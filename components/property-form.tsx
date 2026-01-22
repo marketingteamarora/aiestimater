@@ -72,13 +72,14 @@ export default function PropertyForm() {
     postalCode: string
     fullAddress: string
   }) => {
+    console.log('Address selected:', address);
     setFormData(prev => ({
       ...prev,
-      streetNumber: address.streetNumber,
-      streetName: address.streetName,
-      city: address.city,
-      postalCode: address.postalCode
-    }))
+      streetNumber: address.streetNumber || '',
+      streetName: address.streetName || '',
+      city: address.city || '',
+      postalCode: address.postalCode || ''
+    }));
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
