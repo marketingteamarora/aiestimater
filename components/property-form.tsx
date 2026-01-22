@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { MapPin, Home, Sparkles, Loader2 } from "lucide-react"
+import AddressAutocomplete from "./address-autocomplete"
 
 export default function PropertyForm() {
   const router = useRouter()
@@ -61,6 +62,23 @@ export default function PropertyForm() {
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+  }
+
+  const handleAddressSelect = (address: {
+    streetNumber: string
+    streetName: string
+    city: string
+    province: string
+    postalCode: string
+    fullAddress: string
+  }) => {
+    setFormData(prev => ({
+      ...prev,
+      streetNumber: address.streetNumber,
+      streetName: address.streetName,
+      city: address.city,
+      postalCode: address.postalCode
+    }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -133,57 +151,69 @@ export default function PropertyForm() {
               <h3 className="font-semibold text-lg">Property Location</h3>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="streetNumber">Street Number *</Label>
-                <Input
-                  id="streetNumber"
-                  placeholder="123"
-                  value={formData.streetNumber}
-                  onChange={(e) => handleChange("streetNumber", e.target.value)}
-                  required
-                  className="text-base"
+                <Label>Search Address *</Label>
+                <AddressAutocomplete
+                  onAddressSelect={handleAddressSelect}
+                  placeholder="Start typing your address..."
+                  inputClassName="text-base h-12"
+                  initialValue={initialAddress}
                 />
+                <p className="text-xs text-muted-foreground">Start typing to find your address and auto-fill the form</p>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="streetName">Street Name *</Label>
-                <Input
-                  id="streetName"
-                  placeholder="Main Street"
-                  value={formData.streetName}
-                  onChange={(e) => handleChange("streetName", e.target.value)}
-                  required
-                  className="text-base"
-                />
-              </div>
-            </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="streetNumber">Street Number *</Label>
+                  <Input
+                    id="streetNumber"
+                    placeholder="123"
+                    value={formData.streetNumber}
+                    onChange={(e) => handleChange("streetNumber", e.target.value)}
+                    required
+                    className="text-base"
+                  />
+                </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="city">City *</Label>
-                <Input
-                  id="city"
-                  placeholder="Brampton"
-                  value={formData.city}
-                  onChange={(e) => handleChange("city", e.target.value)}
-                  required
-                  className="text-base"
-                />
+                <div className="space-y-2">
+                  <Label htmlFor="streetName">Street Name *</Label>
+                  <Input
+                    id="streetName"
+                    placeholder="Main Street"
+                    value={formData.streetName}
+                    onChange={(e) => handleChange("streetName", e.target.value)}
+                    required
+                    className="text-base"
+                  />
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="postalCode">Postal Code *</Label>
-                <Input
-                  id="postalCode"
-                  placeholder="L6X 1A1"
-                  value={formData.postalCode}
-                  onChange={(e) => handleChange("postalCode", e.target.value)}
-                  required
-                  className="text-base"
-                />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="city">City *</Label>
+                  <Input
+                    id="city"
+                    placeholder="Brampton"
+                    value={formData.city}
+                    onChange={(e) => handleChange("city", e.target.value)}
+                    required
+                    className="text-base"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="postalCode">Postal Code *</Label>
+                  <Input
+                    id="postalCode"
+                    placeholder="L6X 1A1"
+                    value={formData.postalCode}
+                    onChange={(e) => handleChange("postalCode", e.target.value)}
+                    required
+                    className="text-base"
+                  />
+                </div>
               </div>
-            </div>
           </div>
 
           <div className="border-t pt-6" />
