@@ -214,6 +214,7 @@ export default function PropertyForm() {
                   />
                 </div>
               </div>
+            </div>
           </div>
 
           <div className="border-t pt-6" />
