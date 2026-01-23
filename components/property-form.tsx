@@ -9,8 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { MapPin, Home, Sparkles, Loader2 } from "lucide-react"
-import AddressAutocomplete from "./address-autocomplete"
+import { MapPin, Home, Sparkles, Loader2, User } from "lucide-react"
 
 interface PropertyFormProps {
   streetNumber?: string
@@ -32,6 +31,12 @@ export default function PropertyForm({
   const initialAddress = searchParams.get("address") || propFullAddress
 
   const [formData, setFormData] = useState({
+    // Contact Information
+    name: "",
+    email: "",
+    phone: "",
+    
+    // Property Information
     streetNumber: propStreetNumber,
     streetName: propStreetName,
     city: propCity,
@@ -102,6 +107,11 @@ export default function PropertyForm({
     setError("")
 
     try {
+      // Validate required fields
+      if (!formData.name || !formData.email || !formData.phone) {
+        throw new Error("Please fill in all required contact information")
+      }
+
       const payload = {
         address: {
           city: formData.city,
@@ -128,6 +138,7 @@ export default function PropertyForm({
 
       console.log("[v0] Sending payload to API:", payload)
 
+      // First, get the estimate
       const response = await fetch("/api/estimate", {
         method: "POST",
         headers: {
@@ -143,13 +154,40 @@ export default function PropertyForm({
       const estimateData = await response.json()
       console.log("[v0] Received estimate data:", estimateData)
 
+      // Then save to Google Sheets
+      try {
+        const sheetsResponse = await fetch("/api/leads", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            propertyData: payload,
+            estimateData: estimateData,
+          }),
+        })
+
+        if (!sheetsResponse.ok) {
+          console.error("Failed to save to Google Sheets")
+          // Don't throw an error, just log it since we still want to proceed
+        } else {
+          console.log("Successfully saved to Google Sheets")
+        }
+      } catch (sheetsError) {
+        console.error("Error saving to Google Sheets:", sheetsError)
+        // Don't throw an error, just log it since we still want to proceed
+      }
+
       sessionStorage.setItem("propertyData", JSON.stringify(formData))
       sessionStorage.setItem("estimateData", JSON.stringify(estimateData))
 
       router.push("/dashboard")
     } catch (err) {
-      console.error("[v0] Error getting estimate:", err)
-      setError("Unable to calculate estimate. Please try again.")
+      console.error("[v0] Error:", err)
+      setError(err instanceof Error ? err.message : "An unknown error occurred. Please try again.")
     } finally {
       setIsLoading(false)
     }
@@ -159,6 +197,54 @@ export default function PropertyForm({
     <form onSubmit={handleSubmit} className="space-y-6">
       <Card className="border-2 shadow-lg">
         <CardContent className="pt-6 space-y-6">
+          {/* Contact Information */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 text-primary mb-3">
+              <User className="w-5 h-5 text-accent" />
+              <h3 className="font-semibold text-lg">Contact Information</h3>
+            </div>
+
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Full Name *</Label>
+                  <Input
+                    id="name"
+                    placeholder="John Doe"
+                    value={formData.name}
+                    onChange={(e) => handleChange("name", e.target.value)}
+                    required
+                    className="text-base"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="john@example.com"
+                    value={formData.email}
+                    onChange={(e) => handleChange("email", e.target.value)}
+                    required
+                    className="text-base"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phone">Phone *</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="(123) 456-7890"
+                    value={formData.phone}
+                    onChange={(e) => handleChange("phone", e.target.value)}
+                    required
+                    className="text-base"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Location */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-primary mb-3">
@@ -167,17 +253,6 @@ export default function PropertyForm({
             </div>
 
             <div className="space-y-4">
-              <div className="space-y-2">
-                <Label>Search Address *</Label>
-                <AddressAutocomplete
-                  onAddressSelect={handleAddressSelect}
-                  placeholder="Start typing your address..."
-                  inputClassName="text-base h-12"
-                  initialValue={initialAddress}
-                />
-                <p className="text-xs text-muted-foreground">Start typing to find your address and auto-fill the form</p>
-              </div>
-
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="streetNumber">Street Number *</Label>
