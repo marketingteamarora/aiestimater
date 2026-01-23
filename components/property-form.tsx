@@ -12,16 +12,30 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { MapPin, Home, Sparkles, Loader2 } from "lucide-react"
 import AddressAutocomplete from "./address-autocomplete"
 
-export default function PropertyForm() {
+interface PropertyFormProps {
+  streetNumber?: string
+  streetName?: string
+  city?: string
+  postalCode?: string
+  fullAddress?: string
+}
+
+export default function PropertyForm({
+  streetNumber: propStreetNumber = "",
+  streetName: propStreetName = "",
+  city: propCity = "",
+  postalCode: propPostalCode = "",
+  fullAddress: propFullAddress = ""
+}: PropertyFormProps = {}) {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const initialAddress = searchParams.get("address") || ""
+  const initialAddress = searchParams.get("address") || propFullAddress
 
   const [formData, setFormData] = useState({
-    streetNumber: "",
-    streetName: "",
-    city: "",
-    postalCode: "",
+    streetNumber: propStreetNumber,
+    streetName: propStreetName,
+    city: propCity,
+    postalCode: propPostalCode,
     propertyType: "",
     propertyStyle: "",
     bedrooms: "",

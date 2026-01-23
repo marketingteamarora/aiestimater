@@ -35,7 +35,13 @@ function EstimateContent() {
           </div>
 
           {/* Form */}
-          <PropertyForm />
+          <PropertyForm 
+            streetNumber={searchParams.get("streetNumber") || ""}
+            streetName={searchParams.get("streetName") || ""}
+            city={searchParams.get("city") || ""}
+            postalCode={searchParams.get("postalCode") || ""}
+            fullAddress={searchParams.get("address") || ""}
+          />
         </div>
       </div>
     </div>
