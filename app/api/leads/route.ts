@@ -9,23 +9,34 @@ export async function POST(request: NextRequest) {
 
     console.log("[v0] Saving lead to database:", body)
 
-    // Insert lead data
-    const { data: leadData, error: leadError } = await supabase
-      .from("leads")
-      .insert({
-        name: body.name,
-        email: body.email,
-        phone: body.phone,
-      })
-      .select()
-      .single()
+    // Insert lead data (optional - don't block Google Sheets if this fails)
+    let leadId = null;
+    try {
+      const { data: leadData, error: leadError } = await supabase
+        .from("leads")
+        .insert({
+          name: body.name,
+          email: body.email,
+          phone: body.phone,
+        })
+        .select()
+        .single()
 
-    if (leadError) {
-      console.error("[v0] Error saving lead:", leadError)
-      return NextResponse.json({ error: "Failed to save lead", details: leadError.message }, { status: 500 })
+      if (leadError) {
+        console.error("[v0] Error saving lead to Supabase:", leadError)
+        // Check if table exists error or something specific?
+        // For now, we proceed to Google Sheets
+      } else {
+        console.log("[v0] Lead saved to Supabase successfully:", leadData)
+        leadId = leadData.id;
+      }
+    } catch (sbError) {
+      console.error("[v0] Unexpected Supabase error:", sbError)
     }
 
-    console.log("[v0] Lead saved successfully:", leadData)
+    // Always attempt to save to Google Sheets
+    console.log("[v0] Attempting to save to Google Sheets...")
+    let sheetsSuccess = false;
     try {
       const sheetsResult = await appendLeadToGoogleSheet({
         name: body.name,
@@ -39,17 +50,18 @@ export async function POST(request: NextRequest) {
         console.warn("[v0] Google Sheets append skipped/failed:", sheetsResult)
       } else {
         console.log("[v0] Google Sheets append succeeded")
+        sheetsSuccess = true;
       }
     } catch (sheetsError: any) {
       console.warn("[v0] Google Sheets append threw error:", sheetsError?.message || sheetsError)
     }
 
-    // If property estimate data is provided, save it
-    if (body.propertyData && body.estimateData) {
+    // If property estimate data is provided AND we have a lead ID, save it to Supabase
+    if (leadId && body.propertyData && body.estimateData) {
       const { data: estimateData, error: estimateError } = await supabase
         .from("property_estimates")
         .insert({
-          lead_id: leadData.id,
+          lead_id: leadId,
           street_number: body.propertyData.streetNumber,
           street_name: body.propertyData.streetName,
           city: body.propertyData.city,
@@ -76,11 +88,18 @@ export async function POST(request: NextRequest) {
 
       if (estimateError) {
         console.error("[v0] Error saving property estimate:", estimateError)
-        // Don't fail the whole request if estimate save fails
       } else {
         console.log("[v0] Property estimate saved successfully:", estimateData)
       }
     }
+
+    // Return success if at least one worked, or if we just want to ack the receipt
+    // Since the user is likely blocked by the 500, returning 200 is safer if we processed it.
+    if (!sheetsSuccess && !leadId) {
+      return NextResponse.json({ error: "Failed to save to both Database and Google Sheets" }, { status: 500 })
+    }
+
+    return NextResponse.json({ success: true, leadId, sheetsSuccess })
 
     return NextResponse.json({ success: true, lead: leadData })
   } catch (error: any) {
