@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { MapPin, Home, Sparkles, Loader2, User } from "lucide-react"
+import { MapPin, Home, Sparkles, Loader2 } from "lucide-react"
 
 interface PropertyFormProps {
   streetNumber?: string
@@ -35,7 +35,7 @@ export default function PropertyForm({
     name: "",
     email: "",
     phone: "",
-    
+
     // Property Information
     streetNumber: propStreetNumber,
     streetName: propStreetName,
@@ -107,11 +107,6 @@ export default function PropertyForm({
     setError("")
 
     try {
-      // Validate required fields
-      if (!formData.name || !formData.email || !formData.phone) {
-        throw new Error("Please fill in all required contact information")
-      }
-
       const payload = {
         address: {
           city: formData.city,
@@ -154,6 +149,9 @@ export default function PropertyForm({
       const estimateData = await response.json()
       console.log("[v0] Received estimate data:", estimateData)
 
+      // Note: Google Sheets integration is currently disabled since contact information
+      // fields (name, email, phone) have been removed from the form
+      /*
       // Then save to Google Sheets
       try {
         const sheetsResponse = await fetch("/api/leads", {
@@ -180,6 +178,8 @@ export default function PropertyForm({
         console.error("Error saving to Google Sheets:", sheetsError)
         // Don't throw an error, just log it since we still want to proceed
       }
+      */
+
 
       sessionStorage.setItem("propertyData", JSON.stringify(formData))
       sessionStorage.setItem("estimateData", JSON.stringify(estimateData))
@@ -197,54 +197,6 @@ export default function PropertyForm({
     <form onSubmit={handleSubmit} className="space-y-6">
       <Card className="border-2 shadow-lg">
         <CardContent className="pt-6 space-y-6">
-          {/* Contact Information */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-primary mb-3">
-              <User className="w-5 h-5 text-accent" />
-              <h3 className="font-semibold text-lg">Contact Information</h3>
-            </div>
-
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Full Name *</Label>
-                  <Input
-                    id="name"
-                    placeholder="John Doe"
-                    value={formData.name}
-                    onChange={(e) => handleChange("name", e.target.value)}
-                    required
-                    className="text-base"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="john@example.com"
-                    value={formData.email}
-                    onChange={(e) => handleChange("email", e.target.value)}
-                    required
-                    className="text-base"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone *</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="(123) 456-7890"
-                    value={formData.phone}
-                    onChange={(e) => handleChange("phone", e.target.value)}
-                    required
-                    className="text-base"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Location */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-primary mb-3">
