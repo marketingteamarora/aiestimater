@@ -508,5 +508,3 @@ export default function PropertyForm({
     </div>
   )
 }
-  )
-}
