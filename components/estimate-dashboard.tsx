@@ -162,18 +162,18 @@ export default function EstimateDashboard() {
   // Handle historical data from both formats
   const historicalData = estimateData.historicalValues
     ? estimateData.historicalValues.map((item) => ({
-        month: item.month,
-        value: item.value,
-        formattedValue: formatCurrency(item.value),
-      }))
+      month: item.month,
+      value: item.value,
+      formattedValue: formatCurrency(item.value),
+    }))
     : estimateData.history?.mth
       ? Object.entries(estimateData.history.mth)
-          .slice(-12)
-          .map(([month, data]) => ({
-            month: new Date(month).toLocaleDateString("en-US", { month: "short", year: "2-digit" }),
-            value: data.value,
-            formattedValue: formatCurrency(data.value),
-          }))
+        .slice(-12)
+        .map(([month, data]) => ({
+          month: new Date(month).toLocaleDateString("en-US", { month: "short", year: "2-digit" }),
+          value: data.value,
+          formattedValue: formatCurrency(data.value),
+        }))
       : []
 
   const calculateTrend = () => {
@@ -203,14 +203,14 @@ export default function EstimateDashboard() {
   const pricePerSqFt = estimateData.pricePerSqft || (propertyData.squareFeet && estimateValue > 0
     ? Math.round(estimateValue / Number.parseInt(propertyData.squareFeet))
     : null)
-  
+
   // Get insights from DeepSeek or generate defaults
   const insights = estimateData.insights || [
     "Property value based on current market conditions",
     "Analysis includes comparable sales in the area",
     "Estimate accounts for property features and location"
   ]
-  
+
   // Get comparables from DeepSeek if available
   const comparables = estimateData.comparables || []
 
@@ -273,6 +273,9 @@ export default function EstimateDashboard() {
                         </Badge>
                       )}
                     </div>
+                    <p className="text-xs text-muted-foreground mt-4 italic" style={{ filter: isRevealed ? "none" : "blur(8px)" }}>
+                      Disclaimer: This is an automated estimate based on available market data.
+                    </p>
                   </div>
                 </div>
 
