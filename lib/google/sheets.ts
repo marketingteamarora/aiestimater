@@ -247,3 +247,48 @@ export async function appendContactToGoogleSheet(contact: ContactSubmission): Pr
 
   return appendRowToSheet("Contact Us", row, headers)
 }
+
+export type LeaseByOwnerLead = {
+  owner_name: string
+  email: string
+  phone: string
+  property_address: string
+  city: string
+  postal_code: string
+  property_type: string
+  bedrooms: number | null
+  bathrooms: number | null
+  sqft: number | null
+  rent_amount: number | null
+  available_date: string | null
+  description: string | null
+  created_at?: string | null
+}
+
+// Lease by Owner Leads Specific
+export async function appendLeaseLeadToGoogleSheet(lead: LeaseByOwnerLead): Promise<AppendResult> {
+  const headers = [
+    "Date", "Owner Name", "Email", "Phone", "Property Address",
+    "City", "Postal Code", "Property Type", "Bedrooms", "Bathrooms",
+    "Sqft", "Rent Amount", "Available Date", "Description"
+  ]
+
+  const row = [
+    lead.created_at ? new Date(lead.created_at).toISOString() : new Date().toISOString(),
+    lead.owner_name,
+    lead.email,
+    lead.phone,
+    lead.property_address,
+    lead.city,
+    lead.postal_code,
+    lead.property_type,
+    lead.bedrooms ?? "",
+    lead.bathrooms ?? "",
+    lead.sqft ?? "",
+    lead.rent_amount ?? "",
+    lead.available_date ?? "",
+    lead.description ?? "",
+  ]
+
+  return appendRowToSheet("Lease by Owner Leads", row, headers)
+}
