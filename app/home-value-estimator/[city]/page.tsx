@@ -138,6 +138,351 @@ const cities: Record<string, CityConfig> = {
       "West Oak Trails",
     ],
   },
+  markham: {
+    name: "Markham",
+    slug: "markham",
+    region: "York Region",
+    description:
+      "Markham is Canada's high-tech capital and one of the GTA's most desirable real estate markets. Known for its excellent schools, vibrant multicultural communities, and booming tech sector, Markham home values have consistently outperformed GTA averages. Our free home value estimator uses real Markham MLS data for accurate property valuations.",
+    avgPrice: "$1,200,000+",
+    marketTrend: "Tech-driven demand with strong appreciation",
+    highlights: [
+      "Canada's high-tech capital with IBM, AMD, Qualcomm",
+      "Top-ranked public and private schools",
+      "Rapidly expanding Viva transit network",
+      "Strong multicultural communities driving demand",
+    ],
+    neighborhoods: [
+      "Unionville",
+      "Markham Village",
+      "Cornell",
+      "Cathedraltown",
+      "Berczy",
+      "Wismer Commons",
+    ],
+  },
+  vaughan: {
+    name: "Vaughan",
+    slug: "vaughan",
+    region: "York Region",
+    description:
+      "Vaughan is one of the fastest-growing cities in the GTA, anchored by the Vaughan Metropolitan Centre and Canada's Wonderland corridor. With the TTC subway extension bringing rapid transit, Vaughan real estate has seen exceptional appreciation. Get your free Vaughan home value estimate instantly with our AI tool.",
+    avgPrice: "$1,150,000+",
+    marketTrend: "Subway-driven growth and new development",
+    highlights: [
+      "TTC Line 1 extension to Vaughan Metropolitan Centre",
+      "Major retail and entertainment hub",
+      "Rapidly growing condo and townhouse market",
+      "Strategic location at Highways 400 and 407",
+    ],
+    neighborhoods: [
+      "Kleinburg",
+      "Woodbridge",
+      "Maple",
+      "Thornhill",
+      "Concord",
+      "Patterson",
+    ],
+  },
+  "richmond-hill": {
+    name: "Richmond Hill",
+    slug: "richmond-hill",
+    region: "York Region",
+    description:
+      "Richmond Hill is one of York Region's most sought-after communities, offering a blend of suburban living with excellent transit connections to downtown Toronto. With top-rated schools, lush green spaces, and a thriving local economy, Richmond Hill home values remain strong. Get your free home value estimate for Richmond Hill today.",
+    avgPrice: "$1,300,000+",
+    marketTrend: "Steady demand driven by schools and transit",
+    highlights: [
+      "Top-rated schools attracting families",
+      "GO Transit and Viva rapid transit access",
+      "Richmond Green Sports Centre and park system",
+      "Diverse dining and shopping along Yonge Street",
+    ],
+    neighborhoods: [
+      "Oak Ridges",
+      "Mill Pond",
+      "Jefferson",
+      "Westbrook",
+      "Rouge Woods",
+      "Bayview Hill",
+    ],
+  },
+  newmarket: {
+    name: "Newmarket",
+    slug: "newmarket",
+    region: "York Region",
+    description:
+      "Newmarket offers an appealing mix of small-town charm and modern amenities in York Region. With a revitalized historic Main Street, excellent schools, and more affordable entry points than southern York Region, Newmarket is attracting young families and investors alike. Get your free Newmarket home value estimate.",
+    avgPrice: "$900,000+",
+    marketTrend: "Growing demand with improving transit links",
+    highlights: [
+      "Charming historic Main Street district",
+      "More affordable than Markham and Vaughan",
+      "Strong GO Transit commuter connection",
+      "Excellent recreation and trail system",
+    ],
+    neighborhoods: [
+      "Stonehaven",
+      "Woodland Hills",
+      "Bristol-London",
+      "Summerhill Estates",
+      "Glenway",
+      "College Manor",
+    ],
+  },
+  aurora: {
+    name: "Aurora",
+    slug: "aurora",
+    region: "York Region",
+    description:
+      "Aurora is a premium residential community in York Region, known for its heritage architecture, excellent schools, and family-friendly atmosphere. With strong demand from professionals commuting to Toronto, Aurora home values have shown consistent long-term growth. Get an accurate free home value estimate for your Aurora property.",
+    avgPrice: "$1,100,000+",
+    marketTrend: "Premium residential market with consistent growth",
+    highlights: [
+      "Heritage homes and mature tree-lined streets",
+      "Highly rated public and Catholic schools",
+      "GO Transit express service to Union Station",
+      "Award-winning parks and recreation facilities",
+    ],
+    neighborhoods: [
+      "Aurora Village",
+      "Bayview Northeast",
+      "Aurora Highlands",
+      "Hills of St. Andrew's",
+      "Stonebridge",
+      "Aurora Grove",
+    ],
+  },
+  milton: {
+    name: "Milton",
+    slug: "milton",
+    region: "Halton Region",
+    description:
+      "Milton has been one of Canada's fastest-growing towns for over a decade, driven by new family-friendly developments and proximity to major GTA employment centres. With more affordable pricing compared to Oakville and Burlington, Milton offers strong value for buyers. Our AI estimates Milton home values using the latest local sales data.",
+    avgPrice: "$950,000+",
+    marketTrend: "Fast growth with strong new construction",
+    highlights: [
+      "One of Canada's fastest-growing municipalities",
+      "Significantly more affordable than south Halton",
+      "Strong GO Transit Milton line service",
+      "New schools and community infrastructure",
+    ],
+    neighborhoods: [
+      "Old Milton",
+      "Willmott",
+      "Bronte Meadows",
+      "Scott",
+      "Harrison",
+      "Dempsey",
+    ],
+  },
+  burlington: {
+    name: "Burlington",
+    slug: "burlington",
+    region: "Halton Region",
+    description:
+      "Burlington is a vibrant lakefront city offering a high quality of life with excellent schools, a revitalized downtown, and stunning waterfront trails. Burlington real estate attracts families, professionals, and retirees alike with its blend of urban amenities and natural beauty. Get your free Burlington home value estimate.",
+    avgPrice: "$1,050,000+",
+    marketTrend: "Stable premium market with lakefront demand",
+    highlights: [
+      "Beautiful Lake Ontario waterfront and Spencer Smith Park",
+      "Revitalized downtown with dining and shops",
+      "Strong GO Transit connection to Toronto and Hamilton",
+      "Top-rated schools in Halton District School Board",
+    ],
+    neighborhoods: [
+      "Downtown Burlington",
+      "Aldershot",
+      "Tyandaga",
+      "Orchard",
+      "Millcroft",
+      "Palmer",
+    ],
+  },
+  hamilton: {
+    name: "Hamilton",
+    slug: "hamilton",
+    region: "City of Hamilton",
+    description:
+      "Hamilton has emerged as one of Ontario's hottest real estate markets, driven by relative affordability, a revitalized downtown arts scene, and excellent GO Transit connections to Toronto. Known as the 'Hammer,' Hamilton's diverse neighbourhoods offer everything from Victorian heritage homes to modern condos. Get your free Hamilton home value estimate.",
+    avgPrice: "$750,000+",
+    marketTrend: "Strong appreciation driven by GTA affordability migration",
+    highlights: [
+      "Most affordable major GTA-adjacent city",
+      "Booming arts, culture, and restaurant scene",
+      "GO Transit expansion with all-day service",
+      "McMaster University driving rental demand",
+    ],
+    neighborhoods: [
+      "Westdale",
+      "Locke Street",
+      "Dundas",
+      "Ancaster",
+      "Stoney Creek",
+      "Waterdown",
+    ],
+  },
+  whitby: {
+    name: "Whitby",
+    slug: "whitby",
+    region: "Durham Region",
+    description:
+      "Whitby is Durham Region's most popular residential community, offering excellent schools, family-friendly neighbourhoods, and strong GO Transit connections to Toronto. With Brooklin's rapid growth and the waterfront harbour area, Whitby provides diverse housing options. Get your free Whitby home value estimate instantly.",
+    avgPrice: "$850,000+",
+    marketTrend: "Strong family demand with new developments",
+    highlights: [
+      "Top-rated Durham District School Board schools",
+      "Whitby GO Station with express Toronto service",
+      "Brooklin — one of GTA's fastest-growing communities",
+      "Beautiful harbour and waterfront trail system",
+    ],
+    neighborhoods: [
+      "Brooklin",
+      "Williamsburg",
+      "Blue Grass Meadows",
+      "Port Whitby",
+      "Lynde Creek",
+      "Pringle Creek",
+    ],
+  },
+  oshawa: {
+    name: "Oshawa",
+    slug: "oshawa",
+    region: "Durham Region",
+    description:
+      "Oshawa offers some of the most affordable home prices in the GTA, making it an attractive market for first-time buyers and investors. With Ontario Tech University, a revitalizing downtown, and strong GO Transit service, Oshawa home values have been steadily climbing. Get your free Oshawa home value estimate.",
+    avgPrice: "$700,000+",
+    marketTrend: "Affordable entry point with strong upside",
+    highlights: [
+      "Most affordable entry into the GTA market",
+      "Ontario Tech University and Durham College driving demand",
+      "GO Transit Lakeshore East line to Toronto",
+      "Major revitalization of downtown core",
+    ],
+    neighborhoods: [
+      "Taunton",
+      "Windfields",
+      "Northwood",
+      "Samac",
+      "Lakeview",
+      "McLaughlin",
+    ],
+  },
+  ajax: {
+    name: "Ajax",
+    slug: "ajax",
+    region: "Durham Region",
+    description:
+      "Ajax is a growing lakefront community in Durham Region, known for its excellent waterfront trails, family-friendly neighbourhoods, and strong commuter rail connections. With a mix of new developments and established communities, Ajax offers strong value in the eastern GTA. Get your free Ajax home value estimate.",
+    avgPrice: "$800,000+",
+    marketTrend: "Waterfront community with growing demand",
+    highlights: [
+      "Beautiful Lake Ontario waterfront and trail system",
+      "Ajax GO Station with frequent Toronto service",
+      "New commercial development at Harwood and Salem",
+      "Award-winning community parks and recreation",
+    ],
+    neighborhoods: [
+      "South Ajax",
+      "Pickering Beach",
+      "Audley",
+      "Village Green",
+      "Central East Ajax",
+      "Central West Ajax",
+    ],
+  },
+  pickering: {
+    name: "Pickering",
+    slug: "pickering",
+    region: "Durham Region",
+    description:
+      "Pickering sits at the gateway to Durham Region, offering excellent GO Transit access and proximity to both Toronto and the eastern GTA. With the massive Pickering City Centre development underway, the city is poised for significant growth. Get your free Pickering home value estimate using our AI-powered tool.",
+    avgPrice: "$900,000+",
+    marketTrend: "Major development driving future growth",
+    highlights: [
+      "Gateway to Durham Region — closest to Toronto",
+      "Pickering Town Centre and new City Centre development",
+      "Rouge National Urban Park on western border",
+      "Excellent GO Transit with express Toronto service",
+    ],
+    neighborhoods: [
+      "Village East",
+      "Amberlea",
+      "Dunbarton",
+      "Highbush",
+      "Liverpool",
+      "Bay Ridges",
+    ],
+  },
+  caledon: {
+    name: "Caledon",
+    slug: "caledon",
+    region: "Peel Region",
+    description:
+      "Caledon is Peel Region's most spacious and rural community, offering large lots, estate homes, and a peaceful lifestyle while remaining within the GTA. With Bolton's growth as a commercial hub, Caledon attracts buyers seeking space and privacy. Get your free Caledon home value estimate.",
+    avgPrice: "$1,100,000+",
+    marketTrend: "Estate and rural premium market",
+    highlights: [
+      "Large lot sizes and estate properties",
+      "Bruce Trail and Caledon Trailway access",
+      "Bolton — growing commercial and retail hub",
+      "Rural charm with GTA proximity",
+    ],
+    neighborhoods: [
+      "Bolton",
+      "Palgrave",
+      "Caledon Village",
+      "Caledon East",
+      "Inglewood",
+      "Cheltenham",
+    ],
+  },
+  etobicoke: {
+    name: "Etobicoke",
+    slug: "etobicoke",
+    region: "City of Toronto (West)",
+    description:
+      "Etobicoke is Toronto's western district, offering everything from luxury waterfront condos along the Humber Bay corridor to affordable family homes in established neighbourhoods. With strong transit connections and proximity to Pearson Airport, Etobicoke remains one of Toronto's most diverse real estate markets. Get your free Etobicoke home value estimate.",
+    avgPrice: "$900,000+",
+    marketTrend: "Diverse market with waterfront premium",
+    highlights: [
+      "Humber Bay waterfront condo corridor",
+      "Proximity to Toronto Pearson International Airport",
+      "Strong TTC subway and GO Transit access",
+      "Established family neighbourhoods with mature trees",
+    ],
+    neighborhoods: [
+      "Humber Bay",
+      "Mimico",
+      "Islington-City Centre West",
+      "Kingsway South",
+      "Long Branch",
+      "Rexdale",
+    ],
+  },
+  "north-york": {
+    name: "North York",
+    slug: "north-york",
+    region: "City of Toronto (North)",
+    description:
+      "North York is Toronto's dynamic northern district, home to the Yonge and Sheppard condo corridor, family-friendly suburbs, and excellent schools. With three TTC subway stations and rapid condo development, North York home values have seen exceptional appreciation. Get your free North York home value estimate.",
+    avgPrice: "$950,000+",
+    marketTrend: "Condo corridor growth with strong family demand",
+    highlights: [
+      "Yonge-Sheppard and Yonge-Finch condo corridors",
+      "Three TTC subway lines running through the district",
+      "Top-ranked North York schools",
+      "Strong mix of condos, semis, and detached homes",
+    ],
+    neighborhoods: [
+      "Willowdale",
+      "Bayview Village",
+      "Don Mills",
+      "Downsview",
+      "York Mills",
+      "Bathurst Manor",
+    ],
+  },
 }
 
 export async function generateStaticParams() {
@@ -211,11 +556,40 @@ export default async function CityPage({
     },
   }
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://gethomeevaluation.ca",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Home Value Estimator",
+        item: "https://gethomeevaluation.ca/estimate",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: `${config.name} Home Value Estimator`,
+        item: `https://gethomeevaluation.ca/home-value-estimator/${config.slug}`,
+      },
+    ],
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(cityJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <main className="min-h-screen">
         {/* Hero */}

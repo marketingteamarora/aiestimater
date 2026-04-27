@@ -2,8 +2,32 @@ import type { MetadataRoute } from "next"
 
 const siteUrl = "https://gethomeevaluation.ca"
 
+const cities = [
+  "brampton",
+  "mississauga",
+  "toronto",
+  "scarborough",
+  "cambridge",
+  "oakville",
+  "markham",
+  "vaughan",
+  "richmond-hill",
+  "newmarket",
+  "aurora",
+  "milton",
+  "burlington",
+  "hamilton",
+  "whitby",
+  "oshawa",
+  "ajax",
+  "pickering",
+  "caledon",
+  "etobicoke",
+  "north-york",
+]
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: siteUrl,
       lastModified: new Date(),
@@ -22,41 +46,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
-    {
-      url: `${siteUrl}/home-value-estimator/brampton`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${siteUrl}/home-value-estimator/mississauga`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${siteUrl}/home-value-estimator/toronto`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${siteUrl}/home-value-estimator/scarborough`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${siteUrl}/home-value-estimator/cambridge`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${siteUrl}/home-value-estimator/oakville`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
   ]
+
+  const cityPages: MetadataRoute.Sitemap = cities.map((city) => ({
+    url: `${siteUrl}/home-value-estimator/${city}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }))
+
+  return [...staticPages, ...cityPages]
 }

@@ -70,13 +70,58 @@ const faqJsonLd = {
   ],
 }
 
-const cities = [
-  { name: "Brampton", href: "/home-value-estimator/brampton", desc: "Peel Region's fastest-growing city" },
-  { name: "Mississauga", href: "/home-value-estimator/mississauga", desc: "Ontario's second-largest city" },
-  { name: "Toronto", href: "/home-value-estimator/toronto", desc: "Canada's real estate capital" },
-  { name: "Scarborough", href: "/home-value-estimator/scarborough", desc: "East Toronto neighbourhoods" },
-  { name: "Cambridge", href: "/home-value-estimator/cambridge", desc: "Waterloo Region market" },
-  { name: "Oakville", href: "/home-value-estimator/oakville", desc: "Halton Region luxury market" },
+const cityGroups = [
+  {
+    region: "Peel Region",
+    cities: [
+      { name: "Brampton", href: "/home-value-estimator/brampton" },
+      { name: "Mississauga", href: "/home-value-estimator/mississauga" },
+      { name: "Caledon", href: "/home-value-estimator/caledon" },
+    ],
+  },
+  {
+    region: "York Region",
+    cities: [
+      { name: "Markham", href: "/home-value-estimator/markham" },
+      { name: "Vaughan", href: "/home-value-estimator/vaughan" },
+      { name: "Richmond Hill", href: "/home-value-estimator/richmond-hill" },
+      { name: "Newmarket", href: "/home-value-estimator/newmarket" },
+      { name: "Aurora", href: "/home-value-estimator/aurora" },
+    ],
+  },
+  {
+    region: "City of Toronto",
+    cities: [
+      { name: "Toronto", href: "/home-value-estimator/toronto" },
+      { name: "Scarborough", href: "/home-value-estimator/scarborough" },
+      { name: "Etobicoke", href: "/home-value-estimator/etobicoke" },
+      { name: "North York", href: "/home-value-estimator/north-york" },
+    ],
+  },
+  {
+    region: "Halton Region",
+    cities: [
+      { name: "Oakville", href: "/home-value-estimator/oakville" },
+      { name: "Burlington", href: "/home-value-estimator/burlington" },
+      { name: "Milton", href: "/home-value-estimator/milton" },
+    ],
+  },
+  {
+    region: "Durham Region",
+    cities: [
+      { name: "Pickering", href: "/home-value-estimator/pickering" },
+      { name: "Ajax", href: "/home-value-estimator/ajax" },
+      { name: "Whitby", href: "/home-value-estimator/whitby" },
+      { name: "Oshawa", href: "/home-value-estimator/oshawa" },
+    ],
+  },
+  {
+    region: "Other Ontario",
+    cities: [
+      { name: "Hamilton", href: "/home-value-estimator/hamilton" },
+      { name: "Cambridge", href: "/home-value-estimator/cambridge" },
+    ],
+  },
 ]
 
 const faqs = [
@@ -194,30 +239,35 @@ export default function HomePage() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-                Free Home Value Estimator by City
+                Free Home Value Estimator — All GTA Cities
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                We specialize in Ontario real estate markets. Select your city for a
-                location-specific home valuation.
+                We serve all cities across the Greater Toronto Area and beyond. Select your city
+                for a location-specific home valuation.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-4xl mx-auto">
-              {cities.map((city) => (
-                <Link
-                  key={city.name}
-                  href={city.href}
-                  className="group flex items-start gap-4 p-5 rounded-xl border-2 border-border hover:border-accent bg-card hover:shadow-lg transition-all"
-                >
-                  <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-                    <MapPin className="w-5 h-5 text-accent" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-foreground group-hover:text-accent transition-colors">
-                      {city.name} Home Value Estimator
-                    </div>
-                    <div className="text-sm text-muted-foreground mt-0.5">{city.desc}</div>
-                  </div>
-                </Link>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {cityGroups.map((group) => (
+                <div key={group.region}>
+                  <h3 className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">
+                    {group.region}
+                  </h3>
+                  <ul className="space-y-2">
+                    {group.cities.map((city) => (
+                      <li key={city.name}>
+                        <Link
+                          href={city.href}
+                          className="group flex items-center gap-2 p-3 rounded-lg border border-border hover:border-accent bg-card hover:shadow-md transition-all"
+                        >
+                          <MapPin className="w-4 h-4 text-accent flex-shrink-0" />
+                          <span className="font-medium text-foreground group-hover:text-accent transition-colors">
+                            {city.name}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
           </div>
