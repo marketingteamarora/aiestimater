@@ -15,11 +15,11 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-accent font-bold text-xl">PV</span>
+              <span className="text-accent font-bold text-xl">HE</span>
             </div>
             <div className="hidden sm:block">
-              <div className="font-bold text-lg text-primary">PropValue AI</div>
-              <div className="text-xs text-muted-foreground -mt-1">Smart Estimates</div>
+              <div className="font-bold text-lg text-primary">GetHomeEvaluation.ca</div>
+              <div className="text-xs text-muted-foreground -mt-1">Free Home Value Estimator</div>
             </div>
           </Link>
 
@@ -30,6 +30,9 @@ export default function Header() {
             </Link>
             <Link href="/estimate" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
               Get Estimate
+            </Link>
+            <Link href="/home-value-estimator/brampton" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
+              Cities
             </Link>
             <Link href="/contact" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
               Contact

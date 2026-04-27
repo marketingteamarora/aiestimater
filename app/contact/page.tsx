@@ -1,6 +1,14 @@
-"use client"
-
+import type { Metadata } from "next"
 import ContactForm from "@/components/contact-form"
+
+export const metadata: Metadata = {
+  title: "Contact Us — Free Home Evaluation Consultation",
+  description:
+    "Get in touch with our Ontario real estate experts. Schedule a free home evaluation consultation for your Brampton, Mississauga, Toronto, or Scarborough property.",
+  alternates: {
+    canonical: "/contact",
+  },
+}
 
 export default function ContactPage() {
   return (
@@ -8,9 +16,12 @@ export default function ContactPage() {
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8 space-y-3">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground">Get in Touch</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+              Talk to a Local Expert
+            </h1>
             <p className="text-lg text-muted-foreground">
-              Fill out the form below and our team will respond within 24 hours.
+              Want a more detailed home evaluation? Our RE/MAX Optimum Realty agents specialize in
+              Ontario real estate and will respond within 24 hours.
             </p>
           </div>
 
