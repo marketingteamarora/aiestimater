@@ -20,7 +20,7 @@ export default function EstimateContent() {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold text-foreground text-balance">
-              Get Your Free Home Value Estimate
+              Get Your Free AI Home Value Estimate
             </h1>
 
             {searchedAddress && (

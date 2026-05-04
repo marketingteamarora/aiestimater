@@ -7,7 +7,7 @@ import { Brain, TrendingUp, Shield, Zap, Star, MapPin, Users, CheckCircle2, Chev
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Free Home Value Estimator Canada — How Much Is My Home Worth?",
+  title: "Free AI Home Value Estimator Canada — How Much Is My Home Worth?",
   description:
     "Get an instant, free home value estimate in Canada. AI-powered tool analyzes real market data to tell you what your home is worth in Brampton, Mississauga, Toronto, Scarborough & across Ontario.",
   alternates: {

@@ -60,7 +60,7 @@ export default function HeroSection() {
           </div>
 
           <h1 className="text-6xl md:text-8xl font-bold text-white leading-tight text-balance">
-            Know Your Home's Worth in{" "}
+            Know Your AI Home Value in{" "}
             <span className="text-accent relative">
               Seconds
               <svg className="absolute -bottom-2 left-0 w-full" height="12" viewBox="0 0 300 12" fill="none">

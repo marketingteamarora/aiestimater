@@ -498,13 +498,13 @@ export async function generateMetadata({
   const config = cities[city]
   if (!config) return {}
   return {
-    title: `${config.name} Home Value Estimator — Free Property Valuation`,
+    title: `${config.name} AI Home Value Estimator — Free Property Valuation`,
     description: `Get a free, instant home value estimate for your ${config.name} property. AI-powered tool analyzes real ${config.name} MLS data to tell you what your home is worth today. ${config.region}, Ontario.`,
     alternates: {
       canonical: `/home-value-estimator/${config.slug}`,
     },
     openGraph: {
-      title: `${config.name} Home Value Estimator — Free Property Valuation`,
+      title: `${config.name} AI Home Value Estimator — Free Property Valuation`,
       description: `Find out what your ${config.name} home is worth in seconds. Free AI-powered valuation using real ${config.name} market data.`,
     },
   }
@@ -605,7 +605,7 @@ export default async function CityPage({
                 {config.region}, Ontario
               </div>
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-                {config.name} Home Value Estimator
+                {config.name} AI Home Value Estimator
               </h1>
               <p className="text-xl text-white/80 max-w-2xl mx-auto">
                 Get a free, instant estimate of what your {config.name} home is worth today.

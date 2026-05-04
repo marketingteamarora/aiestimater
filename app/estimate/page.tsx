@@ -3,7 +3,7 @@ import { Suspense } from "react"
 import EstimateContent from "./estimate-content"
 
 export const metadata: Metadata = {
-  title: "Free Home Value Estimate — Enter Your Address",
+  title: "Free AI Home Value Estimate — Enter Your Address",
   description:
     "Enter your Ontario property address to get a free, instant AI-powered home value estimate. Takes less than 2 minutes. Serving Brampton, Mississauga, Toronto, Scarborough & all of Ontario.",
   alternates: {

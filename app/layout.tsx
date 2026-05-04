@@ -9,7 +9,7 @@ const siteUrl = "https://gethomeevaluation.ca"
 
 export const metadata: Metadata = {
   title: {
-    default: "Free Home Value Estimator Canada | Get My Home Evaluation",
+    default: "Free AI Home Value Estimator Canada | Get My Home Evaluation",
     template: "%s | GetHomeEvaluation.ca",
   },
   description:
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Free Home Value Estimator Canada | Get My Home Evaluation",
+    title: "Free AI Home Value Estimator Canada | Get My Home Evaluation",
     description:
       "Find out what your home is worth in seconds. Free AI-powered home evaluation for Brampton, Mississauga, Toronto & all of Ontario.",
     url: siteUrl,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Home Value Estimator Canada | GetHomeEvaluation.ca",
+    title: "Free AI Home Value Estimator Canada | GetHomeEvaluation.ca",
     description:
       "Instant, free AI-powered home evaluation for Ontario homeowners. Know what your home is worth today.",
   },
