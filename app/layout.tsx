@@ -84,7 +84,6 @@ const jsonLd = {
       "@id": `${siteUrl}/#localbusiness`,
       name: "RE/MAX Optimum Realty — Home Value Estimator",
       url: siteUrl,
-      telephone: "+1-905-488-7827",
       priceRange: "Free",
       description:
         "Free AI-powered home value estimator serving Brampton, Mississauga, Toronto, Scarborough, and all of Ontario.",

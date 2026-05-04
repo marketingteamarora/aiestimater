@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { MapPin, Phone, Mail, ExternalLink } from "lucide-react"
+import { MapPin, ExternalLink } from "lucide-react"
 
 const cityGroups = [
   {
@@ -76,14 +76,6 @@ export default function Footer() {
               across the Greater Toronto Area and beyond.
             </p>
             <div className="space-y-2 text-sm text-white/70">
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-accent flex-shrink-0" />
-                <a href="tel:+19054887827" className="hover:text-accent transition-colors">(905) 488-7827</a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-accent flex-shrink-0" />
-                <span>info@gethomeevaluation.ca</span>
-              </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-accent flex-shrink-0" />
                 <span>Brampton, Ontario, Canada</span>
