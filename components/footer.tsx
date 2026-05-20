@@ -87,7 +87,7 @@ export default function Footer() {
               <ul className="space-y-1">
                 {[
                   { label: "Free Home Estimate", href: "/estimate" },
-                  { label: "About Parveen Arora", href: "/about" },
+                  { label: "Top Real Estate Agent", href: "/top-agent/gta" },
                   { label: "Contact Us", href: "/contact" },
                   { label: "TeamArora.com", href: "https://teamarora.com", external: true },
                 ].map((link) => (

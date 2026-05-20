@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Phone } from "lucide-react"
+import { Menu, X, Phone, ChevronDown } from "lucide-react"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -31,9 +31,22 @@ export default function Header() {
             <Link href="/estimate" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
               Get Estimate
             </Link>
-            <Link href="/about" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
-              About Parveen Arora
-            </Link>
+            <div className="relative group">
+              <button className="flex items-center gap-1 text-sm font-medium text-foreground hover:text-accent transition-colors py-2">
+                Top Agent <ChevronDown className="w-4 h-4" />
+              </button>
+              <div className="absolute top-full left-0 w-56 bg-white border border-border rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 overflow-hidden">
+                <Link href="/top-agent/brampton" className="block px-4 py-3 text-sm text-foreground hover:bg-secondary hover:text-accent border-b border-border">
+                  Brampton's #1 Agent
+                </Link>
+                <Link href="/top-agent/mississauga" className="block px-4 py-3 text-sm text-foreground hover:bg-secondary hover:text-accent border-b border-border">
+                  Mississauga's Best Agent
+                </Link>
+                <Link href="/top-agent/gta" className="block px-4 py-3 text-sm text-foreground hover:bg-secondary hover:text-accent">
+                  GTA's Top Realtor
+                </Link>
+              </div>
+            </div>
             <Link href="/home-value-estimator/brampton" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
               Cities
             </Link>
@@ -79,13 +92,30 @@ export default function Header() {
               >
                 Get Estimate
               </Link>
-              <Link
-                href="/about"
-                className="text-sm font-medium text-foreground hover:text-accent transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About Parveen Arora
-              </Link>
+              <div className="py-2 space-y-3">
+                <div className="text-sm font-semibold text-foreground px-2">Top Agent Areas</div>
+                <Link
+                  href="/top-agent/brampton"
+                  className="block text-sm text-muted-foreground hover:text-accent transition-colors pl-4"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Brampton's #1 Agent
+                </Link>
+                <Link
+                  href="/top-agent/mississauga"
+                  className="block text-sm text-muted-foreground hover:text-accent transition-colors pl-4"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Mississauga's Best Agent
+                </Link>
+                <Link
+                  href="/top-agent/gta"
+                  className="block text-sm text-muted-foreground hover:text-accent transition-colors pl-4"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  GTA's Top Realtor
+                </Link>
+              </div>
               <Link
                 href="/contact"
                 className="text-sm font-medium text-foreground hover:text-accent transition-colors"
