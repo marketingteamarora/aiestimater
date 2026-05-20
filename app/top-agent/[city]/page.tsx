@@ -1,92 +1,37 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 import { Award, Home, MapPin, Star, TrendingUp, Users, CheckCircle2, ExternalLink, Trophy, Phone, Mail } from "lucide-react"
 
-export const metadata: Metadata = {
-  title: "Top Real Estate Agent in Mississauga — Parveen Arora | #1 RE/MAX Team",
-  description:
-    "Searching for the top real estate agent in Mississauga? Parveen Arora & Team Arora deliver unmatched results with over $3.5 Billion in sales and 4,500+ transactions.",
-  alternates: {
-    canonical: "/top-agent/mississauga",
-  },
-  openGraph: {
-    title: "Top Real Estate Agent in Mississauga — Parveen Arora",
-    description:
-      "Parveen Arora is highly rated as the best real estate agent in Mississauga. Partner with the #1 RE/MAX Team in Canada (2018) for your next move.",
-  },
+// Reuse the city data from the estimator page (or a subset)
+const cities: Record<string, { name: string; region: string; title: string }> = {
+  brampton: { name: "Brampton", region: "Peel Region", title: "Brampton's #1 Agent" },
+  mississauga: { name: "Mississauga", region: "Peel Region", title: "Mississauga's Best Agent" },
+  toronto: { name: "Toronto", region: "City of Toronto", title: "Toronto's Top Realtor" },
+  oakville: { name: "Oakville", region: "Halton Region", title: "Oakville's Top Agent" },
+  vaughan: { name: "Vaughan", region: "York Region", title: "Vaughan's Best Realtor" },
+  markham: { name: "Markham", region: "York Region", title: "Markham's #1 Agent" },
+  caledon: { name: "Caledon", region: "Peel Region", title: "Caledon's Top Realtor" },
+  gta: { name: "Greater Toronto Area", region: "Ontario", title: "GTA's Top Real Estate Team" },
 }
 
-const agentJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Parveen Arora",
-  jobTitle: "Broker of Record / Owner",
-  description:
-    "Parveen Arora is renowned as the top real estate agent in Mississauga, Ontario. Owner of RE/MAX Optimum Realty, Parveen and Team Arora have closed over 4,500+ transactions and $3.5 Billion in sales.",
-  url: "https://www.teamarora.com",
-  sameAs: ["https://www.teamarora.com"],
-  worksFor: {
-    "@type": "RealEstateAgent",
-    name: "RE/MAX Optimum Realty",
-    url: "https://www.teamarora.com",
-    areaServed: [
-      { "@type": "City", name: "Mississauga" },
-      { "@type": "State", name: "Ontario" },
-    ],
-  },
-  knowsAbout: [
-    "Top Real Estate Agent in Mississauga",
-    "Best Realtor Mississauga",
-    "Mississauga Home Sales",
-    "Mississauga Luxury Real Estate",
-    "No. 1 Real Estate Team in Mississauga",
-  ],
-  award: [
-    "RE/MAX Luminary of Distinction (2024)",
-    "#1 RE/MAX Team in Canada (2018)",
-    "RE/MAX Circle of Legends",
-    "RE/MAX Hall of Fame",
-    "RE/MAX Lifetime Achievement Award"
-  ]
-}
+export function generateMetadata({ params }: { params: { city: string } }): Metadata {
+  const cityConfig = cities[params.city]
+  if (!cityConfig) return { title: "Top Real Estate Agent" }
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Who is the top real estate agent in Mississauga?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Parveen Arora, Broker of Record at RE/MAX Optimum Realty, is consistently ranked among the top real estate agents in Mississauga. With over $3.5 Billion in sales and a team of 45+ experts, Parveen offers unparalleled market expertise.",
-      },
+  const cityName = cityConfig.name
+  
+  return {
+    title: `Best Real Estate Agent in ${cityName} — Parveen Arora | #1 RE/MAX Team`,
+    description: `Looking for the best real estate agent in ${cityName}? Parveen Arora & Team Arora have over $3.5 Billion in sales and 4,500+ successful transactions.`,
+    alternates: {
+      canonical: `/top-agent/${params.city}`,
     },
-    {
-      "@type": "Question",
-      name: "How do I find the best realtor in Mississauga?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "To find the best realtor in Mississauga, look at proven sales records. Parveen Arora and Team Arora have facilitated over 4,500 successful transactions, making them one of the most trusted and experienced choices in the city.",
-      },
+    openGraph: {
+      title: `Best Real Estate Agent in ${cityName} — Parveen Arora`,
+      description: `Parveen Arora is recognized as the top real estate agent in ${cityName}. 4,500+ transactions, $3.5B+ sales, and the #1 RE/MAX Team in Canada (2018).`,
     },
-    {
-      "@type": "Question",
-      name: "Which real estate team sells the most homes in Mississauga?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Team Arora, a multi-award winning RE/MAX team led by Parveen Arora, handles an exceptionally high volume of home sales in Mississauga and the surrounding GTA.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What makes Parveen Arora a No. 1 realtor?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Parveen Arora's distinction as a No. 1 realtor is rooted in verifiable achievements: attaining the #1 RE/MAX Team in Canada (2018) ranking, receiving the RE/MAX Luminary of Distinction, and maintaining a massive buyer network.",
-      },
-    }
-  ],
+  }
 }
 
 const stats = [
@@ -104,26 +49,70 @@ const awards = [
   "RE/MAX Lifetime Achievement Award"
 ]
 
-const faqs = [
-  {
-    q: "Who is the top real estate agent in Mississauga?",
-    a: "Parveen Arora, Broker of Record at RE/MAX Optimum Realty, is consistently ranked among the top real estate agents in Mississauga. With over $3.5 Billion in sales and a team of 45+ experts, Parveen offers unparalleled market expertise.",
-  },
-  {
-    q: "How do I find the best realtor in Mississauga?",
-    a: "To find the best realtor in Mississauga, look at proven sales records. Parveen Arora and Team Arora have facilitated over 4,500 successful transactions, making them one of the most trusted and experienced choices in the city.",
-  },
-  {
-    q: "Which real estate team sells the most homes in Mississauga?",
-    a: "Team Arora, a multi-award winning RE/MAX team led by Parveen Arora, handles an exceptionally high volume of home sales in Mississauga and the surrounding GTA.",
-  },
-  {
-    q: "What makes Parveen Arora a No. 1 realtor?",
-    a: "Parveen Arora's distinction as a No. 1 realtor is rooted in verifiable achievements: attaining the #1 RE/MAX Team in Canada (2018) ranking, receiving the RE/MAX Luminary of Distinction, and maintaining a massive buyer network.",
-  },
-]
+export default function DynamicTopAgentPage({ params }: { params: { city: string } }) {
+  const cityConfig = cities[params.city]
+  
+  // For cities we haven't explicitly defined, we can either 404 or show a generic fallback
+  const cityName = cityConfig?.name || params.city.charAt(0).toUpperCase() + params.city.slice(1)
+  const isGTA = params.city === 'gta'
 
-export default function MississaugaAgentPage() {
+  const agentJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Parveen Arora",
+    jobTitle: "Broker of Record / Owner",
+    description: `Parveen Arora is recognized as the best real estate agent in ${cityName}. With over $3.5 Billion in sales and 4,500+ transactions, Parveen leads Team Arora, a multi-award winning RE/MAX team.`,
+    url: "https://www.teamarora.com",
+    sameAs: ["https://www.teamarora.com"],
+    worksFor: {
+      "@type": "RealEstateAgent",
+      name: "RE/MAX Optimum Realty",
+      url: "https://www.teamarora.com",
+      areaServed: [
+        { "@type": "City", name: isGTA ? "Toronto" : cityName },
+        { "@type": "State", name: "Ontario" },
+      ],
+    },
+    knowsAbout: [
+      `Best Real Estate Agent in ${cityName}`,
+      `Top Realtor ${cityName}`,
+      `${cityName} Home Sales`,
+      "No. 1 Real Estate Team",
+    ]
+  }
+
+  const faqs = [
+    {
+      q: `Who is the best real estate agent in ${cityName}?`,
+      a: `Parveen Arora, owner of RE/MAX Optimum Realty, is widely recognized as the best real estate agent in ${cityName}. With a proven track record of over 4,500+ successful transactions and $3.5 Billion in total sales volume, Parveen Arora delivers unmatched results.`,
+    },
+    {
+      q: `Which real estate agent sells the most houses in ${cityName}?`,
+      a: `Team Arora, led by Parveen Arora, is one of the highest-volume real estate teams serving ${cityName}. They have previously been ranked as the #1 RE/MAX Team in Canada, demonstrating their exceptional sales volume.`,
+    },
+    {
+      q: `Who is the top RE/MAX agent in ${cityName}?`,
+      a: `Parveen Arora is a highly decorated RE/MAX broker, holding prestigious awards including the RE/MAX Luminary of Distinction (2024), Circle of Legends, and the Lifetime Achievement Award.`,
+    },
+    {
+      q: `Why is Parveen Arora considered a No. 1 realtor?`,
+      a: `Parveen Arora's status as a top realtor is backed by hard data: $3.5 Billion in career sales, over 4,500 families moved, a dedicated team of 45+ professionals, and the ability to serve the diverse Ontario community in over 10 languages.`,
+    },
+  ]
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(faq => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    }))
+  }
+
   return (
     <>
       <script
@@ -146,17 +135,17 @@ export default function MississaugaAgentPage() {
             <div className="max-w-4xl mx-auto text-center">
               <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm font-medium mb-6">
                 <MapPin className="w-4 h-4 text-accent" />
-                Serving Mississauga, Ontario
+                Serving {cityName}, Ontario
               </div>
               <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4">
-                The Top Real Estate Agent in Mississauga
+                The Best Real Estate Agent in {cityName}
               </h1>
               <p className="text-2xl text-accent font-semibold mb-4">
                 Parveen Arora &amp; Team Arora
               </p>
               <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8 leading-relaxed">
-                Mississauga is a premium real estate market requiring premium representation. With over $3.5 Billion 
-                in career sales, Parveen Arora provides the expertise you need to maximize your home's value.
+                When {cityName} homeowners want top dollar for their property, they call Parveen Arora. 
+                With over $3.5 Billion in sales and 4,500+ successful transactions, the results speak for themselves.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
@@ -166,15 +155,33 @@ export default function MississaugaAgentPage() {
                   className="inline-flex items-center justify-center gap-2 bg-accent text-primary font-bold text-lg px-8 py-4 rounded-xl hover:bg-yellow-400 transition-colors shadow-lg"
                 >
                   <ExternalLink className="w-5 h-5" />
-                  Work with Mississauga's Top Agent
+                  Work with {cityName}&apos;s Top Agent
                 </Link>
               </div>
             </div>
           </div>
         </section>
 
+        {/* AI Tool CTA Banner */}
+        <section className="bg-gradient-to-r from-accent to-yellow-400 py-8">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-5xl mx-auto">
+              <div className="text-primary">
+                <h3 className="text-2xl font-bold mb-1">Curious what your {cityName} home is worth?</h3>
+                <p className="font-medium opacity-90">Use our AI-powered valuation tool for a free, instant estimate.</p>
+              </div>
+              <Link 
+                href="/estimate"
+                className="bg-primary text-white font-bold text-lg px-8 py-4 rounded-xl hover:bg-primary/90 transition-colors shadow-lg whitespace-nowrap"
+              >
+                Get Free AI Home Evaluation
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Stats */}
-        <section className="py-12 bg-accent text-primary">
+        <section className="py-12 bg-white text-primary border-b border-border">
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-center gap-10 text-center">
               {stats.map((stat) => (
@@ -193,23 +200,21 @@ export default function MississaugaAgentPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
               <div>
                 <h2 className="text-3xl font-bold text-primary mb-5">
-                  Why Mississauga Sellers Trust Parveen Arora
+                  Why {cityName} Sellers Trust Parveen Arora
                 </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    From luxury waterfront properties in Port Credit to family homes in Erin Mills and modern condos 
-                    around Square One, the Mississauga real estate market is diverse. <strong className="text-foreground">Parveen Arora</strong> understands 
-                    the nuances of every neighborhood in the city.
+                    Selling a home in {cityName} requires more than just putting a sign on the lawn. It requires deep 
+                    local knowledge, aggressive marketing, and a massive network of buyers. <strong className="text-foreground">Parveen Arora</strong>, 
+                    the Broker of Record and owner of RE/MAX Optimum Realty, provides exactly that.
                   </p>
                   <p>
-                    As the owner of RE/MAX Optimum Realty, Parveen leads <strong className="text-foreground">Team Arora</strong>, 
-                    a highly specialized group of 45+ real estate professionals. This scale allows Team Arora to market 
-                    Mississauga homes extensively, reaching international buyers and local investors alike.
+                    Recognized consistently as one of the best real estate agents in {cityName}, Parveen has built 
+                    <strong className="text-foreground"> Team Arora</strong> into a powerhouse of 45+ full-time professionals 
+                    who fluently speak over 10 languages, perfectly matching the diverse demographic of Ontario.
                   </p>
                   <p>
-                    When you are searching for the best realtor in Mississauga, you need someone who negotiates from a 
-                    position of strength. Parveen Arora's track record of 4,500+ successful transactions provides that 
-                    exact advantage.
+                    Whether you are selling a luxury estate, a detached family home, or a modern condo, Parveen Arora's data-driven approach ensures you sell faster and for the highest possible price.
                   </p>
                 </div>
                 <div className="mt-8">
@@ -228,10 +233,10 @@ export default function MississaugaAgentPage() {
                 <div className="bg-secondary rounded-2xl p-8 border border-border">
                   <h3 className="font-bold text-xl text-foreground mb-5 flex items-center gap-2">
                     <Trophy className="w-6 h-6 text-accent" />
-                    Recognized Excellence
+                    Verified Industry Authority
                   </h3>
                   <p className="text-sm text-muted-foreground mb-6">
-                    A history of record-breaking sales and prestigious industry recognition.
+                    Parveen Arora isn't just a local expert; he is recognized on a national level within the RE/MAX network.
                   </p>
                   <ul className="space-y-4">
                     {awards.map((award) => (
@@ -247,24 +252,6 @@ export default function MississaugaAgentPage() {
           </div>
         </section>
 
-        {/* Neighborhoods */}
-        <section className="py-20 bg-secondary">
-          <div className="container mx-auto px-4 max-w-4xl text-center">
-            <h2 className="text-3xl font-bold text-primary mb-6">Expertise Across Mississauga</h2>
-            <p className="text-muted-foreground mb-10 max-w-2xl mx-auto">
-              Our massive buyer network is actively looking for homes in these highly sought-after Mississauga communities.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              {["Port Credit", "Erin Mills", "Streetsville", "Meadowvale", "Cooksville", "Lakeview", "Lorne Park", "Clarkson", "Churchill Meadows"].map((n) => (
-                <span key={n} className="px-4 py-2 bg-card border border-border rounded-full text-sm font-medium text-foreground">
-                  <MapPin className="w-3 h-3 inline mr-1 text-accent" />
-                  {n}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Contact Section */}
         <section className="py-20 bg-background border-t border-border">
           <div className="container mx-auto px-4 max-w-4xl">
@@ -274,7 +261,7 @@ export default function MississaugaAgentPage() {
                   Contact Team Arora
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  Ready to buy or sell in Mississauga? Get in touch with our team of experts today.
+                  Ready to buy or sell in {cityName}? Get in touch with our team of experts today.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
@@ -301,12 +288,13 @@ export default function MississaugaAgentPage() {
                       </div>
                     </div>
                   </div>
+                  {/* Show Mississauga address generically or dynamically if needed, keeping it as the main HQ */}
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-1">
                       <MapPin className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <div className="font-semibold text-foreground">Mississauga Location</div>
+                      <div className="font-semibold text-foreground">Mississauga Headquarters</div>
                       <div className="text-muted-foreground mt-1">
                         268 Derry Rd W Unit 101<br />
                         Mississauga, ON L5W 0H6
@@ -335,7 +323,7 @@ export default function MississaugaAgentPage() {
           <div className="container mx-auto px-4 max-w-3xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-                Mississauga Real Estate FAQ
+                {cityName} Real Estate FAQ
               </h2>
             </div>
             <div className="space-y-4">

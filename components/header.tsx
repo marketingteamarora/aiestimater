@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Phone, ChevronDown } from "lucide-react"
+import { Menu, X, Phone, ChevronDown, Zap } from "lucide-react"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -35,16 +35,43 @@ export default function Header() {
               <button className="flex items-center gap-1 text-sm font-medium text-foreground hover:text-accent transition-colors py-2">
                 Top Agent <ChevronDown className="w-4 h-4" />
               </button>
-              <div className="absolute top-full left-0 w-56 bg-white border border-border rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 overflow-hidden">
-                <Link href="/top-agent/brampton" className="block px-4 py-3 text-sm text-foreground hover:bg-secondary hover:text-accent border-b border-border">
-                  Brampton's #1 Agent
-                </Link>
-                <Link href="/top-agent/mississauga" className="block px-4 py-3 text-sm text-foreground hover:bg-secondary hover:text-accent border-b border-border">
-                  Mississauga's Best Agent
-                </Link>
-                <Link href="/top-agent/gta" className="block px-4 py-3 text-sm text-foreground hover:bg-secondary hover:text-accent">
-                  GTA's Top Realtor
-                </Link>
+              <div className="absolute top-full left-0 w-[400px] bg-white border border-border rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 overflow-hidden">
+                <div className="p-4 bg-secondary border-b border-border">
+                  <div className="text-sm font-bold text-primary mb-1">Find Your Local Expert</div>
+                  <div className="text-xs text-muted-foreground">Team Arora serves the entire Greater Toronto Area.</div>
+                </div>
+                <div className="grid grid-cols-2 p-2">
+                  <Link href="/top-agent/brampton" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                    Brampton
+                  </Link>
+                  <Link href="/top-agent/mississauga" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                    Mississauga
+                  </Link>
+                  <Link href="/top-agent/toronto" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                    Toronto
+                  </Link>
+                  <Link href="/top-agent/oakville" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                    Oakville
+                  </Link>
+                  <Link href="/top-agent/vaughan" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                    Vaughan
+                  </Link>
+                  <Link href="/top-agent/markham" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                    Markham
+                  </Link>
+                  <Link href="/top-agent/caledon" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                    Caledon
+                  </Link>
+                  <Link href="/top-agent/gta" className="block px-4 py-2 text-sm font-medium text-accent hover:bg-secondary rounded-md transition-colors">
+                    View All GTA
+                  </Link>
+                </div>
+                <div className="p-3 bg-primary/5 border-t border-border">
+                  <Link href="/estimate" className="flex items-center justify-center gap-2 w-full py-2 bg-accent text-primary font-bold rounded-lg hover:bg-yellow-400 transition-colors">
+                    <Zap className="w-4 h-4" />
+                    Free AI Home Estimate
+                  </Link>
+                </div>
               </div>
             </div>
             <Link href="/home-value-estimator/brampton" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
@@ -92,29 +119,21 @@ export default function Header() {
               >
                 Get Estimate
               </Link>
-              <div className="py-2 space-y-3">
-                <div className="text-sm font-semibold text-foreground px-2">Top Agent Areas</div>
-                <Link
-                  href="/top-agent/brampton"
-                  className="block text-sm text-muted-foreground hover:text-accent transition-colors pl-4"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Brampton's #1 Agent
-                </Link>
-                <Link
-                  href="/top-agent/mississauga"
-                  className="block text-sm text-muted-foreground hover:text-accent transition-colors pl-4"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Mississauga's Best Agent
-                </Link>
-                <Link
-                  href="/top-agent/gta"
-                  className="block text-sm text-muted-foreground hover:text-accent transition-colors pl-4"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  GTA's Top Realtor
-                </Link>
+              <div className="py-2 space-y-2 border-y border-border my-2">
+                <div className="text-sm font-semibold text-foreground px-2 pt-2">Top Agent Areas</div>
+                <div className="grid grid-cols-2 gap-1 px-2">
+                  <Link href="/top-agent/brampton" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Brampton</Link>
+                  <Link href="/top-agent/mississauga" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Mississauga</Link>
+                  <Link href="/top-agent/toronto" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Toronto</Link>
+                  <Link href="/top-agent/oakville" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Oakville</Link>
+                  <Link href="/top-agent/vaughan" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Vaughan</Link>
+                  <Link href="/top-agent/markham" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Markham</Link>
+                </div>
+                <div className="px-2 pb-2">
+                  <Link href="/estimate" className="flex items-center justify-center gap-2 w-full py-2 bg-accent text-primary font-bold rounded-lg hover:bg-yellow-400 transition-colors mt-2" onClick={() => setIsMenuOpen(false)}>
+                    <Zap className="w-4 h-4" /> Free AI Home Estimate
+                  </Link>
+                </div>
               </div>
               <Link
                 href="/contact"
