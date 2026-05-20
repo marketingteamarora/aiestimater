@@ -25,7 +25,7 @@ export function generateMetadata({ params }: { params: { city: string } }): Meta
     title: `Best Real Estate Agent in ${cityName} — Parveen Arora | #1 RE/MAX Team`,
     description: `Looking for the best real estate agent in ${cityName}? Parveen Arora & Team Arora have over $3.5 Billion in sales and 4,500+ successful transactions.`,
     alternates: {
-      canonical: `/top-agent/${params.city}`,
+      canonical: `/real-estate-agent/${params.city}`,
     },
     openGraph: {
       title: `Best Real Estate Agent in ${cityName} — Parveen Arora`,

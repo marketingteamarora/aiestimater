@@ -768,7 +768,7 @@ export default async function CityPage({
                 Connect with Parveen Arora
               </Link>
               <Link
-                href={`/top-agent/${config.slug === 'brampton' || config.slug === 'mississauga' ? config.slug : 'gta'}`}
+                href={`/real-estate-agent/${config.slug === 'brampton' || config.slug === 'mississauga' ? config.slug : 'gta'}`}
                 className="inline-flex items-center justify-center gap-2 bg-secondary text-primary font-bold text-lg px-8 py-4 rounded-xl hover:bg-secondary/80 transition-colors"
               >
                 Why Choose Team Arora?
