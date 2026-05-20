@@ -749,6 +749,34 @@ export default async function CityPage({
           </div>
         </section>
 
+        {/* Meet the Expert / City Specific */}
+        <section className="py-20 bg-background border-t border-border">
+          <div className="container mx-auto px-4 max-w-4xl text-center">
+            <h2 className="text-3xl font-bold text-primary mb-4">
+              Speak with {config.name}'s Top-Selling Real Estate Expert
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+              This free tool is provided by <strong>Parveen Arora</strong>, owner of RE/MAX Optimum Realty and the #1 real estate agent serving {config.name} and the Greater Toronto Area. Whether you're ready to list or just exploring your options, get expert advice from a team that has sold thousands of homes.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link
+                href="https://www.teamarora.com"
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold text-lg px-8 py-4 rounded-xl hover:bg-primary/90 transition-colors shadow-lg"
+              >
+                Connect with Parveen Arora
+              </Link>
+              <Link
+                href="/about"
+                className="inline-flex items-center justify-center gap-2 bg-secondary text-primary font-bold text-lg px-8 py-4 rounded-xl hover:bg-secondary/80 transition-colors"
+              >
+                Why Choose Team Arora?
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Other cities */}
         <section className="py-12 bg-secondary border-t border-border">
           <div className="container mx-auto px-4 max-w-4xl text-center">

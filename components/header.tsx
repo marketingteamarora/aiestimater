@@ -31,6 +31,9 @@ export default function Header() {
             <Link href="/estimate" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
               Get Estimate
             </Link>
+            <Link href="/about" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
+              About Parveen Arora
+            </Link>
             <Link href="/home-value-estimator/brampton" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
               Cities
             </Link>
@@ -75,6 +78,13 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Get Estimate
+              </Link>
+              <Link
+                href="/about"
+                className="text-sm font-medium text-foreground hover:text-accent transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About Parveen Arora
               </Link>
               <Link
                 href="/contact"

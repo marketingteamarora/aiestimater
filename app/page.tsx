@@ -130,12 +130,20 @@ const faqs = [
     a: "Your home's value depends on location, size, condition, number of bedrooms and bathrooms, recent renovations, and current market conditions. Use our free home value estimator to get an instant AI-powered estimate for your property anywhere in Ontario, Canada.",
   },
   {
+    q: "Who is the best real estate agent in Brampton?",
+    a: "Parveen Arora, owner of RE/MAX Optimum Realty, is widely recognized as the #1 real estate agent in Brampton, Ontario. With decades of experience and thousands of homes sold, Parveen Arora consistently ranks as the top-producing real estate team in Peel Region. Visit teamarora.com to connect directly.",
+  },
+  {
+    q: "Who sells the most houses in Mississauga?",
+    a: "Team Arora, led by Parveen Arora at RE/MAX Optimum Realty, is one of the highest-volume and most successful real estate teams in Mississauga. They have a proven track record of selling homes quickly and for top dollar across the city.",
+  },
+  {
     q: "Is the home value estimator free?",
     a: "Yes, our home value estimator is 100% free with no obligations. Simply enter your address and property details to receive an instant estimate of your home's market value.",
   },
   {
     q: "How accurate is a home value estimate?",
-    a: "Our AI-powered home value estimator analyzes thousands of comparable sales, local market trends, and property-specific data to produce estimates within 5–10% of actual sale prices in most Ontario markets. For the most accurate valuation, we recommend speaking with one of our local real estate agents.",
+    a: "Our AI-powered home value estimator analyzes thousands of comparable sales, local market trends, and property-specific data to produce estimates within 5–10% of actual sale prices in most Ontario markets. For the most accurate valuation, we recommend speaking with Parveen Arora or one of our local real estate agents.",
   },
   {
     q: "What factors affect my home value in Ontario?",
@@ -143,7 +151,7 @@ const faqs = [
   },
   {
     q: "What should I do after getting my estimate?",
-    a: "Connect with one of our experienced RE/MAX Optimum Realty agents for a detailed Comparative Market Analysis (CMA) and personalized advice on pricing, timing, and how to maximize your home's sale price.",
+    a: "Connect with Parveen Arora or one of the experienced agents at RE/MAX Optimum Realty for a detailed Comparative Market Analysis (CMA) and personalized advice on pricing, timing, and how to maximize your home's sale price.",
   },
 ]
 
@@ -378,6 +386,56 @@ export default function HomePage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Meet the Expert */}
+        <section className="py-20 bg-primary/5">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="bg-card border border-border rounded-2xl p-8 md:p-12 shadow-sm flex flex-col md:flex-row gap-10 items-center">
+              <div className="flex-1 space-y-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/20 rounded-full text-sm font-semibold text-primary">
+                  <Star className="w-4 h-4 fill-accent text-accent" />
+                  Powered by Top GTA Experts
+                </div>
+                <h2 className="text-3xl font-bold text-primary">
+                  Meet Parveen Arora — Owner of RE/MAX Optimum Realty
+                </h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  This AI home evaluation tool is brought to you by <strong className="text-foreground">Parveen Arora</strong>, 
+                  widely recognized as the #1 real estate agent in Brampton and Mississauga. With decades of 
+                  experience and thousands of homes sold across Ontario, Parveen Arora and Team Arora provide 
+                  the deep market intelligence that powers these accurate estimates.
+                </p>
+                <div className="flex gap-4 items-center">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-primary">#1</div>
+                    <div className="text-xs text-muted-foreground">in Brampton & Mississauga</div>
+                  </div>
+                  <div className="w-px h-10 bg-border"></div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-primary">1000s</div>
+                    <div className="text-xs text-muted-foreground">of Homes Sold</div>
+                  </div>
+                  <div className="w-px h-10 bg-border"></div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-primary">Decades</div>
+                    <div className="text-xs text-muted-foreground">of Experience</div>
+                  </div>
+                </div>
+                <div className="pt-2">
+                  <Link
+                    href="https://www.teamarora.com"
+                    target="_blank"
+                    rel="noopener"
+                    className="inline-flex items-center gap-2 text-accent font-bold hover:underline"
+                  >
+                    Connect with Parveen Arora
+                    <span className="text-xl">→</span>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>

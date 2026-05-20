@@ -72,8 +72,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-white/70 leading-relaxed">
-              Free AI-powered home value estimates for Ontario homeowners. Serving all cities
-              across the Greater Toronto Area and beyond.
+              Free AI-powered home value estimates for Ontario homeowners, provided by Parveen Arora, #1 Real Estate Agent in Brampton & Mississauga.
             </p>
             <div className="space-y-2 text-sm text-white/70">
               <div className="flex items-center gap-2">
@@ -88,8 +87,9 @@ export default function Footer() {
               <ul className="space-y-1">
                 {[
                   { label: "Free Home Estimate", href: "/estimate" },
+                  { label: "About Parveen Arora", href: "/about" },
                   { label: "Contact Us", href: "/contact" },
-                  { label: "RE/MAX Optimum Realty", href: "https://teamarora.com", external: true },
+                  { label: "TeamArora.com", href: "https://teamarora.com", external: true },
                 ].map((link) => (
                   <li key={link.label}>
                     <Link
@@ -150,7 +150,7 @@ export default function Footer() {
           </p>
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/50">
             <span>© {new Date().getFullYear()} GetHomeEvaluation.ca — All rights reserved.</span>
-            <span>Powered by RE/MAX Optimum Realty, Brampton, Ontario</span>
+            <span>Powered by Parveen Arora, RE/MAX Optimum Realty</span>
           </div>
         </div>
       </div>
