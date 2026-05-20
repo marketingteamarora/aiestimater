@@ -358,6 +358,28 @@ export function AgentCityPage({ citySlug, keywordPrefix }: AgentCityPageProps) {
             </div>
           </div>
         </section>
+        {/* Cross-Linking SEO Hub */}
+        <section className="py-12 bg-secondary border-t border-border">
+          <div className="container mx-auto px-4 max-w-4xl text-center">
+            <h3 className="text-xl font-bold text-primary mb-4">
+              More {cityName} Real Estate Resources
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href={`/real-estate-agent/${citySlug}`} className="text-sm font-medium text-accent hover:text-primary transition-colors underline underline-offset-4">
+                Real Estate Agent in {cityName}
+              </Link>
+              <Link href={`/best-real-estate-agent/${citySlug}`} className="text-sm font-medium text-accent hover:text-primary transition-colors underline underline-offset-4">
+                Best Real Estate Agent in {cityName}
+              </Link>
+              <Link href={`/top-real-estate-agent/${citySlug}`} className="text-sm font-medium text-accent hover:text-primary transition-colors underline underline-offset-4">
+                Top Real Estate Agent in {cityName}
+              </Link>
+              <Link href={`/no-1-real-estate-agent/${citySlug}`} className="text-sm font-medium text-accent hover:text-primary transition-colors underline underline-offset-4">
+                No. 1 Real Estate Agent in {cityName}
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   )

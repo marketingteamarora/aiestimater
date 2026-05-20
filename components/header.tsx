@@ -41,28 +41,28 @@ export default function Header() {
                   <div className="text-xs text-muted-foreground">Team Arora serves the entire Greater Toronto Area.</div>
                 </div>
                 <div className="grid grid-cols-2 p-2">
-                  <Link href="/real-estate-agent/brampton" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                  <Link href="/best-real-estate-agent/brampton" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
                     Brampton
                   </Link>
-                  <Link href="/real-estate-agent/mississauga" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                  <Link href="/best-real-estate-agent/mississauga" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
                     Mississauga
                   </Link>
-                  <Link href="/real-estate-agent/toronto" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                  <Link href="/best-real-estate-agent/toronto" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
                     Toronto
                   </Link>
-                  <Link href="/real-estate-agent/oakville" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                  <Link href="/best-real-estate-agent/oakville" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
                     Oakville
                   </Link>
-                  <Link href="/real-estate-agent/vaughan" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                  <Link href="/best-real-estate-agent/vaughan" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
                     Vaughan
                   </Link>
-                  <Link href="/real-estate-agent/markham" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                  <Link href="/best-real-estate-agent/markham" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
                     Markham
                   </Link>
-                  <Link href="/real-estate-agent/caledon" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
+                  <Link href="/best-real-estate-agent/caledon" className="block px-4 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent rounded-md transition-colors">
                     Caledon
                   </Link>
-                  <Link href="/real-estate-agent/gta" className="block px-4 py-2 text-sm font-medium text-accent hover:bg-secondary rounded-md transition-colors">
+                  <Link href="/best-real-estate-agent/gta" className="block px-4 py-2 text-sm font-medium text-accent hover:bg-secondary rounded-md transition-colors">
                     View All GTA
                   </Link>
                 </div>
@@ -122,12 +122,12 @@ export default function Header() {
               <div className="py-2 space-y-2 border-y border-border my-2">
                 <div className="text-sm font-semibold text-foreground px-2 pt-2">Top Agent Areas</div>
                 <div className="grid grid-cols-2 gap-1 px-2">
-                  <Link href="/real-estate-agent/brampton" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Brampton</Link>
-                  <Link href="/real-estate-agent/mississauga" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Mississauga</Link>
-                  <Link href="/real-estate-agent/toronto" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Toronto</Link>
-                  <Link href="/real-estate-agent/oakville" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Oakville</Link>
-                  <Link href="/real-estate-agent/vaughan" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Vaughan</Link>
-                  <Link href="/real-estate-agent/markham" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Markham</Link>
+                  <Link href="/best-real-estate-agent/brampton" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Brampton</Link>
+                  <Link href="/best-real-estate-agent/mississauga" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Mississauga</Link>
+                  <Link href="/best-real-estate-agent/toronto" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Toronto</Link>
+                  <Link href="/best-real-estate-agent/oakville" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Oakville</Link>
+                  <Link href="/best-real-estate-agent/vaughan" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Vaughan</Link>
+                  <Link href="/best-real-estate-agent/markham" className="block text-sm text-muted-foreground hover:text-accent transition-colors p-2" onClick={() => setIsMenuOpen(false)}>Markham</Link>
                 </div>
                 <div className="px-2 pb-2">
                   <Link href="/estimate" className="flex items-center justify-center gap-2 w-full py-2 bg-accent text-primary font-bold rounded-lg hover:bg-yellow-400 transition-colors mt-2" onClick={() => setIsMenuOpen(false)}>
