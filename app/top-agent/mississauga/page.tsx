@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Award, Home, MapPin, Star, TrendingUp, Users, CheckCircle2, ExternalLink, Trophy } from "lucide-react"
+import { Award, Home, MapPin, Star, TrendingUp, Users, CheckCircle2, ExternalLink, Trophy, Phone, Mail } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Top Real Estate Agent in Mississauga — Parveen Arora | #1 RE/MAX Team",
@@ -261,6 +261,71 @@ export default function MississaugaAgentPage() {
                   {n}
                 </span>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section className="py-20 bg-background border-t border-border">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="bg-card rounded-2xl p-8 md:p-12 border border-border shadow-sm flex flex-col md:flex-row gap-10 items-center">
+              <div className="flex-1 space-y-6">
+                <h2 className="text-3xl font-bold text-primary mb-2">
+                  Contact Team Arora
+                </h2>
+                <p className="text-muted-foreground mb-6">
+                  Ready to buy or sell in Mississauga? Get in touch with our team of experts today.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Phone className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-foreground">Phone</div>
+                      <div className="text-muted-foreground mt-1">
+                        <div><strong className="text-foreground/80">Dir:</strong> 416-910-8923</div>
+                        <div><strong className="text-foreground/80">Off:</strong> 905.488.1260</div>
+                        <div><strong className="text-foreground/80">Fax:</strong> 905.456.1107</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Mail className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-foreground">Email</div>
+                      <div className="text-muted-foreground mt-1">
+                        <a href="mailto:parveen@teamarora.com" className="hover:text-accent transition-colors">parveen@teamarora.com</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-1">
+                      <MapPin className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-foreground">Mississauga Location</div>
+                      <div className="text-muted-foreground mt-1">
+                        268 Derry Rd W Unit 101<br />
+                        Mississauga, ON L5W 0H6
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full md:w-1/3">
+                <div className="aspect-square bg-secondary rounded-xl border border-border flex items-center justify-center p-6 text-center">
+                  <div>
+                    <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-primary font-bold text-2xl">TA</span>
+                    </div>
+                    <div className="font-bold text-lg text-primary">Team Arora</div>
+                    <div className="text-sm text-muted-foreground">RE/MAX Optimum Realty</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
