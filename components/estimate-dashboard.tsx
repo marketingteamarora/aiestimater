@@ -32,6 +32,7 @@ import {
   Building,
 } from "lucide-react"
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts"
+import { validateContactFields } from "@/lib/validation/contact"
 
 interface EstimateData {
   // DeepSeek format
@@ -75,6 +76,8 @@ export default function EstimateDashboard() {
   const [isRevealed, setIsRevealed] = useState(false)
   const [showLeadForm, setShowLeadForm] = useState(false)
   const [leadData, setLeadData] = useState({ name: "", email: "", phone: "" })
+  const [leadFieldErrors, setLeadFieldErrors] = useState<Record<string, string>>({})
+  const [leadError, setLeadError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
@@ -109,8 +112,30 @@ export default function EstimateDashboard() {
     return formatted.substring(0, 3) + "XX,XXX"
   }
 
+  const handleLeadChange = (field: "name" | "email" | "phone", value: string) => {
+    setLeadData((prev) => ({ ...prev, [field]: value }))
+    if (leadFieldErrors[field]) {
+      setLeadFieldErrors((prev) => {
+        const next = { ...prev }
+        delete next[field]
+        return next
+      })
+    }
+    if (leadError) setLeadError("")
+  }
+
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLeadError("")
+
+    const contactValidation = validateContactFields(leadData)
+    if (!contactValidation.success) {
+      setLeadFieldErrors(contactValidation.fieldErrors)
+      setLeadError("Please enter valid contact details to unlock your report.")
+      return
+    }
+
+    setLeadFieldErrors({})
     setIsSubmitting(true)
 
     try {
@@ -122,9 +147,9 @@ export default function EstimateDashboard() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: leadData.name,
-          email: leadData.email,
-          phone: leadData.phone,
+          name: contactValidation.data.name,
+          email: contactValidation.data.email,
+          phone: contactValidation.data.phone,
           propertyData: propertyData,
           estimateData: estimateData,
         }),
@@ -134,6 +159,9 @@ export default function EstimateDashboard() {
 
       if (!response.ok) {
         console.error("[v0] Error saving lead:", result)
+        if (result.fieldErrors) {
+          setLeadFieldErrors(result.fieldErrors)
+        }
         throw new Error(result.error || "Failed to save lead")
       }
 
@@ -334,16 +362,23 @@ export default function EstimateDashboard() {
                     </CardHeader>
                     <CardContent>
                       <form onSubmit={handleLeadSubmit} className="space-y-4">
+                        {leadError && (
+                          <p className="text-destructive text-sm text-center">{leadError}</p>
+                        )}
                         <div className="space-y-2">
                           <Label htmlFor="name">Full Name</Label>
                           <Input
                             id="name"
                             placeholder="John Smith"
                             value={leadData.name}
-                            onChange={(e) => setLeadData({ ...leadData, name: e.target.value })}
+                            onChange={(e) => handleLeadChange("name", e.target.value)}
                             required
+                            aria-invalid={!!leadFieldErrors.name}
                             className="h-12"
                           />
+                          {leadFieldErrors.name && (
+                            <p className="text-destructive text-sm">{leadFieldErrors.name}</p>
+                          )}
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="email">Email Address</Label>
@@ -352,22 +387,31 @@ export default function EstimateDashboard() {
                             type="email"
                             placeholder="john@example.com"
                             value={leadData.email}
-                            onChange={(e) => setLeadData({ ...leadData, email: e.target.value })}
+                            onChange={(e) => handleLeadChange("email", e.target.value)}
                             required
+                            aria-invalid={!!leadFieldErrors.email}
                             className="h-12"
                           />
+                          {leadFieldErrors.email && (
+                            <p className="text-destructive text-sm">{leadFieldErrors.email}</p>
+                          )}
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="phone">Phone Number</Label>
                           <Input
                             id="phone"
                             type="tel"
-                            placeholder="(555) 123-4567"
+                            inputMode="tel"
+                            placeholder="(647) 555-1234"
                             value={leadData.phone}
-                            onChange={(e) => setLeadData({ ...leadData, phone: e.target.value })}
+                            onChange={(e) => handleLeadChange("phone", e.target.value)}
                             required
+                            aria-invalid={!!leadFieldErrors.phone}
                             className="h-12"
                           />
+                          {leadFieldErrors.phone && (
+                            <p className="text-destructive text-sm">{leadFieldErrors.phone}</p>
+                          )}
                         </div>
                         <Button
                           type="submit"

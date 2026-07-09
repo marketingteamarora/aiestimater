@@ -1,13 +1,28 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
 import { appendLeadToGoogleSheet } from "@/lib/google/sheets"
+import { validateContactFields } from "@/lib/validation/contact"
 
 export async function POST(request: NextRequest) {
   try {
     const supabase = await createClient()
     const body = await request.json()
 
-    console.log("[v0] Saving lead to database:", body)
+    const contactValidation = validateContactFields({
+      name: body.name ?? "",
+      email: body.email ?? "",
+      phone: body.phone ?? "",
+    })
+
+    if (!contactValidation.success) {
+      return NextResponse.json(
+        { error: "Invalid contact details", fieldErrors: contactValidation.fieldErrors },
+        { status: 400 },
+      )
+    }
+
+    const contact = contactValidation.data
+    console.log("[v0] Saving lead to database:", { ...body, ...contact })
 
     // Insert lead data (optional - don't block Google Sheets if this fails)
     let leadId = null;
@@ -15,9 +30,9 @@ export async function POST(request: NextRequest) {
       const { data: leadData, error: leadError } = await supabase
         .from("leads")
         .insert({
-          name: body.name,
-          email: body.email,
-          phone: body.phone,
+          name: contact.name,
+          email: contact.email,
+          phone: contact.phone,
         })
         .select()
         .single()
@@ -39,9 +54,9 @@ export async function POST(request: NextRequest) {
     let sheetsSuccess = false;
     try {
       const sheetsResult = await appendLeadToGoogleSheet({
-        name: body.name,
-        email: body.email,
-        phone: body.phone,
+        name: contact.name,
+        email: contact.email,
+        phone: contact.phone,
         propertyData: body.propertyData,
         estimateData: body.estimateData,
       })
@@ -100,8 +115,6 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ success: true, leadId, sheetsSuccess })
-
-    return NextResponse.json({ success: true, lead: leadData })
   } catch (error: any) {
     console.error("[v0] Unexpected error in leads API:", error)
     return NextResponse.json({ error: "Internal server error", details: error.message }, { status: 500 })

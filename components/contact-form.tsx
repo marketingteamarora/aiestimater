@@ -10,10 +10,12 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
 import { Send } from "lucide-react"
+import { validateContactFields } from "@/lib/validation/contact"
 
 export default function ContactForm() {
   const { toast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -26,10 +28,34 @@ export default function ContactForm() {
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    setFieldErrors((prev) => {
+      const next = { ...prev }
+      if (next[field]) delete next[field]
+      if ((field === "firstName" || field === "lastName") && next.name) delete next.name
+      return next
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    const contactValidation = validateContactFields({
+      name: `${formData.firstName} ${formData.lastName}`.trim(),
+      email: formData.email,
+      phone: formData.phone,
+    })
+
+    if (!contactValidation.success) {
+      setFieldErrors(contactValidation.fieldErrors)
+      toast({
+        title: "Invalid contact details",
+        description: "Please check the highlighted fields and try again.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    setFieldErrors({})
     setIsSubmitting(true)
 
     try {
@@ -41,9 +67,9 @@ export default function ContactForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-          phone: formData.phone,
+          name: contactValidation.data.name,
+          email: contactValidation.data.email,
+          phone: contactValidation.data.phone,
           message: `${formData.interestedIn ? `Interested in: ${formData.interestedIn}\n` : ""}${formData.propertyAddress ? `Property: ${formData.propertyAddress}\n\n` : ""}${formData.message}`,
           preferredContact: formData.interestedIn,
         }),
@@ -53,6 +79,9 @@ export default function ContactForm() {
 
       if (!response.ok) {
         console.error("[v0] Error saving contact submission:", result)
+        if (result.fieldErrors) {
+          setFieldErrors(result.fieldErrors)
+        }
         throw new Error(result.error || "Failed to save contact submission")
       }
 
@@ -96,7 +125,11 @@ export default function ContactForm() {
             value={formData.firstName}
             onChange={(e) => handleChange("firstName", e.target.value)}
             required
+            aria-invalid={!!fieldErrors.name}
           />
+          {fieldErrors.name && (
+            <p className="text-destructive text-sm md:col-span-2">{fieldErrors.name}</p>
+          )}
         </div>
         <div className="space-y-2">
           <Label htmlFor="lastName">Last Name</Label>
@@ -120,18 +153,27 @@ export default function ContactForm() {
             value={formData.email}
             onChange={(e) => handleChange("email", e.target.value)}
             required
+            aria-invalid={!!fieldErrors.email}
           />
+          {fieldErrors.email && (
+            <p className="text-destructive text-sm">{fieldErrors.email}</p>
+          )}
         </div>
         <div className="space-y-2">
           <Label htmlFor="phone">Phone Number</Label>
           <Input
             id="phone"
             type="tel"
+            inputMode="tel"
             placeholder="(647) 555-1234"
             value={formData.phone}
             onChange={(e) => handleChange("phone", e.target.value)}
             required
+            aria-invalid={!!fieldErrors.phone}
           />
+          {fieldErrors.phone && (
+            <p className="text-destructive text-sm">{fieldErrors.phone}</p>
+          )}
         </div>
       </div>
 
