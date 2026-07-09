@@ -11,6 +11,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Progress } from "@/components/ui/progress"
 import { MapPin, Home, Sparkles, Loader2 } from "lucide-react"
+import { validatePropertyNumericFields } from "@/lib/validation/property"
+
+const CURRENT_YEAR = new Date().getFullYear()
 
 interface PropertyFormProps {
   streetNumber?: string
@@ -57,6 +60,7 @@ export default function PropertyForm({
 
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
   const [progress, setProgress] = useState(0)
   const [loadingMessage, setLoadingMessage] = useState("Initializing analysis...")
 
@@ -102,6 +106,13 @@ export default function PropertyForm({
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    if (fieldErrors[field]) {
+      setFieldErrors((prev) => {
+        const next = { ...prev }
+        delete next[field]
+        return next
+      })
+    }
   }
 
   const handleAddressSelect = (address: {
@@ -124,10 +135,26 @@ export default function PropertyForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
     setError("")
 
+    const numericValidation = validatePropertyNumericFields({
+      squareFeet: formData.squareFeet,
+      yearBuilt: formData.yearBuilt,
+      taxes: formData.taxes,
+    })
+
+    if (!numericValidation.success) {
+      setFieldErrors(numericValidation.fieldErrors)
+      setError("Please fix the highlighted fields before continuing.")
+      return
+    }
+
+    setFieldErrors({})
+    setIsLoading(true)
+
     try {
+      const { squareFeet, yearBuilt, taxes } = numericValidation.data
+
       const payload = {
         address: {
           city: formData.city,
@@ -144,11 +171,11 @@ export default function PropertyForm({
           numParkingSpaces: Number.parseInt(formData.parkingSpaces) || 0,
           propertyType: formData.propertyType,
           style: formData.propertyStyle,
-          sqft: formData.squareFeet,
-          yearBuilt: Number.parseInt(formData.yearBuilt),
+          sqft: String(squareFeet),
+          yearBuilt,
         },
         taxes: {
-          annualAmount: Number.parseFloat(formData.taxes) || 0,
+          annualAmount: taxes,
         },
       }
 
@@ -164,7 +191,12 @@ export default function PropertyForm({
       })
 
       if (!response.ok) {
-        throw new Error("Failed to get estimate")
+        const errorData = await response.json().catch(() => null)
+        if (errorData?.fieldErrors) {
+          setFieldErrors(errorData.fieldErrors)
+          throw new Error("Please fix the highlighted fields before continuing.")
+        }
+        throw new Error(errorData?.error || "Failed to get estimate")
       }
 
       const estimateData = await response.json()
@@ -366,12 +398,20 @@ export default function PropertyForm({
                   <Input
                     id="squareFeet"
                     type="number"
+                    inputMode="numeric"
+                    min={100}
+                    max={50000}
+                    step={1}
                     placeholder="2000"
                     value={formData.squareFeet}
                     onChange={(e) => handleChange("squareFeet", e.target.value)}
                     required
+                    aria-invalid={!!fieldErrors.squareFeet}
                     className="text-base"
                   />
+                  {fieldErrors.squareFeet && (
+                    <p className="text-destructive text-sm">{fieldErrors.squareFeet}</p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
@@ -379,12 +419,20 @@ export default function PropertyForm({
                   <Input
                     id="yearBuilt"
                     type="number"
+                    inputMode="numeric"
+                    min={1800}
+                    max={CURRENT_YEAR + 1}
+                    step={1}
                     placeholder="2010"
                     value={formData.yearBuilt}
                     onChange={(e) => handleChange("yearBuilt", e.target.value)}
                     required
+                    aria-invalid={!!fieldErrors.yearBuilt}
                     className="text-base"
                   />
+                  {fieldErrors.yearBuilt && (
+                    <p className="text-destructive text-sm">{fieldErrors.yearBuilt}</p>
+                  )}
                 </div>
               </div>
 
@@ -467,12 +515,20 @@ export default function PropertyForm({
                 <Input
                   id="taxes"
                   type="number"
+                  inputMode="decimal"
+                  min={1}
+                  max={100000}
+                  step={1}
                   placeholder="5000"
                   value={formData.taxes}
                   onChange={(e) => handleChange("taxes", e.target.value)}
                   required
+                  aria-invalid={!!fieldErrors.taxes}
                   className="text-base"
                 />
+                {fieldErrors.taxes && (
+                  <p className="text-destructive text-sm">{fieldErrors.taxes}</p>
+                )}
               </div>
             </div>
           </CardContent>

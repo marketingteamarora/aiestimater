@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { estimateRequestSchema, zodFieldErrors } from "@/lib/validation/property"
 
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY
 const DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
@@ -184,13 +185,29 @@ async function getRepliersEstimate(propertyData: PropertyData) {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    console.log("[SERVER] Received estimate request for:", body.address)
+    const parsed = estimateRequestSchema.safeParse(body)
+
+    if (!parsed.success) {
+      const apiFieldErrors = zodFieldErrors(parsed.error)
+      const formFieldErrors: Record<string, string> = {}
+      if (apiFieldErrors.sqft) formFieldErrors.squareFeet = apiFieldErrors.sqft
+      if (apiFieldErrors.yearBuilt) formFieldErrors.yearBuilt = apiFieldErrors.yearBuilt
+      if (apiFieldErrors.annualAmount) formFieldErrors.taxes = apiFieldErrors.annualAmount
+
+      return NextResponse.json(
+        { error: "Invalid property details", fieldErrors: formFieldErrors },
+        { status: 400 },
+      )
+    }
+
+    const propertyData = parsed.data
+    console.log("[SERVER] Received estimate request for:", propertyData.address)
 
     // Try DeepSeek first (primary)
     if (DEEPSEEK_API_KEY) {
       try {
         console.log("[SERVER] Attempting DeepSeek estimate...")
-        const estimate = await getDeepSeekEstimate(body)
+        const estimate = await getDeepSeekEstimate(propertyData)
         console.log("[SERVER] DeepSeek estimate successful")
         return NextResponse.json(estimate)
       } catch (deepseekError) {
@@ -201,7 +218,7 @@ export async function POST(request: Request) {
     // Fallback to Repliers
     try {
       console.log("[SERVER] Attempting Repliers estimate...")
-      const estimate = await getRepliersEstimate(body)
+      const estimate = await getRepliersEstimate(propertyData)
       console.log("[SERVER] Repliers estimate successful")
       return NextResponse.json(estimate)
     } catch (repliersError) {
