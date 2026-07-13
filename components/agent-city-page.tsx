@@ -131,24 +131,21 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
       <main className="min-h-screen">
-        <section className="relative bg-primary text-white py-24 overflow-hidden">
-          <div className="absolute inset-0 z-0 opacity-20">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-          </div>
+        <section className="relative bg-secondary text-primary py-24 overflow-hidden border-b border-border">
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-medium mb-6 backdrop-blur-md">
+                <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white border border-border rounded-full text-sm font-semibold mb-6 shadow-sm">
                   <MapPin className="w-4 h-4 text-accent" />
                   Serving {cityName}, Ontario
                 </div>
-                <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-4">
+                <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-4 text-primary">
                   The {displayTitle}
                 </h1>
-                <p className="text-2xl text-accent font-serif italic mb-6">
+                <p className="text-2xl text-muted-foreground font-serif italic mb-6">
                   {PARVEEN_ARORA.name} &amp; {PARVEEN_ARORA.teamName}
                 </p>
-                <p className="text-lg md:text-xl text-white/70 font-light leading-relaxed mb-8">
+                <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed mb-8">
                   {PARVEEN_ARORA.bio.split(".")[0]}. When {cityName} homeowners want top dollar, they call{" "}
                   {PARVEEN_ARORA.name} — {PARVEEN_ARORA.yearsExperience}+ years, {PARVEEN_ARORA.transactions}{" "}
                   transactions, and {PARVEEN_ARORA.salesVolume} in sales.
@@ -158,23 +155,22 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
                     href={PARVEEN_ARORA.profileUrl}
                     target="_blank"
                     rel="noopener"
-                    className="inline-flex items-center justify-center gap-2 bg-accent text-primary font-bold text-lg px-8 py-4 rounded-xl hover:bg-accent/90 transition-colors shadow-lg"
+                    className="inline-flex items-center justify-center gap-2 bg-accent text-white font-semibold text-lg px-8 py-4 rounded-lg hover:bg-accent/90 transition-colors shadow-sm"
                   >
                     <ExternalLink className="w-5 h-5" />
                     Work with {cityName}&apos;s Top Agent
                   </Link>
                   <Link
                     href="/estimate"
-                    className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-bold text-lg px-8 py-4 rounded-xl hover:bg-white/20 transition-colors backdrop-blur-md"
+                    className="inline-flex items-center justify-center gap-2 bg-white text-primary border border-border font-semibold text-lg px-8 py-4 rounded-lg hover:bg-secondary transition-colors"
                   >
-                    <Zap className="w-5 h-5" />
                     Free Home Evaluation
                   </Link>
                 </div>
               </div>
               <div className="flex justify-center lg:justify-end">
-                <div className="relative w-72 h-80 md:w-96 md:h-[28rem] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent z-10" />
+                <div className="relative w-72 h-80 md:w-96 md:h-[28rem] rounded-xl overflow-hidden border border-border shadow-sm">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10" />
                   <Image
                     src={PARVEEN_ARORA.imagePath}
                     alt={`${PARVEEN_ARORA.name} — ${displayTitle}, ${PARVEEN_ARORA.brokerage}`}
@@ -229,18 +225,18 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
           </section>
         )}
 
-        <section className="bg-gradient-to-r from-accent to-yellow-400 py-8">
+        <section className="bg-primary text-white py-12">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-5xl mx-auto">
-              <div className="text-primary">
-                <h3 className="text-2xl font-bold mb-1">Curious what your {cityName} home is worth?</h3>
-                <p className="font-medium opacity-90">AI-powered valuation by {PARVEEN_ARORA.name}&apos;s team.</p>
+              <div>
+                <h3 className="text-2xl font-bold mb-2 tracking-tight">Curious what your {cityName} home is worth?</h3>
+                <p className="font-medium text-white/70">Data-driven valuation by {PARVEEN_ARORA.name}&apos;s team.</p>
               </div>
               <Link
                 href="/estimate"
-                className="bg-primary text-white font-bold text-lg px-8 py-4 rounded-xl hover:bg-primary/90 transition-colors shadow-lg whitespace-nowrap"
+                className="bg-accent text-white font-semibold text-lg px-8 py-4 rounded-lg hover:bg-accent/90 transition-colors shadow-sm whitespace-nowrap"
               >
-                Get Free AI Home Evaluation
+                Get Free Property Evaluation
               </Link>
             </div>
           </div>
@@ -310,7 +306,7 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
                   </Link>
                 </div>
               </div>
-              <div className="bg-secondary rounded-3xl p-10 border border-border shadow-soft">
+              <div className="bg-white rounded-xl p-10 border border-border shadow-soft">
                 <h3 className="font-bold text-2xl text-primary mb-8 flex items-center gap-3">
                   <Trophy className="w-7 h-7 text-accent" />
                   Verified Industry Authority
@@ -319,7 +315,7 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
                   {PARVEEN_ARORA.awards.map((award) => (
                     <li key={award} className="flex items-start gap-4">
                       <Award className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-foreground font-medium text-lg">{award}</span>
+                      <span className="text-muted-foreground font-medium text-lg">{award}</span>
                     </li>
                   ))}
                 </ul>
@@ -328,10 +324,10 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
           </div>
         </section>
 
-        <section className="py-20 bg-background border-t border-border">
+        <section className="py-20 bg-secondary border-t border-border">
           <div className="container mx-auto px-4 max-w-4xl">
-            <div className="bg-card rounded-2xl p-8 md:p-12 border border-border shadow-sm flex flex-col md:flex-row gap-10 items-center">
-              <div className="relative w-40 h-48 flex-shrink-0 rounded-xl overflow-hidden border-2 border-accent/30">
+            <div className="bg-white rounded-xl p-8 md:p-12 border border-border shadow-soft flex flex-col md:flex-row gap-10 items-center">
+              <div className="relative w-40 h-48 flex-shrink-0 rounded-lg overflow-hidden border border-border">
                 <Image
                   src={PARVEEN_ARORA.imagePath}
                   alt={`Contact ${PARVEEN_ARORA.name}, ${cityName} real estate agent`}
@@ -383,13 +379,13 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
           </div>
         </section>
 
-        <section className="py-20 bg-background">
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-3xl">
             <h2 className="text-3xl font-bold text-primary mb-8 text-center">{cityName} Real Estate FAQ</h2>
             <div className="space-y-4">
               {faqs.map((faq) => (
-                <details key={faq.q} className="group bg-card border border-border rounded-xl overflow-hidden">
-                  <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-foreground hover:text-accent transition-colors list-none">
+                <details key={faq.q} className="group bg-white border border-border rounded-lg overflow-hidden shadow-sm">
+                  <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-primary hover:text-accent transition-colors list-none">
                     {faq.q}
                     <span className="text-muted-foreground text-xl group-open:rotate-180 transition-transform flex-shrink-0 ml-4">
                       ↓

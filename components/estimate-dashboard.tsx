@@ -17,8 +17,6 @@ import {
   ArrowRight,
   Phone,
   Mail,
-  Sparkles,
-  Brain,
   Home,
   DollarSign,
   Calendar,
@@ -247,14 +245,14 @@ export default function EstimateDashboard() {
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="text-center space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Badge className="bg-primary/10 text-primary border-primary/20 text-base px-4 py-2 animate-pulse">
-              <Brain className="w-4 h-4 mr-2 inline text-primary" />
-              AI Analysis Complete
+            <Badge className="bg-secondary text-primary border-border text-base px-4 py-2 font-medium">
+              <CheckCircle2 className="w-4 h-4 mr-2 inline text-accent" />
+              Data Analysis Complete
             </Badge>
-            <h1 className="text-3xl md:text-5xl font-bold text-foreground">Your Property Valuation</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-primary tracking-tight">Your Property Valuation</h1>
             <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <MapPin className="w-5 h-5 text-primary" />
-              <p className="text-lg md:text-xl">
+              <MapPin className="w-5 h-5 text-accent" />
+              <p className="text-lg md:text-xl font-medium">
                 {propertyData.streetNumber} {propertyData.streetName}, {propertyData.city}
               </p>
             </div>
@@ -265,11 +263,11 @@ export default function EstimateDashboard() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -z-10" />
               <CardHeader className="text-center pb-6 relative">
                 <div className="flex items-center justify-center gap-2 mb-3">
-                  <Sparkles className="w-6 h-6 text-accent" />
-                  <CardTitle className="text-2xl md:text-3xl font-bold tracking-tight">AI-Calculated Market Value</CardTitle>
+                  <TrendingUp className="w-6 h-6 text-accent" />
+                  <CardTitle className="text-2xl md:text-3xl font-bold tracking-tight text-primary">Estimated Market Value</CardTitle>
                 </div>
                 <CardDescription className="text-base font-medium">
-                  Powered by advanced machine learning algorithms analyzing thousands of data points
+                  Based on recent comparable sales and current market conditions
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-8">
@@ -449,8 +447,8 @@ export default function EstimateDashboard() {
             <Card className="border border-border/50 shadow-soft hover:shadow-hover transition-all bg-white">
               <CardHeader className="pb-3 border-b border-border/30">
                 <CardTitle className="text-lg flex items-center gap-2 font-bold text-primary">
-                  <Brain className="w-5 h-5 text-accent" />
-                  AI Confidence
+                  <CheckCircle2 className="w-5 h-5 text-accent" />
+                  Valuation Confidence
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 pt-4">
@@ -537,61 +535,64 @@ export default function EstimateDashboard() {
 
           {historicalData.length > 0 && (
             <Card
-              className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-450"
+              className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-450 border border-border/50 shadow-soft bg-white"
               style={{ filter: isRevealed ? "none" : "blur(8px)", pointerEvents: isRevealed ? "auto" : "none" }}
             >
-              <CardHeader>
+              <CardHeader className="border-b border-border/30 pb-5">
                 <div className="flex items-center justify-between flex-wrap gap-4">
                   <div>
-                    <CardTitle className="flex items-center gap-2 text-xl">
-                      <TrendingUp className="w-5 h-5 text-primary" />
+                    <CardTitle className="flex items-center gap-2 text-2xl font-bold text-primary">
+                      <TrendingUp className="w-6 h-6 text-accent" />
                       12-Month Value History
                     </CardTitle>
-                    <CardDescription className="mt-1">
-                      AI-predicted property values showing market trends over time
+                    <CardDescription className="mt-2 text-base font-medium">
+                      Estimated property values showing market trends over time
                     </CardDescription>
                   </div>
-                  <Badge variant="outline" className="text-sm border-primary/30 bg-primary/5">
-                    <Calendar className="w-4 h-4 mr-2 text-primary" />
-                    <span className="text-foreground">Last updated: {new Date().toLocaleDateString()}</span>
+                  <Badge variant="outline" className="text-sm border-border bg-secondary/50 text-muted-foreground px-3 py-1">
+                    <Calendar className="w-4 h-4 mr-2" />
+                    <span>Last updated: {new Date().toLocaleDateString()}</span>
                   </Badge>
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-6">
                 <ResponsiveContainer width="100%" height={350}>
                   <AreaChart data={historicalData}>
                     <defs>
                       <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#d4af37" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="#d4af37" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#2563eb" stopOpacity={0.15} />
+                        <stop offset="95%" stopColor="#2563eb" stopOpacity={0} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e9ecef" />
-                    <XAxis dataKey="month" stroke="#6c757d" style={{ fontSize: "12px" }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e4e4e7" vertical={false} />
+                    <XAxis dataKey="month" stroke="#71717a" style={{ fontSize: "12px" }} tickLine={false} axisLine={false} dy={10} />
                     <YAxis
-                      stroke="#6c757d"
+                      stroke="#71717a"
                       tickFormatter={(value) => `$${(value / 1000).toFixed(0)}K`}
                       style={{ fontSize: "12px" }}
+                      tickLine={false}
+                      axisLine={false}
+                      dx={-10}
                     />
                     <Tooltip
                       formatter={(value: number) => [formatCurrency(value), "Estimated Value"]}
                       contentStyle={{
                         backgroundColor: "#ffffff",
-                        border: "1px solid #d4af37",
-                        borderRadius: "12px",
+                        border: "1px solid #e4e4e7",
+                        borderRadius: "8px",
                         padding: "12px",
-                        boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                        boxShadow: "0 4px 20px -2px rgba(10, 22, 40, 0.05)",
                       }}
-                      labelStyle={{ fontWeight: "bold", marginBottom: "4px" }}
+                      labelStyle={{ fontWeight: "600", color: "#09090b", marginBottom: "4px" }}
                     />
                     <Area
                       type="monotone"
                       dataKey="value"
-                      stroke="#d4af37"
+                      stroke="#2563eb"
                       strokeWidth={3}
                       fill="url(#colorValue)"
-                      dot={{ fill: "#d4af37", r: 4, strokeWidth: 2, stroke: "#fff" }}
-                      activeDot={{ r: 6, strokeWidth: 2 }}
+                      dot={{ fill: "#ffffff", r: 4, strokeWidth: 2, stroke: "#2563eb" }}
+                      activeDot={{ r: 6, strokeWidth: 2, fill: "#2563eb", stroke: "#ffffff" }}
                     />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -599,7 +600,7 @@ export default function EstimateDashboard() {
             </Card>
           )}
 
-          {/* AI Insights Section */}
+          {/* Market Insights Section */}
           {insights.length > 0 && (
             <Card
               className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500 border border-border/50 shadow-soft bg-white"
@@ -608,7 +609,7 @@ export default function EstimateDashboard() {
               <CardHeader className="border-b border-border/30 pb-5">
                 <CardTitle className="flex items-center gap-2 text-2xl font-bold text-primary">
                   <Lightbulb className="w-6 h-6 text-accent" />
-                  AI-Powered Insights
+                  Market Insights
                 </CardTitle>
                 <CardDescription className="text-base font-medium">Key factors affecting your property value</CardDescription>
               </CardHeader>
@@ -676,7 +677,7 @@ export default function EstimateDashboard() {
             <CardContent className="p-10 md:p-16 relative z-10">
               <div className="max-w-3xl mx-auto text-center space-y-8">
                 <div className="inline-flex items-center justify-center gap-2 mb-2 bg-white/10 border border-white/20 px-5 py-2 rounded-full backdrop-blur-md">
-                  <Sparkles className="w-4 h-4 text-accent" />
+                  <TrendingUp className="w-4 h-4 text-accent" />
                   <span className="text-white font-semibold text-sm uppercase tracking-wider">Next Steps</span>
                 </div>
                 <h2 className="text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight">

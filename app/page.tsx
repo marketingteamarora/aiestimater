@@ -177,9 +177,9 @@ export default function HomePage() {
         <HeroSection />
 
         {/* Stats bar */}
-        <section className="py-8 bg-primary text-white border-b border-white/10">
+        <section className="py-12 bg-primary text-white">
           <div className="container mx-auto px-4">
-            <div className="flex flex-wrap justify-center gap-10 text-center">
+            <div className="flex flex-wrap justify-center gap-12 md:gap-20 text-center">
               {[
                 { value: "10,000+", label: "Homes Evaluated" },
                 { value: "95%", label: "Accuracy Rate" },
@@ -187,8 +187,8 @@ export default function HomePage() {
                 { value: "30 sec", label: "Instant Results" },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <div className="text-2xl font-bold text-accent">{stat.value}</div>
-                  <div className="text-sm text-white/70 mt-1">{stat.label}</div>
+                  <div className="text-3xl font-bold text-white">{stat.value}</div>
+                  <div className="text-sm text-white/70 mt-2 font-medium uppercase tracking-wider">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -199,23 +199,23 @@ export default function HomePage() {
         <HowItWorks />
 
         {/* AI features */}
-        <section className="py-24 bg-secondary">
+        <section className="py-24 bg-white border-y border-border">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-primary mb-6 tracking-tight">
-                Powered by Advanced Technology
-              </h2>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Our home value estimator uses cutting-edge data models, analyzing
-                millions of property transactions across Ontario to give you the most accurate
-                estimate possible — completely free.
-              </p>
-            </div>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 tracking-tight text-balance">
+              Data-Driven Market Accuracy
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground text-pretty font-light">
+              Our home value estimator uses comprehensive market data, analyzing
+              millions of property transactions across Ontario to give you the most accurate
+              estimate possible — completely free.
+            </p>
+          </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
               {[
                 {
-                  icon: Brain,
+                  icon: TrendingUp,
                   title: "Smart Analysis",
                   desc: "Advanced algorithms analyze millions of Ontario property records.",
                 },
@@ -225,7 +225,7 @@ export default function HomePage() {
                   desc: "Get your free home value estimate in under 30 seconds.",
                 },
                 {
-                  icon: TrendingUp,
+                  icon: MapPin,
                   title: "Market Trends",
                   desc: "Real-time data from local market conditions across Ontario.",
                 },
@@ -235,7 +235,7 @@ export default function HomePage() {
                   desc: "Trusted by thousands of homeowners across Ontario.",
                 },
               ].map((item) => (
-                <div key={item.title} className="bg-card rounded-2xl p-8 shadow-soft hover:shadow-hover transition-all duration-300 border border-border/50">
+                <div key={item.title} className="bg-secondary rounded-xl p-8 border border-border">
                   <div className="w-12 h-12 mb-6 text-accent">
                     <item.icon className="w-full h-full" strokeWidth={1.5} />
                   </div>
@@ -390,58 +390,58 @@ export default function HomePage() {
         </section>
 
         {/* Meet the Expert */}
-        <section className="py-20 bg-primary/5">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <div className="bg-card border border-border rounded-2xl p-8 md:p-12 shadow-sm flex flex-col md:flex-row gap-10 items-center">
-              <div className="relative w-48 h-56 flex-shrink-0 rounded-xl overflow-hidden border-2 border-accent/30 shadow-lg">
+        <section className="py-24 bg-secondary border-y border-border">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="bg-white border border-border rounded-xl p-8 md:p-12 shadow-soft flex flex-col md:flex-row gap-12 items-center">
+              <div className="relative w-56 h-64 flex-shrink-0 rounded-lg overflow-hidden border border-border">
                 <Image
                   src={PARVEEN_ARORA.imagePath}
                   alt={`${PARVEEN_ARORA.name} — #1 real estate agent in Brampton and Mississauga, RE/MAX Optimum Realty`}
                   fill
                   className="object-cover object-top"
-                  sizes="192px"
+                  sizes="224px"
                 />
               </div>
               <div className="flex-1 space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/20 rounded-full text-sm font-semibold text-primary">
-                  <Star className="w-4 h-4 fill-accent text-accent" />
-                  Powered by Top GTA Experts
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary border border-border rounded-full text-sm font-semibold text-primary">
+                  <Star className="w-4 h-4 text-accent" />
+                  Local Market Expert
                 </div>
-                <h2 className="text-3xl font-bold text-primary">
+                <h2 className="text-3xl font-bold text-primary tracking-tight">
                   Meet Parveen Arora — Owner of RE/MAX Optimum Realty
                 </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  This AI home evaluation tool is brought to you by <strong className="text-foreground">{PARVEEN_ARORA.name}</strong>,
+                <p className="text-muted-foreground leading-relaxed text-lg font-light">
+                  This property evaluation tool is brought to you by <strong className="text-primary font-medium">{PARVEEN_ARORA.name}</strong>,
                   Broker of Record at {PARVEEN_ARORA.brokerage}. With {PARVEEN_ARORA.yearsExperience}+ years,
                   {PARVEEN_ARORA.transactions} transactions, and {PARVEEN_ARORA.salesVolume} in sales,
                   {PARVEEN_ARORA.name} is recognized as the #1 real estate agent in Brampton and Mississauga.
                 </p>
-                <div className="flex gap-4 items-center flex-wrap">
-                  <div className="text-center">
+                <div className="flex gap-8 items-center flex-wrap pt-2">
+                  <div>
                     <div className="text-2xl font-bold text-primary">{CLIENT_REVIEWS.totalDisplay}</div>
-                    <div className="text-xs text-muted-foreground">Client Reviews</div>
+                    <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mt-1">Client Reviews</div>
                   </div>
                   <div className="w-px h-10 bg-border"></div>
-                  <div className="text-center">
+                  <div>
                     <div className="text-2xl font-bold text-primary">{PARVEEN_ARORA.salesVolume}</div>
-                    <div className="text-xs text-muted-foreground">Sales Volume</div>
+                    <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mt-1">Sales Volume</div>
                   </div>
                   <div className="w-px h-10 bg-border"></div>
-                  <div className="text-center">
+                  <div>
                     <div className="text-2xl font-bold text-primary">{PARVEEN_ARORA.yearsExperience}+</div>
-                    <div className="text-xs text-muted-foreground">Years Experience</div>
+                    <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mt-1">Years Experience</div>
                   </div>
                 </div>
-                <div className="pt-2 flex flex-wrap gap-4">
+                <div className="pt-4 flex flex-wrap gap-6">
                   <Link
                     href="/parveen-arora"
-                    className="inline-flex items-center gap-2 text-accent font-bold hover:underline"
+                    className="inline-flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors"
                   >
                     Full profile &amp; credentials →
                   </Link>
                   <Link
                     href={getAgentPageUrl("brampton")}
-                    className="inline-flex items-center gap-2 text-primary font-bold hover:underline"
+                    className="inline-flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors"
                   >
                     Best Agent in Brampton →
                   </Link>
@@ -452,10 +452,10 @@ export default function HomePage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20 bg-secondary">
+        <section className="py-24 bg-white">
           <div className="container mx-auto px-4 max-w-3xl">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 tracking-tight">
                 Frequently Asked Questions
               </h2>
               <p className="text-lg text-muted-foreground">
@@ -466,13 +466,13 @@ export default function HomePage() {
               {faqs.map((faq) => (
                 <details
                   key={faq.q}
-                  className="group bg-card border border-border rounded-xl overflow-hidden"
+                  className="group bg-white border border-border rounded-lg overflow-hidden shadow-sm"
                 >
-                  <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-foreground hover:text-accent transition-colors list-none">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-primary hover:text-accent transition-colors list-none">
                     {faq.q}
                     <ChevronDown className="w-5 h-5 text-muted-foreground group-open:rotate-180 transition-transform flex-shrink-0 ml-4" />
                   </summary>
-                  <div className="px-5 pb-5 text-muted-foreground leading-relaxed border-t border-border pt-4">
+                  <div className="px-6 pb-6 text-muted-foreground leading-relaxed border-t border-border pt-4">
                     {faq.a}
                   </div>
                 </details>
@@ -482,22 +482,21 @@ export default function HomePage() {
         </section>
 
         {/* Final CTA */}
-        <section className="py-16 bg-primary text-white text-center">
-          <div className="container mx-auto px-4 max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <section className="py-24 bg-primary text-white text-center">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
               Ready to Find Out What Your Home Is Worth?
             </h2>
-            <p className="text-white/80 text-lg mb-8">
+            <p className="text-white/80 text-lg md:text-xl mb-10 font-light">
               Get your free home value estimate in under 30 seconds. No sign-up required.
             </p>
             <Link
               href="/estimate"
-              className="inline-flex items-center gap-2 bg-accent text-primary font-bold text-lg px-8 py-4 rounded-xl hover:bg-yellow-400 transition-colors shadow-lg"
+              className="inline-flex items-center gap-2 bg-accent text-white font-semibold text-lg px-10 py-5 rounded-lg hover:bg-accent/90 transition-colors shadow-sm"
             >
-              <Zap className="w-5 h-5" />
               Get My Free Home Estimate
             </Link>
-            <p className="text-white/50 text-sm mt-4">100% Free · No Obligation · Instant Results</p>
+            <p className="text-white/50 text-sm mt-6 font-medium">100% Free · No Obligation · Instant Results</p>
           </div>
         </section>
       </main>

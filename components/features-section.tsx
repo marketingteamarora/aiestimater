@@ -3,8 +3,8 @@ import { BarChart3, Clock, Shield, TrendingUp, MapPin, Bell } from "lucide-react
 const features = [
   {
     icon: BarChart3,
-    title: "AI-Powered Accuracy",
-    description: "Advanced algorithms analyze thousands of data points for precise valuations",
+    title: "Data-Driven Accuracy",
+    description: "Advanced algorithms analyze thousands of local data points for precise valuations",
   },
   {
     icon: Clock,
@@ -35,14 +35,14 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="py-24 bg-secondary">
+    <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4 text-balance">
-            Why Choose PropValue AI?
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 tracking-tight text-balance">
+            Why Choose GetHomeEvaluation.ca?
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty">
-            Cutting-edge AI technology analyzing millions of data points for accurate valuations
+          <p className="text-lg md:text-xl text-muted-foreground text-pretty font-light">
+            Cutting-edge technology analyzing millions of data points for accurate valuations
           </p>
         </div>
 
@@ -50,12 +50,12 @@ export default function FeaturesSection() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-card p-8 rounded-xl border border-border hover:border-accent/50 transition-all hover:shadow-lg group"
+              className="bg-secondary p-8 rounded-xl border border-border hover:shadow-soft transition-all group"
             >
-              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 shadow-sm border border-border">
                 <feature.icon className="w-6 h-6 text-accent" />
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">{feature.title}</h3>
+              <h3 className="text-xl font-bold text-primary mb-3">{feature.title}</h3>
               <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
             </div>
           ))}
