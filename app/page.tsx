@@ -6,12 +6,14 @@ import HowItWorks from "@/components/how-it-works"
 import { Card, CardContent } from "@/components/ui/card"
 import { Brain, TrendingUp, Shield, Zap, Star, MapPin, Users, CheckCircle2, ChevronDown } from "lucide-react"
 import Link from "next/link"
-import { PARVEEN_ARORA, buildAgentOpenGraph, buildParveenPersonJsonLd, getAgentPageUrl } from "@/lib/seo/parveen-arora"
+import { PARVEEN_ARORA, buildAgentOpenGraph, buildParveenPersonJsonLd, getAgentPageUrl, CLIENT_REVIEWS } from "@/lib/seo/parveen-arora"
+import { buildAggregateRatingJsonLd } from "@/lib/seo/reviews"
+import { ReviewsTrustSection } from "@/components/reviews-trust-section"
 
 export const metadata: Metadata = {
   title: "Free AI Home Value Estimator Canada — How Much Is My Home Worth?",
   description:
-    "Get an instant, free home value estimate in Canada. AI-powered tool by Parveen Arora, #1 RE/MAX agent in Brampton & Mississauga. Covers Toronto, Scarborough & all of Ontario.",
+    `Get an instant, free home value estimate in Canada. AI-powered tool by Parveen Arora with ${CLIENT_REVIEWS.totalDisplay} verified reviews across Google, Rank My Agent, and Rate My Agent.`,
   alternates: {
     canonical: "/",
   },
@@ -144,12 +146,7 @@ const reviewJsonLd = {
   "@type": "RealEstateAgent",
   name: PARVEEN_ARORA.teamName,
   founder: { "@type": "Person", name: PARVEEN_ARORA.name },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5",
-    reviewCount: String(PARVEEN_ARORA.rankMyAgentReviews),
-    bestRating: "5",
-  },
+  aggregateRating: buildAggregateRatingJsonLd(),
   review: testimonials.map((t) => ({
     "@type": "Review",
     author: { "@type": "Person", name: t.name },
@@ -302,15 +299,17 @@ export default function HomePage() {
           </div>
         </section>
 
+        <ReviewsTrustSection />
+
         {/* Testimonials */}
-        <section className="py-20 bg-secondary">
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
                 What Ontario Homeowners Say
               </h2>
               <p className="text-lg text-muted-foreground">
-                Thousands of homeowners across Ontario trust our free home evaluation tool
+                Join {CLIENT_REVIEWS.totalDisplay} clients who trust {PARVEEN_ARORA.name} and our free home evaluation tool
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -421,8 +420,8 @@ export default function HomePage() {
                 </p>
                 <div className="flex gap-4 items-center flex-wrap">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">{PARVEEN_ARORA.transactions}</div>
-                    <div className="text-xs text-muted-foreground">Transactions</div>
+                    <div className="text-2xl font-bold text-primary">{CLIENT_REVIEWS.totalDisplay}</div>
+                    <div className="text-xs text-muted-foreground">Client Reviews</div>
                   </div>
                   <div className="w-px h-10 bg-border"></div>
                   <div className="text-center">

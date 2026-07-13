@@ -13,6 +13,7 @@ import {
   TrendingUp,
   Home,
 } from "lucide-react"
+import { ReviewsTrustSection } from "@/components/reviews-trust-section"
 import { agentCities } from "@/lib/seo/agent-cities"
 import { getCityMarket } from "@/lib/seo/city-market-data"
 import {
@@ -20,6 +21,8 @@ import {
   SITE_URL,
   buildParveenPersonJsonLd,
   getAgentPageUrl,
+  CLIENT_REVIEWS,
+  buildReviewsSummaryText,
 } from "@/lib/seo/parveen-arora"
 import {
   generateAgentMetadata,
@@ -29,10 +32,10 @@ import {
 export { agentCities, generateAgentMetadata }
 
 const stats = [
+  { value: CLIENT_REVIEWS.totalDisplay, label: "Client Reviews" },
   { value: PARVEEN_ARORA.transactions, label: "Successful Transactions" },
   { value: PARVEEN_ARORA.salesVolume, label: "Career Sales Volume" },
   { value: "#1", label: "RE/MAX Team in Canada (2018)" },
-  { value: PARVEEN_ARORA.teamSize, label: "Full-Time Real Estate Experts" },
 ]
 
 interface AgentCityPageProps {
@@ -89,7 +92,11 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
     },
     {
       q: `Who is the top RE/MAX agent in ${cityName}?`,
-      a: `${PARVEEN_ARORA.name} holds prestigious RE/MAX honours including Luminary of Distinction (2024), Circle of Legends, Hall of Fame, and Lifetime Achievement Award. He is listed on RE/MAX Canada and Rank My Agent with ${PARVEEN_ARORA.rankMyAgentReviews}+ verified reviews.`,
+      a: `${PARVEEN_ARORA.name} holds prestigious RE/MAX honours including Luminary of Distinction (2024), Circle of Legends, Hall of Fame, and Lifetime Achievement Award. With ${CLIENT_REVIEWS.totalDisplay} reviews across Google (${CLIENT_REVIEWS.platforms[0].countDisplay}), Rank My Agent (${CLIENT_REVIEWS.platforms[1].countDisplay}), Rate My Agent (${CLIENT_REVIEWS.platforms[2].countDisplay}), and more, ${PARVEEN_ARORA.name} is one of the most trusted agents in ${cityName}.`,
+    },
+    {
+      q: `How many reviews does Parveen Arora have?`,
+      a: `${PARVEEN_ARORA.name} and ${PARVEEN_ARORA.teamName} have ${CLIENT_REVIEWS.totalDisplay} client reviews across verified platforms including Google Reviews, Rank My Agent, and Rate My Agent, with an average rating of ${CLIENT_REVIEWS.aggregateRating} out of 5.`,
     },
     {
       q: `Why is ${PARVEEN_ARORA.name} considered a ${keywordPrefix || "top"} realtor in ${cityName}?`,
@@ -254,6 +261,8 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
           </div>
         </section>
 
+        <ReviewsTrustSection cityName={cityName} />
+
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
@@ -266,37 +275,17 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
                     Selling in {cityName} requires deep local knowledge, aggressive marketing, and a massive buyer
                     network. <strong className="text-foreground">{PARVEEN_ARORA.name}</strong>, Broker of Record at{" "}
                     {PARVEEN_ARORA.brokerage}, leads {PARVEEN_ARORA.teamName} with {PARVEEN_ARORA.yearsExperience}+
-                    years serving Brampton, Mississauga, and the GTA.
+                    years and {CLIENT_REVIEWS.totalDisplay} verified client reviews.
                   </p>
                   <p>
-                    Recognized on{" "}
-                    <a
-                      href="https://www.remax.ca/on/parveen-arora-39110-ag"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent hover:underline"
-                    >
-                      RE/MAX Canada
-                    </a>
-                    ,{" "}
-                    <a
-                      href="https://rankmyagent.com/parveenarora"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent hover:underline"
-                    >
-                      Rank My Agent
-                    </a>{" "}
-                    ({PARVEEN_ARORA.rankMyAgentReviews}+ reviews), and as a{" "}
-                    <a
-                      href="https://news.remax.com/remax-luminary-of-distinction"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent hover:underline"
-                    >
+                    {buildReviewsSummaryText()} Read reviews on{" "}
+                    <a href={CLIENT_REVIEWS.platforms[0].url} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Google</a>,{" "}
+                    <a href={CLIENT_REVIEWS.platforms[1].url} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Rank My Agent</a>, and{" "}
+                    <a href={CLIENT_REVIEWS.platforms[2].url} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Rate My Agent</a>.
+                    {PARVEEN_ARORA.name} is also a{" "}
+                    <a href="https://news.remax.com/remax-luminary-of-distinction" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
                       RE/MAX Luminary of Distinction
-                    </a>
-                    , {PARVEEN_ARORA.name} brings verified authority to every {cityName} listing.
+                    </a>.
                   </p>
                   <p>
                     {PARVEEN_ARORA.teamName} speaks {PARVEEN_ARORA.languagesServed} languages including{" "}

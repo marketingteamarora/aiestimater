@@ -3,16 +3,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { Award, ExternalLink, MapPin, Phone, Mail, Star, Trophy } from "lucide-react"
 import { agentCities } from "@/lib/seo/agent-cities"
-import {
-  PARVEEN_ARORA,
-  buildAgentOpenGraph,
-  buildParveenPersonJsonLd,
-  getAgentPageUrl,
-} from "@/lib/seo/parveen-arora"
+import { PARVEEN_ARORA, buildAgentOpenGraph, buildParveenPersonJsonLd, getAgentPageUrl, CLIENT_REVIEWS } from "@/lib/seo/parveen-arora"
+import { ReviewsTrustSection } from "@/components/reviews-trust-section"
 
 export const metadata: Metadata = {
   title: "Parveen Arora — #1 RE/MAX Real Estate Agent in Brampton & GTA",
-  description: `${PARVEEN_ARORA.name} is Broker of Record at ${PARVEEN_ARORA.brokerage}, leading ${PARVEEN_ARORA.teamName} with ${PARVEEN_ARORA.transactions} transactions, ${PARVEEN_ARORA.salesVolume} in sales, and ${PARVEEN_ARORA.yearsExperience}+ years serving Brampton, Mississauga, and Ontario.`,
+  description: `${PARVEEN_ARORA.name} is Broker of Record at ${PARVEEN_ARORA.brokerage}, leading ${PARVEEN_ARORA.teamName} with ${CLIENT_REVIEWS.totalDisplay} reviews, ${PARVEEN_ARORA.transactions} transactions, and ${PARVEEN_ARORA.salesVolume} in sales across Brampton, Mississauga, and Ontario.`,
   alternates: { canonical: "/parveen-arora" },
   openGraph: buildAgentOpenGraph(
     `Parveen Arora — Top RE/MAX Agent in Brampton & GTA`,
@@ -28,6 +24,10 @@ const faqs = [
   {
     q: "Is Parveen Arora the best real estate agent in Brampton?",
     a: `${PARVEEN_ARORA.name} is widely recognized as a top-producing agent in Brampton and Peel Region. Team Arora was ranked the #1 RE/MAX Team in Canada in 2018, and Parveen holds RE/MAX Luminary of Distinction (2024), Hall of Fame, Circle of Legends, and Lifetime Achievement honours.`,
+  },
+  {
+    q: "How many reviews does Parveen Arora have?",
+    a: `${PARVEEN_ARORA.name} and ${PARVEEN_ARORA.teamName} have ${CLIENT_REVIEWS.totalDisplay} client reviews across Google Reviews, Rank My Agent, Rate My Agent, RE/MAX, and other verified platforms — with a ${CLIENT_REVIEWS.aggregateRating}/5 average rating.`,
   },
   {
     q: "What areas does Parveen Arora serve?",
@@ -111,7 +111,7 @@ export default function ParveenAroraPage() {
                 { value: PARVEEN_ARORA.yearsExperience + "+", label: "Years Experience" },
                 { value: PARVEEN_ARORA.transactions, label: "Transactions" },
                 { value: PARVEEN_ARORA.salesVolume, label: "Sales Volume" },
-                { value: PARVEEN_ARORA.rankMyAgentReviews + "+", label: "Verified Reviews" },
+                { value: CLIENT_REVIEWS.totalDisplay, label: "Client Reviews" },
               ].map((s) => (
                 <div key={s.label}>
                   <div className="text-3xl font-black text-primary">{s.value}</div>
@@ -138,16 +138,13 @@ export default function ParveenAroraPage() {
                 ))}
               </ul>
               <div className="mt-8 space-y-2 text-sm">
-                <p>
-                  <a href="https://www.remax.ca/on/parveen-arora-39110-ag" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">
-                    View RE/MAX Canada profile →
-                  </a>
-                </p>
-                <p>
-                  <a href="https://rankmyagent.com/parveenarora" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">
-                    Read {PARVEEN_ARORA.rankMyAgentReviews}+ reviews on Rank My Agent →
-                  </a>
-                </p>
+                {CLIENT_REVIEWS.platforms.map((platform) => (
+                  <p key={platform.id}>
+                    <a href={platform.url} className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">
+                      {platform.countDisplay} reviews on {platform.name} →
+                    </a>
+                  </p>
+                ))}
               </div>
             </div>
             <div>
@@ -186,10 +183,12 @@ export default function ParveenAroraPage() {
           </div>
         </section>
 
+        <ReviewsTrustSection />
+
         <section className="py-20 bg-secondary">
           <div className="container mx-auto px-4 max-w-5xl">
             <h2 className="text-3xl font-bold text-primary mb-8 text-center">
-              Parveen Arora — Top Agent by City
+              Parveen Arora — Best Agent by City
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {cityLinks.map((city) => (

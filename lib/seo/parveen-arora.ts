@@ -1,3 +1,5 @@
+import { buildAggregateRatingJsonLd, CLIENT_REVIEWS, buildReviewsSummaryText } from "@/lib/seo/reviews"
+
 export const SITE_URL = "https://gethomeevaluation.ca"
 
 /** Primary agent landing URL — "best" is the main SEO keyword */
@@ -68,6 +70,7 @@ export const PARVEEN_ARORA = {
     "https://www.teamarora.com",
     "https://www.remax.ca/on/parveen-arora-39110-ag",
     "https://rankmyagent.com/parveenarora",
+    "https://www.rate-my-agent.com/parveen-arora-ratings-mississauga-7286",
     "https://listings.teamarora.com",
     "https://news.remax.com/remax-luminary-of-distinction",
   ],
@@ -91,9 +94,12 @@ export const PARVEEN_ARORA = {
     "Relocation",
     "Buyer brokerage",
   ],
-  bio: `Parveen Arora is the Broker of Record and owner of RE/MAX Optimum Realty, leading Team Arora — one of the highest-volume real estate teams in the Greater Toronto Area. With 21+ years of experience, 4,500+ successful transactions, and $3.5 billion in career sales volume, Parveen is recognized across Brampton, Mississauga, and the GTA as a top-producing RE/MAX agent. His team of 45+ professionals serves clients in English, Hindi, Punjabi, and 10+ languages.`,
-  rankMyAgentReviews: 116,
+  bio: `Parveen Arora is the Broker of Record and owner of RE/MAX Optimum Realty, leading Team Arora — one of the highest-volume real estate teams in the Greater Toronto Area. With 21+ years of experience, 4,500+ successful transactions, $3.5 billion in career sales volume, and ${CLIENT_REVIEWS.totalDisplay} client reviews across Google, Rank My Agent, Rate My Agent, and more, Parveen is recognized across Brampton, Mississauga, and the GTA as a top-producing RE/MAX agent. His team of 45+ professionals serves clients in English, Hindi, Punjabi, and 10+ languages.`,
+  reviews: CLIENT_REVIEWS,
 } as const
+
+// Legacy alias
+export const PARVEEN_REVIEW_COUNT = CLIENT_REVIEWS.totalDisplay
 
 export function buildParveenPersonJsonLd(options?: { cityName?: string; description?: string }) {
   const cityName = options?.cityName
@@ -134,8 +140,11 @@ export function buildParveenPersonJsonLd(options?: { cityName?: string; descript
     areaServed: cityName
       ? [{ "@type": "City", name: cityName }, { "@type": "State", name: "Ontario" }]
       : PARVEEN_ARORA.serviceAreas.map((name) => ({ "@type": "City", name })),
+    aggregateRating: buildAggregateRatingJsonLd(),
   }
 }
+
+export { buildReviewsSummaryText, CLIENT_REVIEWS }
 
 export function buildAgentOpenGraph(title: string, description: string) {
   return {
