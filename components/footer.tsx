@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { MapPin, ExternalLink } from "lucide-react"
+import { getAgentPageUrl } from "@/lib/seo/parveen-arora"
 
 const cityGroups = [
   {
@@ -86,8 +87,10 @@ export default function Footer() {
               </h3>
               <ul className="space-y-1">
                 {[
+                  { label: "Parveen Arora Profile", href: "/parveen-arora" },
+                  { label: "#1 Agent in Brampton", href: getAgentPageUrl("brampton") },
+                  { label: "#1 Agent in Mississauga", href: getAgentPageUrl("mississauga") },
                   { label: "Free Home Estimate", href: "/estimate" },
-                  { label: "Top Real Estate Agent", href: "/real-estate-agent/gta" },
                   { label: "Contact Us", href: "/contact" },
                   { label: "TeamArora.com", href: "https://teamarora.com", external: true },
                 ].map((link) => (
@@ -123,17 +126,26 @@ export default function Footer() {
                     {group.region}
                   </h3>
                   <ul className="space-y-1">
-                    {group.cities.map((city) => (
-                      <li key={city.name}>
-                        <Link
-                          href={city.href}
-                          className="text-sm text-white/70 hover:text-accent transition-colors flex items-center gap-1"
-                        >
-                          <MapPin className="w-3 h-3 flex-shrink-0" />
-                          {city.name}
-                        </Link>
-                      </li>
-                    ))}
+                    {group.cities.map((city) => {
+                      const slug = city.href.split("/").pop() ?? ""
+                      return (
+                        <li key={city.name} className="space-y-0.5">
+                          <Link
+                            href={city.href}
+                            className="text-sm text-white/70 hover:text-accent transition-colors flex items-center gap-1"
+                          >
+                            <MapPin className="w-3 h-3 flex-shrink-0" />
+                            {city.name} Estimate
+                          </Link>
+                          <Link
+                            href={getAgentPageUrl(slug)}
+                            className="text-xs text-white/50 hover:text-accent transition-colors pl-4"
+                          >
+                            Top Agent
+                          </Link>
+                        </li>
+                      )
+                    })}
                   </ul>
                 </div>
               ))}

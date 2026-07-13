@@ -1,10 +1,16 @@
 import type { Metadata } from "next"
-import { AgentCityPage, generateAgentMetadata } from "@/components/agent-city-page"
+import { AgentCityPage } from "@/components/agent-city-page"
+import { generateAgentMetadata, generateAgentStaticParams } from "@/lib/seo/agent-routes"
 
-export function generateMetadata({ params }: { params: { city: string } }): Metadata {
-  return generateAgentMetadata(params.city, "Best", "best-real-estate-agent")
+export function generateStaticParams() {
+  return generateAgentStaticParams()
 }
 
-export default function BestRealEstateAgentPage({ params }: { params: { city: string } }) {
-  return <AgentCityPage citySlug={params.city} keywordPrefix="Best" />
+export function generateMetadata({ params }: { params: Promise<{ city: string }> }): Promise<Metadata> {
+  return params.then(({ city }) => generateAgentMetadata(city, "Best", "best-real-estate-agent"))
+}
+
+export default async function BestRealEstateAgentPage({ params }: { params: Promise<{ city: string }> }) {
+  const { city } = await params
+  return <AgentCityPage citySlug={city} keywordPrefix="Best" routeBase="best-real-estate-agent" />
 }

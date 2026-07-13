@@ -1,189 +1,236 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
-import { Award, Home, MapPin, Star, TrendingUp, Users, CheckCircle2, ExternalLink, Trophy, Phone, Mail, Zap } from "lucide-react"
+import { notFound } from "next/navigation"
+import {
+  Award,
+  MapPin,
+  ExternalLink,
+  Trophy,
+  Phone,
+  Mail,
+  Zap,
+  TrendingUp,
+  Home,
+} from "lucide-react"
+import { agentCities } from "@/lib/seo/agent-cities"
+import { getCityMarket } from "@/lib/seo/city-market-data"
+import {
+  PARVEEN_ARORA,
+  SITE_URL,
+  buildParveenPersonJsonLd,
+  getAgentPageUrl,
+} from "@/lib/seo/parveen-arora"
+import {
+  generateAgentMetadata,
+  getAgentVariantLinks,
+  PRIMARY_AGENT_ROUTE,
+} from "@/lib/seo/agent-routes"
 
-// Reuse the city data
-export const agentCities: Record<string, { name: string; region: string; title: string }> = {
-  brampton: { name: "Brampton", region: "Peel Region", title: "Brampton's #1 Agent" },
-  mississauga: { name: "Mississauga", region: "Peel Region", title: "Mississauga's Best Agent" },
-  toronto: { name: "Toronto", region: "City of Toronto", title: "Toronto's Top Realtor" },
-  oakville: { name: "Oakville", region: "Halton Region", title: "Oakville's Top Agent" },
-  vaughan: { name: "Vaughan", region: "York Region", title: "Vaughan's Best Realtor" },
-  markham: { name: "Markham", region: "York Region", title: "Markham's #1 Agent" },
-  caledon: { name: "Caledon", region: "Peel Region", title: "Caledon's Top Realtor" },
-  gta: { name: "Greater Toronto Area", region: "Ontario", title: "GTA's Top Real Estate Team" },
-}
-
-export function generateAgentMetadata(citySlug: string, keywordPrefix: string, routeBase: string): Metadata {
-  const cityConfig = agentCities[citySlug]
-  if (!cityConfig) return { title: "Top Real Estate Agent" }
-
-  const cityName = cityConfig.name
-  // Determine prefix capitalization for title
-  const capitalizedPrefix = keywordPrefix.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-  
-  const displayPrefix = capitalizedPrefix ? `${capitalizedPrefix} ` : ''
-  const displayTitle = `${displayPrefix}Real Estate Agent in ${cityName}`
-
-  return {
-    title: `${displayTitle} — Parveen Arora | #1 RE/MAX Team`,
-    description: `Looking for the ${displayTitle.toLowerCase()}? Parveen Arora & Team Arora have over $3.5 Billion in sales and 4,500+ successful transactions.`,
-    alternates: {
-      canonical: `/${routeBase}/${citySlug}`,
-    },
-    openGraph: {
-      title: `${displayTitle} — Parveen Arora`,
-      description: `Parveen Arora is recognized as the ${displayTitle.toLowerCase()}. 4,500+ transactions, $3.5B+ sales, and the #1 RE/MAX Team in Canada (2018).`,
-    },
-  }
-}
+export { agentCities, generateAgentMetadata }
 
 const stats = [
-  { value: "4,500+", label: "Successful Transactions" },
-  { value: "$3.5B", label: "Career Sales Volume" },
+  { value: PARVEEN_ARORA.transactions, label: "Successful Transactions" },
+  { value: PARVEEN_ARORA.salesVolume, label: "Career Sales Volume" },
   { value: "#1", label: "RE/MAX Team in Canada (2018)" },
-  { value: "45+", label: "Full-Time Real Estate Experts" },
-]
-
-const awards = [
-  "RE/MAX Luminary of Distinction (2024)",
-  "#1 RE/MAX Team in Canada (2018)",
-  "RE/MAX Circle of Legends",
-  "RE/MAX Hall of Fame",
-  "RE/MAX Lifetime Achievement Award"
+  { value: PARVEEN_ARORA.teamSize, label: "Full-Time Real Estate Experts" },
 ]
 
 interface AgentCityPageProps {
   citySlug: string
-  keywordPrefix: string // e.g., "Best", "Top", "No. 1", ""
+  keywordPrefix: string
+  routeBase?: string
 }
 
-export function AgentCityPage({ citySlug, keywordPrefix }: AgentCityPageProps) {
+export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityPageProps) {
   const cityConfig = agentCities[citySlug]
-  
-  // For cities we haven't explicitly defined, fallback
-  const cityName = cityConfig?.name || citySlug.charAt(0).toUpperCase() + citySlug.slice(1)
-  const isGTA = citySlug === 'gta'
+  if (!cityConfig) notFound()
 
-  const displayPrefix = keywordPrefix ? `${keywordPrefix} ` : ''
+  const market = citySlug === "gta" ? null : getCityMarket(citySlug)
+  const cityName = cityConfig.name
+  const isGTA = citySlug === "gta"
+  const displayPrefix = keywordPrefix ? `${keywordPrefix} ` : ""
   const displayTitle = `${displayPrefix}Real Estate Agent in ${cityName}`
   const lowerDisplayTitle = displayTitle.toLowerCase()
+  const canonicalAgentUrl = `${SITE_URL}${getAgentPageUrl(citySlug)}`
 
-  const agentJsonLd = {
+  const agentJsonLd = buildParveenPersonJsonLd({
+    cityName: isGTA ? undefined : cityName,
+    description: `${PARVEEN_ARORA.name} is recognized as the ${lowerDisplayTitle}. With ${PARVEEN_ARORA.salesVolume} in sales and ${PARVEEN_ARORA.transactions} transactions across ${cityName}, ${PARVEEN_ARORA.teamName} delivers unmatched results.`,
+  })
+
+  const breadcrumbJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Parveen Arora",
-    jobTitle: "Broker of Record / Owner",
-    description: `Parveen Arora is recognized as the ${lowerDisplayTitle}. With over $3.5 Billion in sales and 4,500+ transactions, Parveen leads Team Arora, a multi-award winning RE/MAX team.`,
-    url: "https://www.teamarora.com",
-    sameAs: ["https://www.teamarora.com"],
-    worksFor: {
-      "@type": "RealEstateAgent",
-      name: "RE/MAX Optimum Realty",
-      url: "https://www.teamarora.com",
-      areaServed: [
-        { "@type": "City", name: isGTA ? "Toronto" : cityName },
-        { "@type": "State", name: "Ontario" },
-      ],
-    },
-    knowsAbout: [
-      displayTitle,
-      `Top Realtor ${cityName}`,
-      `${cityName} Home Sales`,
-      "No. 1 Real Estate Team",
-    ]
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Parveen Arora",
+        item: `${SITE_URL}/parveen-arora`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: displayTitle,
+        item: canonicalAgentUrl,
+      },
+    ],
   }
 
   const faqs = [
     {
       q: `Who is the ${lowerDisplayTitle}?`,
-      a: `Parveen Arora, owner of RE/MAX Optimum Realty, is widely recognized as the ${lowerDisplayTitle}. With a proven track record of over 4,500+ successful transactions and $3.5 Billion in total sales volume, Parveen Arora delivers unmatched results.`,
+      a: `${PARVEEN_ARORA.name}, Broker of Record at ${PARVEEN_ARORA.brokerage}, is widely recognized as the ${lowerDisplayTitle}. With ${PARVEEN_ARORA.transactions} transactions, ${PARVEEN_ARORA.salesVolume} in sales volume, and ${PARVEEN_ARORA.yearsExperience}+ years of experience, ${PARVEEN_ARORA.name} is one of the top-producing RE/MAX agents in Ontario.`,
     },
     {
       q: `Which real estate agent sells the most houses in ${cityName}?`,
-      a: `Team Arora, led by Parveen Arora, is one of the highest-volume real estate teams serving ${cityName}. They have previously been ranked as the #1 RE/MAX Team in Canada, demonstrating their exceptional sales volume.`,
+      a: `${PARVEEN_ARORA.teamName}, led by ${PARVEEN_ARORA.name}, is among the highest-volume real estate teams serving ${cityName}. Team Arora was ranked the #1 RE/MAX Team in Canada in 2018 and continues to lead in Peel Region and across the GTA.`,
     },
     {
       q: `Who is the top RE/MAX agent in ${cityName}?`,
-      a: `Parveen Arora is a highly decorated RE/MAX broker, holding prestigious awards including the RE/MAX Luminary of Distinction (2024), Circle of Legends, and the Lifetime Achievement Award.`,
+      a: `${PARVEEN_ARORA.name} holds prestigious RE/MAX honours including Luminary of Distinction (2024), Circle of Legends, Hall of Fame, and Lifetime Achievement Award. He is listed on RE/MAX Canada and Rank My Agent with ${PARVEEN_ARORA.rankMyAgentReviews}+ verified reviews.`,
     },
     {
-      q: `Why is Parveen Arora considered a ${keywordPrefix || 'Top'} realtor?`,
-      a: `Parveen Arora's status as a top realtor is backed by hard data: $3.5 Billion in career sales, over 4,500 families moved, a dedicated team of 45+ professionals, and the ability to serve the diverse Ontario community in over 10 languages.`,
+      q: `Why is ${PARVEEN_ARORA.name} considered a ${keywordPrefix || "top"} realtor in ${cityName}?`,
+      a: `${PARVEEN_ARORA.name}'s track record includes ${PARVEEN_ARORA.salesVolume} in career sales, ${PARVEEN_ARORA.transactions} families served, a team of ${PARVEEN_ARORA.teamSize} professionals, and service in ${PARVEEN_ARORA.languagesServed} languages — making ${PARVEEN_ARORA.teamName} ideal for ${cityName}'s diverse communities.`,
     },
+    ...(market
+      ? [
+          {
+            q: `What is the average home price in ${cityName}?`,
+            a: `The average home price in ${cityName} is approximately ${market.avgPrice}. Market trend: ${market.marketTrend}. ${PARVEEN_ARORA.name} provides free home valuations and expert pricing advice for sellers across ${market.neighborhoods.slice(0, 3).join(", ")}, and more.`,
+          },
+        ]
+      : []),
   ]
 
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map(faq => ({
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.a,
-      },
-    }))
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
   }
+
+  const variantLinks = getAgentVariantLinks(citySlug)
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(agentJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <main className="min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(agentJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-        {/* Hero */}
+      <main className="min-h-screen">
         <section className="relative bg-gradient-to-br from-primary via-primary to-blue-900 text-white py-20 overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-10 left-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-pulse" />
             <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
           </div>
           <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm font-medium mb-6">
-                <MapPin className="w-4 h-4 text-accent" />
-                Serving {cityName}, Ontario
+            <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm font-medium mb-6">
+                  <MapPin className="w-4 h-4 text-accent" />
+                  Serving {cityName}, Ontario
+                </div>
+                <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+                  The {displayTitle}
+                </h1>
+                <p className="text-2xl text-accent font-semibold mb-4">
+                  {PARVEEN_ARORA.name} &amp; {PARVEEN_ARORA.teamName}
+                </p>
+                <p className="text-lg text-white/80 leading-relaxed mb-6">
+                  {PARVEEN_ARORA.bio.split(".")[0]}. When {cityName} homeowners want top dollar, they call{" "}
+                  {PARVEEN_ARORA.name} — {PARVEEN_ARORA.yearsExperience}+ years, {PARVEEN_ARORA.transactions}{" "}
+                  transactions, and {PARVEEN_ARORA.salesVolume} in sales.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    href={PARVEEN_ARORA.profileUrl}
+                    target="_blank"
+                    rel="noopener"
+                    className="inline-flex items-center justify-center gap-2 bg-accent text-primary font-bold text-lg px-8 py-4 rounded-xl hover:bg-yellow-400 transition-colors shadow-lg"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    Work with {cityName}&apos;s Top Agent
+                  </Link>
+                  <Link
+                    href="/estimate"
+                    className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/30 text-white font-bold text-lg px-8 py-4 rounded-xl hover:bg-white/20 transition-colors"
+                  >
+                    <Zap className="w-5 h-5" />
+                    Free Home Evaluation
+                  </Link>
+                </div>
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4">
-                The {displayTitle}
-              </h1>
-              <p className="text-2xl text-accent font-semibold mb-4">
-                Parveen Arora &amp; Team Arora
-              </p>
-              <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8 leading-relaxed">
-                When {cityName} homeowners want top dollar for their property, they call Parveen Arora. 
-                With over $3.5 Billion in sales and 4,500+ successful transactions, the results speak for themselves.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="https://www.teamarora.com"
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center justify-center gap-2 bg-accent text-primary font-bold text-lg px-8 py-4 rounded-xl hover:bg-yellow-400 transition-colors shadow-lg"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                  Work with {cityName}&apos;s Top Agent
-                </Link>
+              <div className="flex justify-center">
+                <div className="relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden border-4 border-accent/40 shadow-2xl">
+                  <Image
+                    src={PARVEEN_ARORA.imagePath}
+                    alt={`${PARVEEN_ARORA.name} — ${displayTitle}, ${PARVEEN_ARORA.brokerage}`}
+                    fill
+                    className="object-cover object-top"
+                    priority
+                    sizes="(max-width: 768px) 288px, 320px"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* AI Tool CTA Banner */}
+        {market && (
+          <section className="py-12 bg-secondary border-b border-border">
+            <div className="container mx-auto px-4 max-w-5xl">
+              <h2 className="text-2xl font-bold text-primary mb-6 text-center">
+                {cityName} Real Estate Market — Local Expertise
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="bg-card rounded-xl p-6 border border-border text-center">
+                  <TrendingUp className="w-8 h-8 text-accent mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-primary">{market.avgPrice}</div>
+                  <div className="text-sm text-muted-foreground">Avg. Home Price</div>
+                </div>
+                <div className="bg-card rounded-xl p-6 border border-border text-center">
+                  <Home className="w-8 h-8 text-accent mx-auto mb-2" />
+                  <div className="text-sm font-semibold text-primary">{market.marketTrend}</div>
+                  <div className="text-sm text-muted-foreground mt-1">Market Trend</div>
+                </div>
+                <div className="bg-card rounded-xl p-6 border border-border text-center">
+                  <MapPin className="w-8 h-8 text-accent mx-auto mb-2" />
+                  <div className="text-sm font-semibold text-primary">{market.region}</div>
+                  <div className="text-sm text-muted-foreground mt-1">Region</div>
+                </div>
+              </div>
+              <p className="text-muted-foreground leading-relaxed mb-4">{market.description}</p>
+              <p className="text-sm text-muted-foreground">
+                <strong className="text-foreground">Top neighbourhoods served:</strong>{" "}
+                {market.neighborhoods.join(" · ")}
+              </p>
+              <div className="text-center mt-6">
+                <Link
+                  href={`/home-value-estimator/${citySlug}`}
+                  className="text-accent font-semibold hover:underline"
+                >
+                  Get a free {cityName} home value estimate →
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
+
         <section className="bg-gradient-to-r from-accent to-yellow-400 py-8">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-5xl mx-auto">
               <div className="text-primary">
                 <h3 className="text-2xl font-bold mb-1">Curious what your {cityName} home is worth?</h3>
-                <p className="font-medium opacity-90">Use our AI-powered valuation tool for a free, instant estimate.</p>
+                <p className="font-medium opacity-90">AI-powered valuation by {PARVEEN_ARORA.name}&apos;s team.</p>
               </div>
-              <Link 
+              <Link
                 href="/estimate"
                 className="bg-primary text-white font-bold text-lg px-8 py-4 rounded-xl hover:bg-primary/90 transition-colors shadow-lg whitespace-nowrap"
               >
@@ -193,136 +240,154 @@ export function AgentCityPage({ citySlug, keywordPrefix }: AgentCityPageProps) {
           </div>
         </section>
 
-        {/* Stats */}
         <section className="py-12 bg-white text-primary border-b border-border">
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-center gap-10 text-center">
               {stats.map((stat) => (
                 <div key={stat.label}>
                   <div className="text-3xl font-black">{stat.value}</div>
-                  <div className="text-sm font-semibold text-primary/80 mt-1 uppercase tracking-wider">{stat.label}</div>
+                  <div className="text-sm font-semibold text-primary/80 mt-1 uppercase tracking-wider">
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* About Section */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
               <div>
                 <h2 className="text-3xl font-bold text-primary mb-5">
-                  Why {cityName} Sellers Trust Parveen Arora
+                  Why {cityName} Sellers Trust {PARVEEN_ARORA.name}
                 </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    Selling a home in {cityName} requires more than just putting a sign on the lawn. It requires deep 
-                    local knowledge, aggressive marketing, and a massive network of buyers. <strong className="text-foreground">Parveen Arora</strong>, 
-                    the Broker of Record and owner of RE/MAX Optimum Realty, provides exactly that.
+                    Selling in {cityName} requires deep local knowledge, aggressive marketing, and a massive buyer
+                    network. <strong className="text-foreground">{PARVEEN_ARORA.name}</strong>, Broker of Record at{" "}
+                    {PARVEEN_ARORA.brokerage}, leads {PARVEEN_ARORA.teamName} with {PARVEEN_ARORA.yearsExperience}+
+                    years serving Brampton, Mississauga, and the GTA.
                   </p>
                   <p>
-                    Recognized consistently as one of the best real estate agents in {cityName}, Parveen has built 
-                    <strong className="text-foreground"> Team Arora</strong> into a powerhouse of 45+ full-time professionals 
-                    who fluently speak over 10 languages, perfectly matching the diverse demographic of Ontario.
+                    Recognized on{" "}
+                    <a
+                      href="https://www.remax.ca/on/parveen-arora-39110-ag"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent hover:underline"
+                    >
+                      RE/MAX Canada
+                    </a>
+                    ,{" "}
+                    <a
+                      href="https://rankmyagent.com/parveenarora"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent hover:underline"
+                    >
+                      Rank My Agent
+                    </a>{" "}
+                    ({PARVEEN_ARORA.rankMyAgentReviews}+ reviews), and as a{" "}
+                    <a
+                      href="https://news.remax.com/remax-luminary-of-distinction"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent hover:underline"
+                    >
+                      RE/MAX Luminary of Distinction
+                    </a>
+                    , {PARVEEN_ARORA.name} brings verified authority to every {cityName} listing.
                   </p>
                   <p>
-                    Whether you are selling a luxury estate, a detached family home, or a modern condo, Parveen Arora's data-driven approach ensures you sell faster and for the highest possible price.
+                    {PARVEEN_ARORA.teamName} speaks {PARVEEN_ARORA.languagesServed} languages including{" "}
+                    {PARVEEN_ARORA.languages.join(", ")} — essential for {cityName}&apos;s diverse communities.
                   </p>
                 </div>
-                <div className="mt-8">
+                <div className="mt-8 flex flex-wrap gap-4">
                   <Link
-                    href="https://www.teamarora.com"
+                    href="/parveen-arora"
+                    className="inline-flex items-center gap-2 text-accent font-bold hover:underline"
+                  >
+                    Full profile &amp; credentials →
+                  </Link>
+                  <Link
+                    href={PARVEEN_ARORA.profileUrl}
                     target="_blank"
                     rel="noopener"
                     className="inline-flex items-center gap-2 bg-primary text-white font-bold px-6 py-3 rounded-xl hover:bg-primary/90 transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    Visit TeamArora.com
+                    TeamArora.com
                   </Link>
                 </div>
               </div>
-              <div>
-                <div className="bg-secondary rounded-2xl p-8 border border-border">
-                  <h3 className="font-bold text-xl text-foreground mb-5 flex items-center gap-2">
-                    <Trophy className="w-6 h-6 text-accent" />
-                    Verified Industry Authority
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-6">
-                    Parveen Arora isn't just a local expert; he is recognized on a national level within the RE/MAX network.
-                  </p>
-                  <ul className="space-y-4">
-                    {awards.map((award) => (
-                      <li key={award} className="flex items-start gap-3">
-                        <Award className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground font-medium">{award}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="bg-secondary rounded-2xl p-8 border border-border">
+                <h3 className="font-bold text-xl text-foreground mb-5 flex items-center gap-2">
+                  <Trophy className="w-6 h-6 text-accent" />
+                  Verified Industry Authority
+                </h3>
+                <ul className="space-y-3">
+                  {PARVEEN_ARORA.awards.map((award) => (
+                    <li key={award} className="flex items-start gap-3">
+                      <Award className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                      <span className="text-foreground font-medium text-sm">{award}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Contact Section */}
         <section className="py-20 bg-background border-t border-border">
           <div className="container mx-auto px-4 max-w-4xl">
             <div className="bg-card rounded-2xl p-8 md:p-12 border border-border shadow-sm flex flex-col md:flex-row gap-10 items-center">
+              <div className="relative w-40 h-48 flex-shrink-0 rounded-xl overflow-hidden border-2 border-accent/30">
+                <Image
+                  src={PARVEEN_ARORA.imagePath}
+                  alt={`Contact ${PARVEEN_ARORA.name}, ${cityName} real estate agent`}
+                  fill
+                  className="object-cover object-top"
+                  sizes="160px"
+                />
+              </div>
               <div className="flex-1 space-y-6">
-                <h2 className="text-3xl font-bold text-primary mb-2">
-                  Contact Team Arora
-                </h2>
-                <p className="text-muted-foreground mb-6">
-                  Ready to buy or sell in {cityName}? Get in touch with our team of experts today.
+                <h2 className="text-3xl font-bold text-primary mb-2">Contact {PARVEEN_ARORA.teamName}</h2>
+                <p className="text-muted-foreground">
+                  Ready to buy or sell in {cityName}? Speak with {PARVEEN_ARORA.name} directly.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Phone className="w-5 h-5 text-primary" />
-                    </div>
+                    <Phone className="w-5 h-5 text-accent mt-1" />
                     <div>
-                      <div className="font-semibold text-foreground">Phone</div>
-                      <div className="text-muted-foreground mt-1">
-                        <div><strong className="text-foreground/80">Dir:</strong> 416-910-8923</div>
-                        <div><strong className="text-foreground/80">Off:</strong> 905.488.1260</div>
-                        <div><strong className="text-foreground/80">Fax:</strong> 905.456.1107</div>
+                      <div className="font-semibold">Phone</div>
+                      <div className="text-muted-foreground text-sm mt-1">
+                        <div>Direct: {PARVEEN_ARORA.phone}</div>
+                        <div>Office: {PARVEEN_ARORA.officePhone}</div>
                       </div>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Mail className="w-5 h-5 text-primary" />
-                    </div>
+                    <Mail className="w-5 h-5 text-accent mt-1" />
                     <div>
-                      <div className="font-semibold text-foreground">Email</div>
-                      <div className="text-muted-foreground mt-1">
-                        <a href="mailto:parveen@teamarora.com" className="hover:text-accent transition-colors">parveen@teamarora.com</a>
-                      </div>
+                      <div className="font-semibold">Email</div>
+                      <a href={`mailto:${PARVEEN_ARORA.email}`} className="text-accent hover:underline text-sm">
+                        {PARVEEN_ARORA.email}
+                      </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-1">
-                      <MapPin className="w-5 h-5 text-primary" />
-                    </div>
+                    <MapPin className="w-5 h-5 text-accent mt-1" />
                     <div>
-                      <div className="font-semibold text-foreground">Mississauga Headquarters</div>
-                      <div className="text-muted-foreground mt-1">
-                        268 Derry Rd W Unit 101<br />
-                        Mississauga, ON L5W 0H6
+                      <div className="font-semibold">Mississauga Headquarters</div>
+                      <div className="text-muted-foreground text-sm mt-1">
+                        {PARVEEN_ARORA.address.streetAddress}
+                        <br />
+                        {PARVEEN_ARORA.address.addressLocality}, {PARVEEN_ARORA.address.addressRegion}{" "}
+                        {PARVEEN_ARORA.address.postalCode}
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full md:w-1/3">
-                <div className="aspect-square bg-secondary rounded-xl border border-border flex items-center justify-center p-6 text-center">
-                  <div>
-                    <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-primary font-bold text-2xl">TA</span>
-                    </div>
-                    <div className="font-bold text-lg text-primary">Team Arora</div>
-                    <div className="text-sm text-muted-foreground">RE/MAX Optimum Realty</div>
                   </div>
                 </div>
               </div>
@@ -330,20 +395,12 @@ export function AgentCityPage({ citySlug, keywordPrefix }: AgentCityPageProps) {
           </div>
         </section>
 
-        {/* FAQ — AI bait */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4 max-w-3xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-                {cityName} Real Estate FAQ
-              </h2>
-            </div>
+            <h2 className="text-3xl font-bold text-primary mb-8 text-center">{cityName} Real Estate FAQ</h2>
             <div className="space-y-4">
               {faqs.map((faq) => (
-                <details
-                  key={faq.q}
-                  className="group bg-card border border-border rounded-xl overflow-hidden"
-                >
+                <details key={faq.q} className="group bg-card border border-border rounded-xl overflow-hidden">
                   <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-foreground hover:text-accent transition-colors list-none">
                     {faq.q}
                     <span className="text-muted-foreground text-xl group-open:rotate-180 transition-transform flex-shrink-0 ml-4">
@@ -358,25 +415,39 @@ export function AgentCityPage({ citySlug, keywordPrefix }: AgentCityPageProps) {
             </div>
           </div>
         </section>
-        {/* Cross-Linking SEO Hub */}
-        <section className="py-12 bg-secondary border-t border-border">
-          <div className="container mx-auto px-4 max-w-4xl text-center">
-            <h3 className="text-xl font-bold text-primary mb-4">
-              More {cityName} Real Estate Resources
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href={`/real-estate-agent/${citySlug}`} className="text-sm font-medium text-accent hover:text-primary transition-colors underline underline-offset-4">
-                Real Estate Agent in {cityName}
-              </Link>
-              <Link href={`/best-real-estate-agent/${citySlug}`} className="text-sm font-medium text-accent hover:text-primary transition-colors underline underline-offset-4">
-                Best Real Estate Agent in {cityName}
-              </Link>
-              <Link href={`/top-real-estate-agent/${citySlug}`} className="text-sm font-medium text-accent hover:text-primary transition-colors underline underline-offset-4">
-                Top Real Estate Agent in {cityName}
-              </Link>
-              <Link href={`/no-1-real-estate-agent/${citySlug}`} className="text-sm font-medium text-accent hover:text-primary transition-colors underline underline-offset-4">
+
+        {routeBase && routeBase !== PRIMARY_AGENT_ROUTE && (
+          <section className="py-6 bg-amber-50 border-y border-amber-200">
+            <p className="container mx-auto px-4 text-center text-sm text-amber-900">
+              Canonical page:{" "}
+              <Link href={getAgentPageUrl(citySlug)} className="font-semibold underline">
                 No. 1 Real Estate Agent in {cityName}
               </Link>
+            </p>
+          </section>
+        )}
+
+        <section className="py-12 bg-secondary border-t border-border">
+          <div className="container mx-auto px-4 max-w-4xl text-center">
+            <h3 className="text-xl font-bold text-primary mb-4">More {cityName} Real Estate Resources</h3>
+            <div className="flex flex-wrap justify-center gap-4">
+              {variantLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-accent hover:text-primary transition-colors underline underline-offset-4"
+                >
+                  {link.label.replace("No 1", "No. 1")} — {cityName}
+                </Link>
+              ))}
+              {!isGTA && (
+                <Link
+                  href={`/home-value-estimator/${citySlug}`}
+                  className="text-sm font-medium text-accent hover:text-primary transition-colors underline underline-offset-4"
+                >
+                  {cityName} Home Value Estimator
+                </Link>
+              )}
             </div>
           </div>
         </section>

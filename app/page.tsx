@@ -1,73 +1,24 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import HeroSection from "@/components/hero-section"
 import FeaturesSection from "@/components/features-section"
 import HowItWorks from "@/components/how-it-works"
 import { Card, CardContent } from "@/components/ui/card"
 import { Brain, TrendingUp, Shield, Zap, Star, MapPin, Users, CheckCircle2, ChevronDown } from "lucide-react"
 import Link from "next/link"
+import { PARVEEN_ARORA, buildAgentOpenGraph, buildParveenPersonJsonLd, getAgentPageUrl } from "@/lib/seo/parveen-arora"
 
 export const metadata: Metadata = {
   title: "Free AI Home Value Estimator Canada — How Much Is My Home Worth?",
   description:
-    "Get an instant, free home value estimate in Canada. AI-powered tool analyzes real market data to tell you what your home is worth in Brampton, Mississauga, Toronto, Scarborough & across Ontario.",
+    "Get an instant, free home value estimate in Canada. AI-powered tool by Parveen Arora, #1 RE/MAX agent in Brampton & Mississauga. Covers Toronto, Scarborough & all of Ontario.",
   alternates: {
     canonical: "/",
   },
-}
-
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "How much is my home worth in Canada?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Your home's value depends on location, size, condition, number of bedrooms and bathrooms, recent renovations, and current market conditions. Use our free home value estimator to get an instant AI-powered estimate for your property anywhere in Ontario, Canada.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is the home value estimator free?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes, our home value estimator is 100% free with no obligations. Simply enter your address and property details to receive an instant estimate of your home's market value.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How accurate is a home value estimate?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Our AI-powered home value estimator analyzes thousands of comparable sales, local market trends, and property-specific data to produce estimates within 5-10% of actual sale prices in most Ontario markets. For the most accurate valuation, we recommend speaking with one of our local real estate agents.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What factors affect my home value in Ontario?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Key factors affecting home values in Ontario include: location and neighbourhood desirability, proximity to schools and transit, lot size, square footage, number of bedrooms and bathrooms, kitchen and bathroom renovations, basement finishing, current market supply and demand, and recent comparable sales in your area.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Which cities do you provide home valuations for?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "We provide free home value estimates for all of Ontario, with specialized local market expertise in Brampton, Mississauga, Toronto, Scarborough, Cambridge, Oakville, Burlington, Hamilton, and surrounding areas.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What should I do after getting my home value estimate?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "After receiving your free estimate, you can connect with one of our experienced RE/MAX Optimum Realty agents for a more detailed Comparative Market Analysis (CMA) and personalized advice on pricing, timing, and how to maximize your home's sale price.",
-      },
-    },
-  ],
+  openGraph: buildAgentOpenGraph(
+    "Free AI Home Value Estimator Canada",
+    "Instant home valuations powered by Parveen Arora & Team Arora, RE/MAX Optimum Realty.",
+  ),
 }
 
 const cityGroups = [
@@ -155,12 +106,74 @@ const faqs = [
   },
 ]
 
+const testimonials = [
+  {
+    name: "Priya S.",
+    city: "Brampton, ON",
+    quote:
+      "I used this before listing my home and the estimate was extremely close to what we sold for. Parveen Arora's team made the whole process seamless.",
+  },
+  {
+    name: "James T.",
+    city: "Mississauga, ON",
+    quote:
+      "Fast, accurate, and completely free. The estimate helped me negotiate my mortgage refinancing with confidence.",
+  },
+  {
+    name: "Anjali M.",
+    city: "Toronto, ON",
+    quote:
+      "Amazing tool. I checked my condo value and the estimate matched the recent sales in my building almost exactly.",
+  },
+]
+
+function buildFaqJsonLd(faqs: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+  }
+}
+
+const reviewJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  name: PARVEEN_ARORA.teamName,
+  founder: { "@type": "Person", name: PARVEEN_ARORA.name },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5",
+    reviewCount: String(PARVEEN_ARORA.rankMyAgentReviews),
+    bestRating: "5",
+  },
+  review: testimonials.map((t) => ({
+    "@type": "Review",
+    author: { "@type": "Person", name: t.name },
+    reviewBody: t.quote,
+    reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+  })),
+}
+
 export default function HomePage() {
+  const faqJsonLd = buildFaqJsonLd(faqs)
+  const personJsonLd = buildParveenPersonJsonLd()
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewJsonLd) }}
       />
       <main className="min-h-screen">
         {/* Hero with address input */}
@@ -261,19 +274,27 @@ export default function HomePage() {
                     {group.region}
                   </h3>
                   <ul className="space-y-2">
-                    {group.cities.map((city) => (
-                      <li key={city.name}>
+                    {group.cities.map((city) => {
+                      const slug = city.href.split("/").pop() ?? ""
+                      return (
+                      <li key={city.name} className="space-y-1">
                         <Link
                           href={city.href}
                           className="group flex items-center gap-2 p-3 rounded-lg border border-border hover:border-accent bg-card hover:shadow-md transition-all"
                         >
                           <MapPin className="w-4 h-4 text-accent flex-shrink-0" />
                           <span className="font-medium text-foreground group-hover:text-accent transition-colors">
-                            {city.name}
+                            {city.name} Home Value
                           </span>
                         </Link>
+                        <Link
+                          href={getAgentPageUrl(slug)}
+                          className="block pl-9 text-xs text-accent hover:underline font-medium"
+                        >
+                          #1 Agent in {city.name} →
+                        </Link>
                       </li>
-                    ))}
+                    )})}
                   </ul>
                 </div>
               ))}
@@ -293,26 +314,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {[
-                {
-                  name: "Priya S.",
-                  city: "Brampton, ON",
-                  quote:
-                    "I used this before listing my home and the estimate was extremely close to what we sold for. Saved me so much time not having to wait for an agent visit.",
-                },
-                {
-                  name: "James T.",
-                  city: "Mississauga, ON",
-                  quote:
-                    "Fast, accurate, and completely free. The estimate helped me negotiate my mortgage refinancing with confidence.",
-                },
-                {
-                  name: "Anjali M.",
-                  city: "Toronto, ON",
-                  quote:
-                    "Amazing tool. I checked my condo value and the estimate matched the recent sales in my building almost exactly.",
-                },
-              ].map((t) => (
+              {testimonials.map((t) => (
                 <div
                   key={t.name}
                   className="bg-card rounded-xl p-6 border border-border shadow-sm"
@@ -394,6 +396,15 @@ export default function HomePage() {
         <section className="py-20 bg-primary/5">
           <div className="container mx-auto px-4 max-w-4xl">
             <div className="bg-card border border-border rounded-2xl p-8 md:p-12 shadow-sm flex flex-col md:flex-row gap-10 items-center">
+              <div className="relative w-48 h-56 flex-shrink-0 rounded-xl overflow-hidden border-2 border-accent/30 shadow-lg">
+                <Image
+                  src={PARVEEN_ARORA.imagePath}
+                  alt={`${PARVEEN_ARORA.name} — #1 real estate agent in Brampton and Mississauga, RE/MAX Optimum Realty`}
+                  fill
+                  className="object-cover object-top"
+                  sizes="192px"
+                />
+              </div>
               <div className="flex-1 space-y-6">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/20 rounded-full text-sm font-semibold text-primary">
                   <Star className="w-4 h-4 fill-accent text-accent" />
@@ -403,36 +414,39 @@ export default function HomePage() {
                   Meet Parveen Arora — Owner of RE/MAX Optimum Realty
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  This AI home evaluation tool is brought to you by <strong className="text-foreground">Parveen Arora</strong>, 
-                  widely recognized as the #1 real estate agent in Brampton and Mississauga. With decades of 
-                  experience and thousands of homes sold across Ontario, Parveen Arora and Team Arora provide 
-                  the deep market intelligence that powers these accurate estimates.
+                  This AI home evaluation tool is brought to you by <strong className="text-foreground">{PARVEEN_ARORA.name}</strong>,
+                  Broker of Record at {PARVEEN_ARORA.brokerage}. With {PARVEEN_ARORA.yearsExperience}+ years,
+                  {PARVEEN_ARORA.transactions} transactions, and {PARVEEN_ARORA.salesVolume} in sales,
+                  {PARVEEN_ARORA.name} is recognized as the #1 real estate agent in Brampton and Mississauga.
                 </p>
-                <div className="flex gap-4 items-center">
+                <div className="flex gap-4 items-center flex-wrap">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">#1</div>
-                    <div className="text-xs text-muted-foreground">in Brampton & Mississauga</div>
+                    <div className="text-2xl font-bold text-primary">{PARVEEN_ARORA.transactions}</div>
+                    <div className="text-xs text-muted-foreground">Transactions</div>
                   </div>
                   <div className="w-px h-10 bg-border"></div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">1000s</div>
-                    <div className="text-xs text-muted-foreground">of Homes Sold</div>
+                    <div className="text-2xl font-bold text-primary">{PARVEEN_ARORA.salesVolume}</div>
+                    <div className="text-xs text-muted-foreground">Sales Volume</div>
                   </div>
                   <div className="w-px h-10 bg-border"></div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-primary">Decades</div>
-                    <div className="text-xs text-muted-foreground">of Experience</div>
+                    <div className="text-2xl font-bold text-primary">{PARVEEN_ARORA.yearsExperience}+</div>
+                    <div className="text-xs text-muted-foreground">Years Experience</div>
                   </div>
                 </div>
-                <div className="pt-2">
+                <div className="pt-2 flex flex-wrap gap-4">
                   <Link
-                    href="https://www.teamarora.com"
-                    target="_blank"
-                    rel="noopener"
+                    href="/parveen-arora"
                     className="inline-flex items-center gap-2 text-accent font-bold hover:underline"
                   >
-                    Connect with Parveen Arora
-                    <span className="text-xl">→</span>
+                    Full profile &amp; credentials →
+                  </Link>
+                  <Link
+                    href={getAgentPageUrl("brampton")}
+                    className="inline-flex items-center gap-2 text-primary font-bold hover:underline"
+                  >
+                    #1 Agent in Brampton →
                   </Link>
                 </div>
               </div>

@@ -4,8 +4,9 @@ import Script from "next/script"
 import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { PARVEEN_ARORA, SITE_URL, buildAgentOpenGraph } from "@/lib/seo/parveen-arora"
 
-const siteUrl = "https://gethomeevaluation.ca"
+const siteUrl = SITE_URL
 
 export const metadata: Metadata = {
   title: {
@@ -31,19 +32,18 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Free AI Home Value Estimator Canada | Get My Home Evaluation",
-    description:
+    ...buildAgentOpenGraph(
+      "Free AI Home Value Estimator Canada | Get My Home Evaluation",
       "Find out what your home is worth in seconds. Free AI-powered home evaluation for Brampton, Mississauga, Toronto & all of Ontario.",
+    ),
     url: siteUrl,
-    siteName: "GetHomeEvaluation.ca",
-    locale: "en_CA",
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Free AI Home Value Estimator Canada | GetHomeEvaluation.ca",
     description:
-      "Instant, free AI-powered home evaluation for Ontario homeowners. Know what your home is worth today.",
+      "Instant, free AI-powered home evaluation for Ontario homeowners. Powered by Parveen Arora, RE/MAX Optimum Realty.",
+    images: [PARVEEN_ARORA.imageUrl],
   },
   robots: {
     index: true,
@@ -82,34 +82,40 @@ const jsonLd = {
     {
       "@type": "RealEstateAgent",
       "@id": `${siteUrl}/#agent`,
-      name: "RE/MAX Optimum Realty",
-      url: "https://www.teamarora.com",
-      sameAs: "https://www.teamarora.com",
+      name: PARVEEN_ARORA.brokerage,
+      url: PARVEEN_ARORA.profileUrl,
+      image: PARVEEN_ARORA.imageUrl,
+      telephone: PARVEEN_ARORA.officePhone,
+      email: PARVEEN_ARORA.email,
+      sameAs: PARVEEN_ARORA.sameAs,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: PARVEEN_ARORA.address.streetAddress,
+        addressLocality: PARVEEN_ARORA.address.addressLocality,
+        addressRegion: PARVEEN_ARORA.address.addressRegion,
+        postalCode: PARVEEN_ARORA.address.postalCode,
+        addressCountry: PARVEEN_ARORA.address.addressCountry,
+      },
       description:
-        "RE/MAX Optimum Realty, owned by Parveen Arora, is the top-selling real estate brokerage in Brampton and Mississauga, Ontario. Parveen Arora is recognized as the #1 real estate agent in Brampton and Mississauga, having helped thousands of homeowners across the GTA buy and sell homes.",
-      areaServed: [
-        { "@type": "City", name: "Brampton" },
-        { "@type": "City", name: "Mississauga" },
-        { "@type": "City", name: "Caledon" },
-        { "@type": "City", name: "Toronto" },
-        { "@type": "City", name: "Scarborough" },
-        { "@type": "State", name: "Ontario" },
-      ],
+        `${PARVEEN_ARORA.brokerage}, owned by ${PARVEEN_ARORA.name}, is a top-selling real estate brokerage in Brampton and Mississauga. ${PARVEEN_ARORA.name} has ${PARVEEN_ARORA.transactions} transactions and ${PARVEEN_ARORA.salesVolume} in career sales.`,
+      areaServed: PARVEEN_ARORA.serviceAreas.map((name) => ({ "@type": "City", name })),
       founder: {
         "@type": "Person",
-        name: "Parveen Arora",
-        jobTitle: "Broker of Record & Owner",
-        url: "https://www.teamarora.com",
-        sameAs: "https://www.teamarora.com",
+        name: PARVEEN_ARORA.name,
+        jobTitle: PARVEEN_ARORA.jobTitle,
+        url: `${siteUrl}/parveen-arora`,
+        image: PARVEEN_ARORA.imageUrl,
+        telephone: PARVEEN_ARORA.phone,
+        email: PARVEEN_ARORA.email,
+        sameAs: PARVEEN_ARORA.sameAs,
         knowsAbout: [
           "Brampton Real Estate",
           "Mississauga Real Estate",
           "GTA Home Sales",
           "Property Valuation Ontario",
-          "RE/MAX Optimum Realty",
+          PARVEEN_ARORA.brokerage,
         ],
       },
-      priceRange: "Free",
       serviceType: "Real Estate Home Valuation",
     },
   ],
