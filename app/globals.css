@@ -5,25 +5,25 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #09090b;
+  --foreground: #0f172a;
   --card: #ffffff;
-  --card-foreground: #09090b;
+  --card-foreground: #0f172a;
   --popover: #ffffff;
-  --popover-foreground: #09090b;
-  --primary: #18181b;
+  --popover-foreground: #0f172a;
+  --primary: #0f172a;
   --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #18181b;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
+  --secondary: #f8fafc;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
   --accent: #2563eb;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e4e4e7;
-  --input: #e4e4e7;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
   --ring: #2563eb;
-  --radius: 0.3rem;
+  --radius: 0.5rem;
 }
 
 @theme inline {

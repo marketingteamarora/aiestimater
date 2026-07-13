@@ -247,7 +247,7 @@ export default function EstimateDashboard() {
           <div className="text-center space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <Badge className="bg-secondary text-primary border-border text-base px-4 py-2 font-medium">
               <CheckCircle2 className="w-4 h-4 mr-2 inline text-accent" />
-              Data Analysis Complete
+              AI Analysis Complete
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold text-primary tracking-tight">Your Property Valuation</h1>
             <div className="flex items-center justify-center gap-2 text-muted-foreground">
@@ -448,7 +448,7 @@ export default function EstimateDashboard() {
               <CardHeader className="pb-3 border-b border-border/30">
                 <CardTitle className="text-lg flex items-center gap-2 font-bold text-primary">
                   <CheckCircle2 className="w-5 h-5 text-accent" />
-                  Valuation Confidence
+                  AI Confidence
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 pt-4">
@@ -609,7 +609,7 @@ export default function EstimateDashboard() {
               <CardHeader className="border-b border-border/30 pb-5">
                 <CardTitle className="flex items-center gap-2 text-2xl font-bold text-primary">
                   <Lightbulb className="w-6 h-6 text-accent" />
-                  Market Insights
+                  AI-Powered Insights
                 </CardTitle>
                 <CardDescription className="text-base font-medium">Key factors affecting your property value</CardDescription>
               </CardHeader>

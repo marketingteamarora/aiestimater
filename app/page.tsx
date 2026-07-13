@@ -199,25 +199,25 @@ export default function HomePage() {
         <HowItWorks />
 
         {/* AI features */}
-        <section className="py-24 bg-white border-y border-border">
+        <section className="py-24 bg-secondary">
           <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 tracking-tight text-balance">
-              Data-Driven Market Accuracy
-            </h2>
-            <p className="text-lg md:text-xl text-muted-foreground text-pretty font-light">
-              Our home value estimator uses comprehensive market data, analyzing
-              millions of property transactions across Ontario to give you the most accurate
-              estimate possible — completely free.
-            </p>
-          </div>
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6 tracking-tight text-balance">
+                Powered by Advanced AI Technology
+              </h2>
+              <p className="text-lg md:text-xl text-muted-foreground text-pretty font-light">
+                Our home value estimator uses cutting-edge artificial intelligence, analyzing
+                millions of property transactions across Ontario to give you the most accurate
+                estimate possible — completely free.
+              </p>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
               {[
                 {
                   icon: TrendingUp,
-                  title: "Smart Analysis",
-                  desc: "Advanced algorithms analyze millions of Ontario property records.",
+                  title: "AI Analysis",
+                  desc: "Machine learning algorithms analyze millions of Ontario property records.",
                 },
                 {
                   icon: Zap,
@@ -235,7 +235,7 @@ export default function HomePage() {
                   desc: "Trusted by thousands of homeowners across Ontario.",
                 },
               ].map((item) => (
-                <div key={item.title} className="bg-secondary rounded-xl p-8 border border-border">
+                <div key={item.title} className="bg-white rounded-xl p-8 border border-border shadow-soft">
                   <div className="w-12 h-12 mb-6 text-accent">
                     <item.icon className="w-full h-full" strokeWidth={1.5} />
                   </div>

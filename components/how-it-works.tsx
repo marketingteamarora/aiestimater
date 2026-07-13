@@ -19,7 +19,7 @@ const steps = [
     icon: BarChart,
     number: "03",
     title: "Get Your Estimate",
-    description: "Receive an instant data-driven valuation with detailed market insights",
+    description: "Receive an instant AI-powered valuation with detailed market insights",
   },
   {
     icon: CheckCircle,

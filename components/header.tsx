@@ -117,7 +117,7 @@ export default function Header() {
                     <div className="p-3 border-t border-border">
                       <Link
                         href="/estimate"
-                        className="flex items-center justify-center gap-2 w-full py-2.5 bg-accent text-primary font-bold rounded-lg hover:bg-accent/90 transition-colors shadow-sm"
+                        className="flex items-center justify-center gap-2 w-full py-2.5 bg-accent text-white font-bold rounded-lg hover:bg-accent/90 transition-colors shadow-sm"
                       >
                         <Zap className="w-4 h-4 shrink-0" />
                         Free AI Home Estimate
@@ -143,7 +143,7 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
-            <Button asChild className="bg-accent text-primary hover:bg-accent/90 font-semibold shadow-sm">
+            <Button asChild className="bg-accent text-white hover:bg-accent/90 font-semibold shadow-sm">
               <Link href="/estimate">Get Free Estimate</Link>
             </Button>
           </div>
@@ -191,7 +191,7 @@ export default function Header() {
                 </div>
                 <Link
                   href="/estimate"
-                  className="flex items-center justify-center gap-2 w-full py-2.5 bg-accent text-primary font-bold rounded-lg hover:bg-gold-dark mt-2"
+                  className="flex items-center justify-center gap-2 w-full py-2.5 bg-accent text-white font-bold rounded-lg hover:bg-accent/90 mt-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <Zap className="w-4 h-4 shrink-0" />
@@ -202,7 +202,7 @@ export default function Header() {
               <Link href="/contact" className="text-sm font-medium text-foreground py-2" onClick={() => setIsMenuOpen(false)}>
                 Contact
               </Link>
-              <Button asChild className="bg-accent text-primary hover:bg-gold-dark w-full font-semibold">
+              <Button asChild className="bg-accent text-white hover:bg-accent/90 w-full font-semibold">
                 <Link href="/estimate" onClick={() => setIsMenuOpen(false)}>
                   Get Free Estimate
                 </Link>

@@ -73,7 +73,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-white/70 leading-relaxed">
-              Free data-driven home value estimates for Ontario homeowners, provided by Parveen Arora, #1 Real Estate Agent in Brampton & Mississauga.
+              Free AI-powered home value estimates for Ontario homeowners, provided by Parveen Arora, #1 Real Estate Agent in Brampton & Mississauga.
             </p>
             <div className="space-y-2 text-sm text-white/70">
               <div className="flex items-center gap-2">

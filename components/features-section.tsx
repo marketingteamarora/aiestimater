@@ -3,7 +3,7 @@ import { BarChart3, Clock, Shield, TrendingUp, MapPin, Bell } from "lucide-react
 const features = [
   {
     icon: BarChart3,
-    title: "Data-Driven Accuracy",
+    title: "AI-Powered Accuracy",
     description: "Advanced algorithms analyze thousands of local data points for precise valuations",
   },
   {
