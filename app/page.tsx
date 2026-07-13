@@ -199,51 +199,49 @@ export default function HomePage() {
         <HowItWorks />
 
         {/* AI features */}
-        <section className="py-20 bg-secondary">
+        <section className="py-24 bg-secondary">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-                Powered by Advanced AI Technology
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold text-primary mb-6 tracking-tight">
+                Powered by Advanced Technology
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Our home value estimator uses cutting-edge artificial intelligence, analyzing
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                Our home value estimator uses cutting-edge data models, analyzing
                 millions of property transactions across Ontario to give you the most accurate
                 estimate possible — completely free.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
               {[
                 {
                   icon: Brain,
-                  title: "AI Analysis",
-                  desc: "Machine learning algorithms analyze millions of Ontario property records",
+                  title: "Smart Analysis",
+                  desc: "Advanced algorithms analyze millions of Ontario property records.",
                 },
                 {
                   icon: Zap,
                   title: "Instant Results",
-                  desc: "Get your free home value estimate in under 30 seconds",
+                  desc: "Get your free home value estimate in under 30 seconds.",
                 },
                 {
                   icon: TrendingUp,
                   title: "Market Trends",
-                  desc: "Real-time data from local market conditions across Ontario",
+                  desc: "Real-time data from local market conditions across Ontario.",
                 },
                 {
                   icon: Shield,
-                  title: "95% Accurate",
-                  desc: "Trusted by thousands of homeowners across Ontario",
+                  title: "Highly Accurate",
+                  desc: "Trusted by thousands of homeowners across Ontario.",
                 },
               ].map((item) => (
-                <Card key={item.title} className="border-2 hover:border-accent transition-colors">
-                  <CardContent className="pt-6 text-center space-y-3">
-                    <div className="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
-                      <item.icon className="w-7 h-7 text-primary" />
-                    </div>
-                    <h3 className="font-bold text-lg">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.desc}</p>
-                  </CardContent>
-                </Card>
+                <div key={item.title} className="bg-card rounded-2xl p-8 shadow-soft hover:shadow-hover transition-all duration-300 border border-border/50">
+                  <div className="w-12 h-12 mb-6 text-accent">
+                    <item.icon className="w-full h-full" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="font-semibold text-xl mb-3 text-primary">{item.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                </div>
               ))}
             </div>
           </div>

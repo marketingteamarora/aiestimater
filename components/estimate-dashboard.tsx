@@ -261,47 +261,47 @@ export default function EstimateDashboard() {
           </div>
 
           <div className="relative">
-            <Card className="border-2 border-accent/30 shadow-2xl bg-gradient-to-br from-white via-accent/5 to-white overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
+            <Card className="border border-border/50 shadow-hover bg-white overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
               <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -z-10" />
               <CardHeader className="text-center pb-6 relative">
                 <div className="flex items-center justify-center gap-2 mb-3">
-                  <Sparkles className="w-6 h-6 text-primary animate-pulse" />
-                  <CardTitle className="text-2xl md:text-3xl">AI-Calculated Market Value</CardTitle>
+                  <Sparkles className="w-6 h-6 text-accent" />
+                  <CardTitle className="text-2xl md:text-3xl font-bold tracking-tight">AI-Calculated Market Value</CardTitle>
                 </div>
-                <CardDescription className="text-base">
+                <CardDescription className="text-base font-medium">
                   Powered by advanced machine learning algorithms analyzing thousands of data points
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-8">
-                <div className="text-center space-y-4 p-6 bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl border border-accent/20">
+                <div className="text-center space-y-4 p-8 bg-secondary/50 rounded-2xl border border-border/50">
                   <div className="text-5xl md:text-7xl font-bold text-primary tracking-tight">
                     {isRevealed ? formatCurrency(estimateValue) : formatBlurredPrice(estimateValue)}
                   </div>
                   <div className="space-y-2">
-                    <p className="text-muted-foreground text-lg" style={{ filter: isRevealed ? "none" : "blur(8px)" }}>
+                    <p className="text-muted-foreground text-lg font-medium" style={{ filter: isRevealed ? "none" : "blur(8px)" }}>
                       Estimated range: {formatCurrency(estimateLow)} - {formatCurrency(estimateHigh)}
                     </p>
-                    <div className="flex items-center justify-center gap-4 flex-wrap">
+                    <div className="flex items-center justify-center gap-4 flex-wrap mt-4">
                       <Badge
                         variant="outline"
-                        className="text-base px-4 py-1 border-green-600/30 bg-green-50"
+                        className="text-base px-4 py-1.5 border-green-600/30 bg-green-50/50 text-green-700"
                         style={{ filter: isRevealed ? "none" : "blur(8px)" }}
                       >
-                        <CheckCircle2 className="w-4 h-4 mr-2 text-green-600" />
-                        <span className="text-foreground">{confidencePercent}% Confidence</span>
+                        <CheckCircle2 className="w-4 h-4 mr-2" />
+                        <span className="font-semibold">{confidencePercent}% Confidence</span>
                       </Badge>
                       {pricePerSqFt && (
                         <Badge
                           variant="outline"
-                          className="text-base px-4 py-1 border-primary/30 bg-primary/5"
+                          className="text-base px-4 py-1.5 border-primary/20 bg-primary/5 text-primary"
                           style={{ filter: isRevealed ? "none" : "blur(8px)" }}
                         >
-                          <Home className="w-4 h-4 mr-2 text-primary" />
-                          <span className="text-foreground">{formatCurrency(pricePerSqFt)}/sq ft</span>
+                          <Home className="w-4 h-4 mr-2" />
+                          <span className="font-semibold">{formatCurrency(pricePerSqFt)}/sq ft</span>
                         </Badge>
                       )}
                     </div>
-                    <p className="text-xs text-muted-foreground mt-4 italic" style={{ filter: isRevealed ? "none" : "blur(8px)" }}>
+                    <p className="text-xs text-muted-foreground mt-6" style={{ filter: isRevealed ? "none" : "blur(8px)" }}>
                       Disclaimer: This is an automated estimate based on available market data.
                     </p>
                   </div>
@@ -310,55 +310,55 @@ export default function EstimateDashboard() {
                 <Separator />
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="p-4 bg-gradient-to-br from-secondary to-secondary/50 rounded-xl text-center border border-border/50 hover:border-accent/30 transition-colors">
-                    <p className="text-sm text-muted-foreground mb-1">Bedrooms</p>
-                    <p className="font-bold text-2xl text-foreground">{propertyData.bedrooms}</p>
+                  <div className="p-5 bg-white rounded-xl text-center border border-border/50 shadow-soft hover:shadow-hover transition-all">
+                    <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Bedrooms</p>
+                    <p className="font-bold text-3xl text-primary">{propertyData.bedrooms}</p>
                   </div>
-                  <div className="p-4 bg-gradient-to-br from-secondary to-secondary/50 rounded-xl text-center border border-border/50 hover:border-accent/30 transition-colors">
-                    <p className="text-sm text-muted-foreground mb-1">Bathrooms</p>
-                    <p className="font-bold text-2xl text-foreground">{propertyData.bathrooms}</p>
+                  <div className="p-5 bg-white rounded-xl text-center border border-border/50 shadow-soft hover:shadow-hover transition-all">
+                    <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Bathrooms</p>
+                    <p className="font-bold text-3xl text-primary">{propertyData.bathrooms}</p>
                   </div>
-                  <div className="p-4 bg-gradient-to-br from-secondary to-secondary/50 rounded-xl text-center border border-border/50 hover:border-accent/30 transition-colors">
-                    <p className="text-sm text-muted-foreground mb-1">Square Feet</p>
-                    <p className="font-bold text-2xl text-foreground">{propertyData.squareFeet}</p>
+                  <div className="p-5 bg-white rounded-xl text-center border border-border/50 shadow-soft hover:shadow-hover transition-all">
+                    <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Square Feet</p>
+                    <p className="font-bold text-3xl text-primary">{propertyData.squareFeet}</p>
                   </div>
-                  <div className="p-4 bg-gradient-to-br from-secondary to-secondary/50 rounded-xl text-center border border-border/50 hover:border-accent/30 transition-colors">
-                    <p className="text-sm text-muted-foreground mb-1">Year Built</p>
-                    <p className="font-bold text-2xl text-foreground">{propertyData.yearBuilt}</p>
+                  <div className="p-5 bg-white rounded-xl text-center border border-border/50 shadow-soft hover:shadow-hover transition-all">
+                    <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Year Built</p>
+                    <p className="font-bold text-3xl text-primary">{propertyData.yearBuilt}</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             {!isRevealed && (
-              <div className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-xl flex items-center justify-center p-4 z-10">
+              <div className="absolute inset-0 bg-white/80 backdrop-blur-md rounded-xl flex items-center justify-center p-4 z-10 border border-white/20">
                 {!showLeadForm ? (
-                  <div className="text-center space-y-6 max-w-md">
-                    <div className="inline-flex items-center justify-center w-20 h-20 bg-accent/20 rounded-full mb-4">
+                  <div className="text-center space-y-6 max-w-md bg-white p-10 rounded-3xl shadow-hover border border-border/50">
+                    <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/5 rounded-full mb-2">
                       <Lock className="w-10 h-10 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3">See Your Full Report</h3>
+                      <h3 className="text-2xl md:text-3xl font-bold text-primary mb-3">See Your Full Report</h3>
                       <p className="text-muted-foreground text-lg mb-6">
                         Get instant access to detailed insights, market trends, and comparable sales
                       </p>
                     </div>
                     <Button
                       size="lg"
-                      className="bg-primary hover:bg-primary/90 text-white font-semibold text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105 w-full"
+                      className="bg-primary hover:bg-primary/90 text-white font-semibold text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all w-full rounded-xl"
                       onClick={() => setShowLeadForm(true)}
                     >
                       <Eye className="w-5 h-5 mr-2" />
                       Reveal My Estimate
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
-                    <p className="text-sm text-muted-foreground">No credit card required • 100% Free</p>
+                    <p className="text-sm text-muted-foreground font-medium">No credit card required • 100% Free</p>
                   </div>
                 ) : (
-                  <Card className="w-full max-w-md shadow-2xl border-2 border-accent/30">
-                    <CardHeader className="text-center">
-                      <CardTitle className="text-2xl">Unlock Your Full Report</CardTitle>
-                      <CardDescription>Enter your details to see complete valuation insights</CardDescription>
+                  <Card className="w-full max-w-md shadow-hover border border-border/50 rounded-3xl overflow-hidden">
+                    <CardHeader className="text-center bg-secondary/50 border-b border-border/50 pb-6">
+                      <CardTitle className="text-2xl font-bold text-primary">Unlock Your Full Report</CardTitle>
+                      <CardDescription className="text-base font-medium">Enter your details to see complete valuation insights</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <form onSubmit={handleLeadSubmit} className="space-y-4">
@@ -446,51 +446,51 @@ export default function EstimateDashboard() {
             className="grid md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300"
             style={{ filter: isRevealed ? "none" : "blur(8px)", pointerEvents: isRevealed ? "auto" : "none" }}
           >
-            <Card className="border-accent/20 hover:border-accent/40 transition-colors">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg flex items-center gap-2">
-                  <Brain className="w-5 h-5 text-primary" />
+            <Card className="border border-border/50 shadow-soft hover:shadow-hover transition-all bg-white">
+              <CardHeader className="pb-3 border-b border-border/30">
+                <CardTitle className="text-lg flex items-center gap-2 font-bold text-primary">
+                  <Brain className="w-5 h-5 text-accent" />
                   AI Confidence
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-4 pt-4">
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Prediction Accuracy</span>
-                    <span className="font-semibold text-primary">{confidencePercent}%</span>
+                    <span className="text-muted-foreground font-medium">Prediction Accuracy</span>
+                    <span className="font-bold text-primary">{confidencePercent}%</span>
                   </div>
-                  <Progress value={confidencePercent} className="h-3" />
+                  <Progress value={confidencePercent} className="h-2.5 bg-secondary" />
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {confidencePercent >= 90
-                    ? "Excellent confidence - highly reliable estimate"
+                    ? "Excellent confidence - highly reliable estimate based on strong local data."
                     : confidencePercent >= 80
-                      ? "Very good confidence - reliable estimate"
-                      : "Good confidence - solid estimate"}
+                      ? "Very good confidence - reliable estimate based on recent comparable sales."
+                      : "Good confidence - solid estimate based on available market data."}
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="border-accent/20 hover:border-accent/40 transition-colors">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg flex items-center gap-2">
+            <Card className="border border-border/50 shadow-soft hover:shadow-hover transition-all bg-white">
+              <CardHeader className="pb-3 border-b border-border/30">
+                <CardTitle className="text-lg flex items-center gap-2 font-bold text-primary">
                   {trend.direction === "up" ? (
                     <TrendingUp className="w-5 h-5 text-green-600" />
                   ) : trend.direction === "down" ? (
                     <TrendingDown className="w-5 h-5 text-red-600" />
                   ) : (
-                    <TrendingUp className="w-5 h-5 text-primary" />
+                    <TrendingUp className="w-5 h-5 text-accent" />
                   )}
                   Market Trend
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-4 pt-4">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-foreground">
+                  <span className="text-4xl font-bold text-primary">
                     {trend.direction === "up" ? "+" : trend.direction === "down" ? "-" : ""}
                     {trend.percentage.toFixed(1)}%
                   </span>
-                  <span className="text-sm text-muted-foreground">past 12 months</span>
+                  <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">past 12 mos</span>
                 </div>
                 <div className="flex items-center gap-2">
                   {trend.direction === "up" ? (
@@ -498,37 +498,37 @@ export default function EstimateDashboard() {
                   ) : trend.direction === "down" ? (
                     <ArrowDownRight className="w-4 h-4 text-red-600" />
                   ) : null}
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {trend.direction === "up"
-                      ? "Property values are increasing"
+                      ? "Property values in this area are currently increasing."
                       : trend.direction === "down"
-                        ? "Property values are decreasing"
-                        : "Property values are stable"}
+                        ? "Property values in this area are currently decreasing."
+                        : "Property values in this area are currently stable."}
                   </p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-accent/20 hover:border-accent/40 transition-colors">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg flex items-center gap-2">
-                  <DollarSign className="w-5 h-5 text-primary" />
+            <Card className="border border-border/50 shadow-soft hover:shadow-hover transition-all bg-white">
+              <CardHeader className="pb-3 border-b border-border/30">
+                <CardTitle className="text-lg flex items-center gap-2 font-bold text-primary">
+                  <DollarSign className="w-5 h-5 text-accent" />
                   Price Range
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-4 pt-4">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-foreground">{formatCurrency(priceRange)}</span>
+                  <span className="text-4xl font-bold text-primary">{formatCurrency(priceRange)}</span>
                 </div>
-                <p className="text-sm text-muted-foreground">±{priceRangePercent.toFixed(1)}% variance from estimate</p>
-                <div className="pt-2 space-y-1">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-muted-foreground">Low</span>
-                    <span className="font-medium">{formatCurrency(estimateLow)}</span>
+                <p className="text-sm font-medium text-muted-foreground">±{priceRangePercent.toFixed(1)}% variance from estimate</p>
+                <div className="pt-3 space-y-2 border-t border-border/30">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground font-medium">Low Estimate</span>
+                    <span className="font-bold text-primary">{formatCurrency(estimateLow)}</span>
                   </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-muted-foreground">High</span>
-                    <span className="font-medium">{formatCurrency(estimateHigh)}</span>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground font-medium">High Estimate</span>
+                    <span className="font-bold text-primary">{formatCurrency(estimateHigh)}</span>
                   </div>
                 </div>
               </CardContent>
@@ -602,28 +602,28 @@ export default function EstimateDashboard() {
           {/* AI Insights Section */}
           {insights.length > 0 && (
             <Card
-              className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500"
+              className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500 border border-border/50 shadow-soft bg-white"
               style={{ filter: isRevealed ? "none" : "blur(8px)", pointerEvents: isRevealed ? "auto" : "none" }}
             >
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <Lightbulb className="w-5 h-5 text-primary" />
+              <CardHeader className="border-b border-border/30 pb-5">
+                <CardTitle className="flex items-center gap-2 text-2xl font-bold text-primary">
+                  <Lightbulb className="w-6 h-6 text-accent" />
                   AI-Powered Insights
                 </CardTitle>
-                <CardDescription>Key factors affecting your property value</CardDescription>
+                <CardDescription className="text-base font-medium">Key factors affecting your property value</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-3 gap-4">
+              <CardContent className="pt-6">
+                <div className="grid md:grid-cols-3 gap-6">
                   {insights.map((insight, index) => (
                     <div
                       key={index}
-                      className="p-4 bg-gradient-to-br from-secondary to-secondary/50 rounded-xl border border-border/50"
+                      className="p-5 bg-secondary/30 rounded-xl border border-border/50 shadow-sm"
                     >
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                          <CheckCircle2 className="w-4 h-4 text-primary" />
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm border border-border/50">
+                          <CheckCircle2 className="w-5 h-5 text-accent" />
                         </div>
-                        <p className="text-sm text-foreground">{insight}</p>
+                        <p className="text-sm font-medium text-primary leading-relaxed pt-1">{insight}</p>
                       </div>
                     </div>
                   ))}
@@ -635,31 +635,31 @@ export default function EstimateDashboard() {
           {/* Comparable Sales Section */}
           {comparables.length > 0 && (
             <Card
-              className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-550"
+              className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-550 border border-border/50 shadow-soft bg-white"
               style={{ filter: isRevealed ? "none" : "blur(8px)", pointerEvents: isRevealed ? "auto" : "none" }}
             >
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <Building className="w-5 h-5 text-primary" />
+              <CardHeader className="border-b border-border/30 pb-5">
+                <CardTitle className="flex items-center gap-2 text-2xl font-bold text-primary">
+                  <Building className="w-6 h-6 text-accent" />
                   Comparable Sales
                 </CardTitle>
-                <CardDescription>Recent sales of similar properties in your area</CardDescription>
+                <CardDescription className="text-base font-medium">Recent sales of similar properties in your area</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <CardContent className="pt-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {comparables.map((comp, index) => (
                     <div
                       key={index}
-                      className="p-4 bg-gradient-to-br from-secondary to-secondary/50 rounded-xl border border-border/50 hover:border-accent/30 transition-colors"
+                      className="p-5 bg-white rounded-xl border border-border/50 shadow-soft hover:shadow-hover transition-all"
                     >
-                      <div className="space-y-2">
-                        <p className="font-medium text-foreground text-sm">{comp.address}</p>
+                      <div className="space-y-3">
+                        <p className="font-bold text-primary text-base leading-tight">{comp.address}</p>
                         <div className="flex items-baseline gap-2">
-                          <span className="text-xl font-bold text-primary">{formatCurrency(comp.price)}</span>
+                          <span className="text-2xl font-bold text-accent">{formatCurrency(comp.price)}</span>
                         </div>
-                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                          <span>{comp.sqft.toLocaleString()} sq ft</span>
-                          <span>Sold {comp.soldDate}</span>
+                        <div className="flex items-center gap-4 text-sm font-medium text-muted-foreground pt-2 border-t border-border/30">
+                          <span className="flex items-center gap-1"><Home className="w-4 h-4" /> {comp.sqft.toLocaleString()} sq ft</span>
+                          <span className="flex items-center gap-1"><Calendar className="w-4 h-4" /> {comp.soldDate}</span>
                         </div>
                       </div>
                     </div>
@@ -669,42 +669,42 @@ export default function EstimateDashboard() {
             </Card>
           )}
 
-          <Card className="bg-gradient-to-br from-primary via-primary to-primary/90 text-white border-0 shadow-2xl overflow-hidden relative animate-in fade-in slide-in-from-bottom-4 duration-700 delay-600">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-            <CardContent className="p-8 md:p-12 relative z-10">
-              <div className="max-w-3xl mx-auto text-center space-y-6">
-                <div className="inline-flex items-center justify-center gap-2 mb-4 bg-accent/20 px-4 py-2 rounded-full">
-                  <Sparkles className="w-5 h-5 text-accent" />
-                  <span className="text-accent font-semibold">Next Steps</span>
+          <Card className="bg-primary text-white border-0 shadow-2xl overflow-hidden relative animate-in fade-in slide-in-from-bottom-4 duration-700 delay-600 rounded-3xl">
+            <div className="absolute inset-0 z-0 opacity-20">
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+            </div>
+            <CardContent className="p-10 md:p-16 relative z-10">
+              <div className="max-w-3xl mx-auto text-center space-y-8">
+                <div className="inline-flex items-center justify-center gap-2 mb-2 bg-white/10 border border-white/20 px-5 py-2 rounded-full backdrop-blur-md">
+                  <Sparkles className="w-4 h-4 text-accent" />
+                  <span className="text-white font-semibold text-sm uppercase tracking-wider">Next Steps</span>
                 </div>
-                <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+                <h2 className="text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight">
                   Ready to Turn This Estimate Into Reality?
                 </h2>
-                <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+                <p className="text-xl text-white/70 leading-relaxed font-light">
                   Get personalized insights, detailed market analysis, and expert recommendations to maximize your property's value.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                <div className="flex flex-col sm:flex-row gap-5 justify-center pt-6">
                   <Button
                     size="lg"
-                    className="bg-accent text-primary hover:bg-accent/90 font-semibold text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+                    className="bg-accent text-primary hover:bg-accent/90 font-bold text-lg px-8 h-14 rounded-xl shadow-xl transition-all"
                     onClick={() => router.push("/contact")}
                   >
                     <Phone className="w-5 h-5 mr-2" />
                     Schedule Free Consultation
-                    <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                   <Button
                     size="lg"
                     variant="outline"
-                    className="bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm font-semibold text-lg px-8 py-6"
+                    className="bg-white/5 text-white border-white/20 hover:bg-white/10 backdrop-blur-md font-bold text-lg px-8 h-14 rounded-xl"
                     onClick={() => router.push("/contact")}
                   >
                     <Mail className="w-5 h-5 mr-2" />
                     Email Our Team
                   </Button>
                 </div>
-                <p className="text-sm text-white/70 pt-4">
+                <p className="text-sm text-white/50 font-medium pt-4">
                   Serving Brampton, Mississauga, and Cambridge with excellence
                 </p>
               </div>

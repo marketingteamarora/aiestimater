@@ -131,25 +131,24 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
       <main className="min-h-screen">
-        <section className="relative bg-gradient-to-br from-primary via-primary to-blue-900 text-white py-20 overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="absolute top-10 left-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+        <section className="relative bg-primary text-white py-24 overflow-hidden">
+          <div className="absolute inset-0 z-0 opacity-20">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
           </div>
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm font-medium mb-6">
+                <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-medium mb-6 backdrop-blur-md">
                   <MapPin className="w-4 h-4 text-accent" />
                   Serving {cityName}, Ontario
                 </div>
-                <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+                <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-4">
                   The {displayTitle}
                 </h1>
-                <p className="text-2xl text-accent font-semibold mb-4">
+                <p className="text-2xl text-accent font-serif italic mb-6">
                   {PARVEEN_ARORA.name} &amp; {PARVEEN_ARORA.teamName}
                 </p>
-                <p className="text-lg text-white/80 leading-relaxed mb-6">
+                <p className="text-lg md:text-xl text-white/70 font-light leading-relaxed mb-8">
                   {PARVEEN_ARORA.bio.split(".")[0]}. When {cityName} homeowners want top dollar, they call{" "}
                   {PARVEEN_ARORA.name} — {PARVEEN_ARORA.yearsExperience}+ years, {PARVEEN_ARORA.transactions}{" "}
                   transactions, and {PARVEEN_ARORA.salesVolume} in sales.
@@ -159,29 +158,30 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
                     href={PARVEEN_ARORA.profileUrl}
                     target="_blank"
                     rel="noopener"
-                    className="inline-flex items-center justify-center gap-2 bg-accent text-primary font-bold text-lg px-8 py-4 rounded-xl hover:bg-yellow-400 transition-colors shadow-lg"
+                    className="inline-flex items-center justify-center gap-2 bg-accent text-primary font-bold text-lg px-8 py-4 rounded-xl hover:bg-accent/90 transition-colors shadow-lg"
                   >
                     <ExternalLink className="w-5 h-5" />
                     Work with {cityName}&apos;s Top Agent
                   </Link>
                   <Link
                     href="/estimate"
-                    className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/30 text-white font-bold text-lg px-8 py-4 rounded-xl hover:bg-white/20 transition-colors"
+                    className="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-bold text-lg px-8 py-4 rounded-xl hover:bg-white/20 transition-colors backdrop-blur-md"
                   >
                     <Zap className="w-5 h-5" />
                     Free Home Evaluation
                   </Link>
                 </div>
               </div>
-              <div className="flex justify-center">
-                <div className="relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden border-4 border-accent/40 shadow-2xl">
+              <div className="flex justify-center lg:justify-end">
+                <div className="relative w-72 h-80 md:w-96 md:h-[28rem] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent z-10" />
                   <Image
                     src={PARVEEN_ARORA.imagePath}
                     alt={`${PARVEEN_ARORA.name} — ${displayTitle}, ${PARVEEN_ARORA.brokerage}`}
                     fill
                     className="object-cover object-top"
                     priority
-                    sizes="(max-width: 768px) 288px, 320px"
+                    sizes="(max-width: 768px) 288px, 384px"
                   />
                 </div>
               </div>
@@ -246,13 +246,13 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
           </div>
         </section>
 
-        <section className="py-12 bg-white text-primary border-b border-border">
+        <section className="py-16 bg-white text-primary border-b border-border">
           <div className="container mx-auto px-4">
-            <div className="flex flex-wrap justify-center gap-10 text-center">
+            <div className="flex flex-wrap justify-center gap-12 text-center max-w-5xl mx-auto">
               {stats.map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-3xl font-black">{stat.value}</div>
-                  <div className="text-sm font-semibold text-primary/80 mt-1 uppercase tracking-wider">
+                <div key={stat.label} className="flex-1 min-w-[200px]">
+                  <div className="text-4xl md:text-5xl font-bold tracking-tight mb-2">{stat.value}</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
                     {stat.label}
                   </div>
                 </div>
@@ -263,27 +263,27 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
 
         <ReviewsTrustSection cityName={cityName} />
 
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
+        <section className="py-24 bg-background">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
               <div>
-                <h2 className="text-3xl font-bold text-primary mb-5">
+                <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 tracking-tight">
                   Why {cityName} Sellers Trust {PARVEEN_ARORA.name}
                 </h2>
-                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <div className="space-y-6 text-muted-foreground leading-relaxed text-lg font-light">
                   <p>
                     Selling in {cityName} requires deep local knowledge, aggressive marketing, and a massive buyer
-                    network. <strong className="text-foreground">{PARVEEN_ARORA.name}</strong>, Broker of Record at{" "}
+                    network. <strong className="text-foreground font-medium">{PARVEEN_ARORA.name}</strong>, Broker of Record at{" "}
                     {PARVEEN_ARORA.brokerage}, leads {PARVEEN_ARORA.teamName} with {PARVEEN_ARORA.yearsExperience}+
                     years and {CLIENT_REVIEWS.totalDisplay} verified client reviews.
                   </p>
                   <p>
                     {buildReviewsSummaryText()} Read reviews on{" "}
-                    <a href={CLIENT_REVIEWS.platforms[0].url} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Google</a>,{" "}
-                    <a href={CLIENT_REVIEWS.platforms[1].url} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Rank My Agent</a>, and{" "}
-                    <a href={CLIENT_REVIEWS.platforms[2].url} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Rate My Agent</a>.
+                    <a href={CLIENT_REVIEWS.platforms[0].url} target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">Google</a>,{" "}
+                    <a href={CLIENT_REVIEWS.platforms[1].url} target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">Rank My Agent</a>, and{" "}
+                    <a href={CLIENT_REVIEWS.platforms[2].url} target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">Rate My Agent</a>.
                     {PARVEEN_ARORA.name} is also a{" "}
-                    <a href="https://news.remax.com/remax-luminary-of-distinction" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                    <a href="https://news.remax.com/remax-luminary-of-distinction" target="_blank" rel="noopener noreferrer" className="text-accent font-medium hover:underline">
                       RE/MAX Luminary of Distinction
                     </a>.
                   </p>
@@ -292,10 +292,10 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
                     {PARVEEN_ARORA.languages.join(", ")} — essential for {cityName}&apos;s diverse communities.
                   </p>
                 </div>
-                <div className="mt-8 flex flex-wrap gap-4">
+                <div className="mt-10 flex flex-wrap gap-4">
                   <Link
                     href="/parveen-arora"
-                    className="inline-flex items-center gap-2 text-accent font-bold hover:underline"
+                    className="inline-flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors"
                   >
                     Full profile &amp; credentials →
                   </Link>
@@ -303,23 +303,23 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
                     href={PARVEEN_ARORA.profileUrl}
                     target="_blank"
                     rel="noopener"
-                    className="inline-flex items-center gap-2 bg-primary text-white font-bold px-6 py-3 rounded-xl hover:bg-primary/90 transition-colors"
+                    className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-8 py-4 rounded-xl hover:bg-primary/90 transition-colors shadow-soft"
                   >
                     <ExternalLink className="w-4 h-4" />
                     TeamArora.com
                   </Link>
                 </div>
               </div>
-              <div className="bg-secondary rounded-2xl p-8 border border-border">
-                <h3 className="font-bold text-xl text-foreground mb-5 flex items-center gap-2">
-                  <Trophy className="w-6 h-6 text-accent" />
+              <div className="bg-secondary rounded-3xl p-10 border border-border shadow-soft">
+                <h3 className="font-bold text-2xl text-primary mb-8 flex items-center gap-3">
+                  <Trophy className="w-7 h-7 text-accent" />
                   Verified Industry Authority
                 </h3>
-                <ul className="space-y-3">
+                <ul className="space-y-5">
                   {PARVEEN_ARORA.awards.map((award) => (
-                    <li key={award} className="flex items-start gap-3">
-                      <Award className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-foreground font-medium text-sm">{award}</span>
+                    <li key={award} className="flex items-start gap-4">
+                      <Award className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                      <span className="text-foreground font-medium text-lg">{award}</span>
                     </li>
                   ))}
                 </ul>

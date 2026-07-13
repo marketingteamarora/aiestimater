@@ -34,19 +34,19 @@ export default function Header() {
           <nav className="hidden lg:flex items-center gap-5">
             <Link
               href="/"
-              className="text-sm font-medium text-foreground hover:text-gold-dark transition-colors"
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
             >
               Home
             </Link>
             <Link
               href="/estimate"
-              className="text-sm font-medium text-foreground hover:text-gold-dark transition-colors"
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
             >
               Get Estimate
             </Link>
             <Link
               href="/parveen-arora"
-              className="text-sm font-medium text-foreground hover:text-gold-dark transition-colors"
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
             >
               Parveen Arora
             </Link>
@@ -59,14 +59,14 @@ export default function Header() {
             >
               <button
                 type="button"
-                className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-gold-dark transition-colors py-2"
+                className="flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-primary transition-colors py-2"
                 aria-expanded={isAgentMenuOpen}
                 aria-haspopup="true"
               >
                 <Star className="w-4 h-4 text-accent shrink-0" />
                 Best Agent
                 <ChevronDown
-                  className={`w-4 h-4 text-foreground shrink-0 transition-transform ${isAgentMenuOpen ? "rotate-180" : ""}`}
+                  className={`w-4 h-4 text-foreground/80 shrink-0 transition-transform ${isAgentMenuOpen ? "rotate-180" : ""}`}
                 />
               </button>
 
@@ -96,19 +96,19 @@ export default function Header() {
                     <div className="grid grid-cols-3 gap-2 p-3 border-t border-border bg-muted/30 text-center">
                       <Link
                         href={getAgentPageUrlByKeyword("brampton", "best")}
-                        className="text-xs font-semibold text-primary hover:text-gold-dark py-1"
+                        className="text-xs font-semibold text-primary hover:text-primary/70 py-1"
                       >
                         Best
                       </Link>
                       <Link
                         href={getAgentPageUrlByKeyword("brampton", "no1")}
-                        className="text-xs font-semibold text-primary hover:text-gold-dark py-1"
+                        className="text-xs font-semibold text-primary hover:text-primary/70 py-1"
                       >
                         #1
                       </Link>
                       <Link
                         href={getAgentPageUrlByKeyword("brampton", "top")}
-                        className="text-xs font-semibold text-primary hover:text-gold-dark py-1"
+                        className="text-xs font-semibold text-primary hover:text-primary/70 py-1"
                       >
                         Top
                       </Link>
@@ -117,7 +117,7 @@ export default function Header() {
                     <div className="p-3 border-t border-border">
                       <Link
                         href="/estimate"
-                        className="flex items-center justify-center gap-2 w-full py-2.5 bg-accent text-primary font-bold rounded-lg hover:bg-gold-dark transition-colors"
+                        className="flex items-center justify-center gap-2 w-full py-2.5 bg-accent text-primary font-bold rounded-lg hover:bg-accent/90 transition-colors shadow-sm"
                       >
                         <Zap className="w-4 h-4 shrink-0" />
                         Free AI Home Estimate
@@ -130,20 +130,20 @@ export default function Header() {
 
             <Link
               href="/home-value-estimator/brampton"
-              className="text-sm font-medium text-foreground hover:text-gold-dark transition-colors"
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
             >
               Cities
             </Link>
             <Link
               href="/contact"
-              className="text-sm font-medium text-foreground hover:text-gold-dark transition-colors"
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
             >
               Contact
             </Link>
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
-            <Button asChild className="bg-accent text-primary hover:bg-gold-dark font-semibold">
+            <Button asChild className="bg-accent text-primary hover:bg-accent/90 font-semibold shadow-sm">
               <Link href="/estimate">Get Free Estimate</Link>
             </Button>
           </div>
