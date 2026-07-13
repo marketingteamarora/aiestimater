@@ -281,7 +281,7 @@ export default async function CityPage({
                 href={getAgentPageUrl(config.slug)}
                 className="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold text-lg px-8 py-4 rounded-xl hover:bg-primary/90 transition-colors shadow-lg"
               >
-                #{config.name}&apos;s Top Agent — {PARVEEN_ARORA.name}
+                #{config.name}&apos;s Best Agent — {PARVEEN_ARORA.name}
               </Link>
               <Link
                 href="/parveen-arora"

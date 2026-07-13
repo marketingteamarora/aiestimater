@@ -37,14 +37,12 @@ const nextConfig = {
       "etobicoke",
       "north-york",
     ]
-    const legacyPrefixes = ["best-real-estate-agent", "top-real-estate-agent", "real-estate-agent"]
-    return legacyPrefixes.flatMap((prefix) =>
-      cities.map((city) => ({
-        source: `/${prefix}/${city}`,
-        destination: `/no-1-real-estate-agent/${city}`,
-        permanent: true,
-      })),
-    )
+    // Only redirect the generic slug; keep best, no-1, and top as separate indexed pages
+    return cities.map((city) => ({
+      source: `/real-estate-agent/${city}`,
+      destination: `/best-real-estate-agent/${city}`,
+      permanent: true,
+    }))
   },
 }
 

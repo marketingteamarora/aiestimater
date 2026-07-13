@@ -24,7 +24,6 @@ import {
 import {
   generateAgentMetadata,
   getAgentVariantLinks,
-  PRIMARY_AGENT_ROUTE,
 } from "@/lib/seo/agent-routes"
 
 export { agentCities, generateAgentMetadata }
@@ -416,12 +415,12 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
           </div>
         </section>
 
-        {routeBase && routeBase !== PRIMARY_AGENT_ROUTE && (
+        {routeBase && routeBase !== "best-real-estate-agent" && (
           <section className="py-6 bg-amber-50 border-y border-amber-200">
             <p className="container mx-auto px-4 text-center text-sm text-amber-900">
-              Canonical page:{" "}
-              <Link href={getAgentPageUrl(citySlug)} className="font-semibold underline">
-                No. 1 Real Estate Agent in {cityName}
+              Also see:{" "}
+              <Link href={getAgentPageUrl(citySlug)} className="font-semibold underline text-primary">
+                Best Real Estate Agent in {cityName}
               </Link>
             </p>
           </section>

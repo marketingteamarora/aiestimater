@@ -1,10 +1,23 @@
 export const SITE_URL = "https://gethomeevaluation.ca"
 
-/** Primary agent landing URL pattern for SEO consolidation */
-export const PRIMARY_AGENT_ROUTE = "no-1-real-estate-agent"
+/** Primary agent landing URL — "best" is the main SEO keyword */
+export const PRIMARY_AGENT_ROUTE = "best-real-estate-agent"
+
+export const AGENT_KEYWORD_ROUTES = {
+  best: "best-real-estate-agent",
+  no1: "no-1-real-estate-agent",
+  top: "top-real-estate-agent",
+} as const
 
 export function getAgentPageUrl(citySlug: string): string {
   return `/${PRIMARY_AGENT_ROUTE}/${citySlug}`
+}
+
+export function getAgentPageUrlByKeyword(
+  citySlug: string,
+  keyword: keyof typeof AGENT_KEYWORD_ROUTES,
+): string {
+  return `/${AGENT_KEYWORD_ROUTES[keyword]}/${citySlug}`
 }
 
 export const PARVEEN_ARORA = {

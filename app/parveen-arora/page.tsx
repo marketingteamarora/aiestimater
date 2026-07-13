@@ -73,9 +73,9 @@ export default function ParveenAroraPage() {
                 <div className="flex flex-wrap gap-4">
                   <Link
                     href={getAgentPageUrl("brampton")}
-                    className="bg-accent text-primary font-bold px-6 py-3 rounded-xl hover:bg-yellow-400 transition-colors"
+                    className="bg-accent text-primary font-bold px-6 py-3 rounded-xl hover:bg-gold-dark transition-colors"
                   >
-                    #1 Agent in Brampton
+                    Best Agent in Brampton
                   </Link>
                   <Link
                     href={PARVEEN_ARORA.profileUrl}
@@ -200,7 +200,7 @@ export default function ParveenAroraPage() {
                 >
                   <Star className="w-4 h-4 text-accent mx-auto mb-1" />
                   <div className="font-semibold text-sm">{city.name}</div>
-                  <div className="text-xs text-muted-foreground">#1 Agent</div>
+                  <div className="text-xs text-muted-foreground">Best Agent</div>
                 </Link>
               ))}
             </div>

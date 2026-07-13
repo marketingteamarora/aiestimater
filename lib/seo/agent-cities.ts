@@ -37,8 +37,8 @@ agentCities.gta = {
 export const agentCitySlugs = [...citySlugs, "gta"]
 
 export const AGENT_ROUTE_VARIANTS = [
-  "no-1-real-estate-agent",
   "best-real-estate-agent",
+  "no-1-real-estate-agent",
   "top-real-estate-agent",
   "real-estate-agent",
 ] as const

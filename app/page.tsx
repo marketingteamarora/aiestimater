@@ -289,9 +289,9 @@ export default function HomePage() {
                         </Link>
                         <Link
                           href={getAgentPageUrl(slug)}
-                          className="block pl-9 text-xs text-accent hover:underline font-medium"
+                          className="block pl-9 text-xs text-gold-dark hover:underline font-medium"
                         >
-                          #1 Agent in {city.name} →
+                          Best Agent in {city.name} →
                         </Link>
                       </li>
                     )})}
@@ -446,7 +446,7 @@ export default function HomePage() {
                     href={getAgentPageUrl("brampton")}
                     className="inline-flex items-center gap-2 text-primary font-bold hover:underline"
                   >
-                    #1 Agent in Brampton →
+                    Best Agent in Brampton →
                   </Link>
                 </div>
               </div>

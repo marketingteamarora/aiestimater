@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { MapPin, ExternalLink } from "lucide-react"
-import { getAgentPageUrl } from "@/lib/seo/parveen-arora"
+import { getAgentPageUrl, getAgentPageUrlByKeyword } from "@/lib/seo/parveen-arora"
 
 const cityGroups = [
   {
@@ -88,8 +88,9 @@ export default function Footer() {
               <ul className="space-y-1">
                 {[
                   { label: "Parveen Arora Profile", href: "/parveen-arora" },
-                  { label: "#1 Agent in Brampton", href: getAgentPageUrl("brampton") },
-                  { label: "#1 Agent in Mississauga", href: getAgentPageUrl("mississauga") },
+                  { label: "Best Agent in Brampton", href: getAgentPageUrl("brampton") },
+                  { label: "Best Agent in Mississauga", href: getAgentPageUrl("mississauga") },
+                  { label: "#1 Agent in Brampton", href: getAgentPageUrlByKeyword("brampton", "no1") },
                   { label: "Free Home Estimate", href: "/estimate" },
                   { label: "Contact Us", href: "/contact" },
                   { label: "TeamArora.com", href: "https://teamarora.com", external: true },
@@ -141,7 +142,7 @@ export default function Footer() {
                             href={getAgentPageUrl(slug)}
                             className="text-xs text-white/50 hover:text-accent transition-colors pl-4"
                           >
-                            Top Agent
+                            Best Agent
                           </Link>
                         </li>
                       )

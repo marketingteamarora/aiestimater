@@ -34,7 +34,7 @@ export function generateAgentMetadata(
 
   const displayPrefix = capitalizedPrefix ? `${capitalizedPrefix} ` : ""
   const displayTitle = `${displayPrefix}Real Estate Agent in ${cityName}`
-  const canonicalPath = `/${PRIMARY_AGENT_ROUTE}/${citySlug}`
+  const canonicalPath = `/${routeBase}/${citySlug}`
   const pageTitle = `${displayTitle} — ${PARVEEN_ARORA.name} | #1 RE/MAX Team`
   const description = `Looking for the ${displayTitle.toLowerCase()}? ${PARVEEN_ARORA.name} & ${PARVEEN_ARORA.teamName} have ${PARVEEN_ARORA.salesVolume} in sales, ${PARVEEN_ARORA.transactions} transactions, and ${PARVEEN_ARORA.yearsExperience}+ years of experience.`
 
@@ -55,7 +55,7 @@ export function generateAgentMetadata(
       images: [PARVEEN_ARORA.imageUrl],
     },
     robots:
-      routeBase !== PRIMARY_AGENT_ROUTE
+      routeBase === "real-estate-agent"
         ? { index: false, follow: true }
         : undefined,
   }

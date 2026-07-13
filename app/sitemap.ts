@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 import { agentCitySlugs } from "@/lib/seo/agent-cities"
+import { AGENT_KEYWORD_ROUTES, SITE_URL } from "@/lib/seo/parveen-arora"
 import { citySlugs } from "@/lib/seo/city-market-data"
-import { PRIMARY_AGENT_ROUTE, SITE_URL } from "@/lib/seo/parveen-arora"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
@@ -38,12 +38,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }))
 
-  const agentPages: MetadataRoute.Sitemap = agentCitySlugs.map((slug) => ({
-    url: `${SITE_URL}/${PRIMARY_AGENT_ROUTE}/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: slug === "brampton" || slug === "mississauga" ? 0.95 : 0.9,
-  }))
+  const keywordRoutes = [
+    { route: AGENT_KEYWORD_ROUTES.best, priority: 0.95 },
+    { route: AGENT_KEYWORD_ROUTES.no1, priority: 0.92 },
+    { route: AGENT_KEYWORD_ROUTES.top, priority: 0.9 },
+  ]
+
+  const agentPages: MetadataRoute.Sitemap = keywordRoutes.flatMap(({ route, priority }) =>
+    agentCitySlugs.map((slug) => ({
+      url: `${SITE_URL}/${route}/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: slug === "brampton" || slug === "mississauga" ? priority : priority - 0.05,
+    })),
+  )
 
   return [...staticPages, ...cityPages, ...agentPages]
 }

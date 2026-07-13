@@ -5,24 +5,24 @@
 
 :root {
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: #0a1628;
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: #0a1628;
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --popover-foreground: #0a1628;
+  --primary: #0a1628;
+  --primary-foreground: #ffffff;
+  --secondary: #f8f9fa;
+  --secondary-foreground: #0a1628;
+  --muted: #f1f3f5;
+  --muted-foreground: #6c757d;
+  --accent: #d4af37;
+  --accent-foreground: #0a1628;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: #d4af37;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -77,35 +77,9 @@
 @theme inline {
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  /* PropValue AI Brand Colors - Deep Navy, White, and Gold Accents */
-  --color-navy: #0a1628;
-  --color-navy-light: #1a2942;
   --color-gold: #d4af37;
   --color-gold-light: #e6c966;
   --color-gold-dark: #b8941f;
-  --color-ai-blue: #3b82f6;
-  --color-ai-purple: #8b5cf6;
-
-  /* Semantic Design Tokens */
-  --color-background: #ffffff;
-  --color-foreground: #0a1628;
-  --color-card: #ffffff;
-  --color-card-foreground: #0a1628;
-  --color-primary: #0a1628;
-  --color-primary-foreground: #ffffff;
-  --color-secondary: #f8f9fa;
-  --color-secondary-foreground: #0a1628;
-  --color-accent: #d4af37;
-  --color-accent-foreground: #0a1628;
-  --color-muted: #f1f3f5;
-  --color-muted-foreground: #6c757d;
-  --color-border: #e9ecef;
-  --color-input: #e9ecef;
-  --color-ring: #d4af37;
-
-  --radius: 0.5rem;
-
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
