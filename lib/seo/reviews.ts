@@ -1,16 +1,16 @@
 /** Verified review counts across third-party platforms — updated for trust & schema */
 export const CLIENT_REVIEWS = {
-  totalDisplay: "600+",
-  totalCount: 600,
+  totalDisplay: "630+",
+  totalCount: 638,
   aggregateRating: 4.9,
   summary:
-    "Parveen Arora and Team Arora have earned 600+ client reviews across Google, Rank My Agent, Rate My Agent, RE/MAX, and other verified platforms — one of the most reviewed real estate teams in Brampton and Mississauga.",
+    "Parveen Arora and Team Arora have earned 630+ client reviews across Google, Rank My Agent, Rate My Agent, RE/MAX, and other verified platforms — one of the most reviewed real estate teams in Brampton and Mississauga.",
   platforms: [
     {
       id: "google",
       name: "Google Reviews",
-      countDisplay: "340+",
-      count: 340,
+      countDisplay: "450+",
+      count: 453,
       rating: 4.8,
       url: "https://www.google.com/maps/search/Team+Arora+REMAX+268+Derry+Rd+Mississauga+reviews",
       description: "Team Arora Realty on Google — trusted by hundreds of GTA homeowners.",
