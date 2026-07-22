@@ -1,10 +1,10 @@
 /** Verified review counts across third-party platforms — updated for trust & schema */
 export const CLIENT_REVIEWS = {
-  totalDisplay: "630+",
-  totalCount: 638,
+  totalDisplay: "650+",
+  totalCount: 650,
   aggregateRating: 4.9,
   summary:
-    "Parveen Arora and Team Arora have earned 630+ client reviews across Google, Rank My Agent, Rate My Agent, RE/MAX, and other verified platforms — one of the most reviewed real estate teams in Brampton and Mississauga.",
+    "Parveen Arora and Team Arora have earned 650+ client reviews across Google, Rank My Agent, Rate My Agent, RE/MAX, and other verified platforms — one of the most reviewed real estate teams in Brampton and Mississauga.",
   platforms: [
     {
       id: "google",
