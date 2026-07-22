@@ -92,6 +92,12 @@ export function ReviewsTrustSection({ cityName, variant = "light" }: ReviewsTrus
         >
           <div>
             <div className={`text-3xl font-black ${isDark ? "text-accent" : "text-primary"}`}>
+              {PARVEEN_ARORA.transactions}
+            </div>
+            <div className={`text-sm ${isDark ? "text-white/70" : "text-muted-foreground"}`}>Transactions</div>
+          </div>
+          <div>
+            <div className={`text-3xl font-black ${isDark ? "text-accent" : "text-primary"}`}>
               {CLIENT_REVIEWS.totalDisplay}
             </div>
             <div className={`text-sm ${isDark ? "text-white/70" : "text-muted-foreground"}`}>Total Reviews</div>

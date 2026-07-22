@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { MapPin, ExternalLink } from "lucide-react"
-import { getAgentPageUrl, getAgentPageUrlByKeyword } from "@/lib/seo/parveen-arora"
+import { getAgentPageUrl, getAgentPageUrlByKeyword, PARVEEN_ARORA, CLIENT_REVIEWS } from "@/lib/seo/parveen-arora"
 
 const cityGroups = [
   {
@@ -79,7 +79,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-white/70 leading-relaxed">
-              Free AI-powered home value estimates for Ontario homeowners, provided by Parveen Arora, #1 Real Estate Agent in Brampton & Mississauga.
+              Free AI-powered home value estimates for Ontario homeowners, provided by {PARVEEN_ARORA.name}, #1 Real Estate Agent in Brampton &amp; Mississauga — {CLIENT_REVIEWS.totalDisplay} reviews, {PARVEEN_ARORA.transactions} transactions, {PARVEEN_ARORA.salesVolume} in sales.
             </p>
             <div className="space-y-2 text-sm text-white/70">
               <div className="flex items-center gap-2">

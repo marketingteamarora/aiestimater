@@ -23,6 +23,7 @@ import {
   getAgentPageUrl,
   CLIENT_REVIEWS,
   buildReviewsSummaryText,
+  getAgentStats,
 } from "@/lib/seo/parveen-arora"
 import {
   generateAgentMetadata,
@@ -31,12 +32,7 @@ import {
 
 export { agentCities, generateAgentMetadata }
 
-const stats = [
-  { value: CLIENT_REVIEWS.totalDisplay, label: "Client Reviews" },
-  { value: PARVEEN_ARORA.transactions, label: "Successful Transactions" },
-  { value: PARVEEN_ARORA.salesVolume, label: "Career Sales Volume" },
-  { value: "#1", label: "RE/MAX Team in Canada (2018)" },
-]
+const stats = getAgentStats("city")
 
 interface AgentCityPageProps {
   citySlug: string

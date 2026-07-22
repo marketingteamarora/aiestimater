@@ -22,6 +22,34 @@ export function getAgentPageUrlByKeyword(
   return `/${AGENT_KEYWORD_ROUTES[keyword]}/${citySlug}`
 }
 
+const AGENT_YEARS_EXPERIENCE = 21
+const AGENT_TRANSACTIONS = "5,000"
+const AGENT_SALES_VOLUME = "$3.5 Billion"
+const AGENT_TEAM_SIZE = "45+"
+const AGENT_LANGUAGES_SERVED = "10+"
+
+export function buildParveenBio(): string {
+  return `Parveen Arora is the Broker of Record and owner of RE/MAX Optimum Realty, leading Team Arora — one of the highest-volume real estate teams in the Greater Toronto Area. With ${AGENT_YEARS_EXPERIENCE}+ years of experience, ${AGENT_TRANSACTIONS} successful transactions, ${AGENT_SALES_VOLUME} in career sales volume, and ${CLIENT_REVIEWS.totalDisplay} client reviews across Google, Rank My Agent, Rate My Agent, and more, Parveen is recognized across Brampton, Mississauga, and the GTA as a top-producing RE/MAX agent. His team of ${AGENT_TEAM_SIZE} professionals serves clients in English, Hindi, Punjabi, and ${AGENT_LANGUAGES_SERVED} languages.`
+}
+
+export function getAgentStats(variant: "profile" | "city" = "profile") {
+  if (variant === "city") {
+    return [
+      { value: CLIENT_REVIEWS.totalDisplay, label: "Client Reviews" },
+      { value: AGENT_TRANSACTIONS, label: "Successful Transactions" },
+      { value: AGENT_SALES_VOLUME, label: "Career Sales Volume" },
+      { value: "#1", label: "RE/MAX Team in Canada (2018)" },
+    ]
+  }
+
+  return [
+    { value: `${AGENT_YEARS_EXPERIENCE}+`, label: "Years Experience" },
+    { value: AGENT_TRANSACTIONS, label: "Transactions" },
+    { value: AGENT_SALES_VOLUME, label: "Sales Volume" },
+    { value: CLIENT_REVIEWS.totalDisplay, label: "Client Reviews" },
+  ]
+}
+
 export const PARVEEN_ARORA = {
   name: "Parveen Arora",
   jobTitle: "Broker of Record & Owner",
@@ -41,12 +69,12 @@ export const PARVEEN_ARORA = {
     postalCode: "L5W 0H6",
     addressCountry: "CA",
   },
-  yearsExperience: 21,
+  yearsExperience: AGENT_YEARS_EXPERIENCE,
   languages: ["English", "Hindi", "Punjabi"],
-  transactions: "5,000",
-  salesVolume: "$3.5 Billion",
-  teamSize: "45+",
-  languagesServed: "10+",
+  transactions: AGENT_TRANSACTIONS,
+  salesVolume: AGENT_SALES_VOLUME,
+  teamSize: AGENT_TEAM_SIZE,
+  languagesServed: AGENT_LANGUAGES_SERVED,
   serviceAreas: [
     "Brampton",
     "Mississauga",
@@ -94,7 +122,7 @@ export const PARVEEN_ARORA = {
     "Relocation",
     "Buyer brokerage",
   ],
-  bio: `Parveen Arora is the Broker of Record and owner of RE/MAX Optimum Realty, leading Team Arora — one of the highest-volume real estate teams in the Greater Toronto Area. With 21+ years of experience, 5,000 successful transactions, $3.5 billion in career sales volume, and ${CLIENT_REVIEWS.totalDisplay} client reviews across Google, Rank My Agent, Rate My Agent, and more, Parveen is recognized across Brampton, Mississauga, and the GTA as a top-producing RE/MAX agent. His team of 45+ professionals serves clients in English, Hindi, Punjabi, and 10+ languages.`,
+  bio: buildParveenBio(),
   reviews: CLIENT_REVIEWS,
 } as const
 

@@ -4,7 +4,7 @@ import Script from "next/script"
 import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { PARVEEN_ARORA, SITE_URL, buildAgentOpenGraph } from "@/lib/seo/parveen-arora"
+import { PARVEEN_ARORA, SITE_URL, buildAgentOpenGraph, CLIENT_REVIEWS } from "@/lib/seo/parveen-arora"
 
 const siteUrl = SITE_URL
 
@@ -97,7 +97,7 @@ const jsonLd = {
         addressCountry: PARVEEN_ARORA.address.addressCountry,
       },
       description:
-        `${PARVEEN_ARORA.brokerage}, owned by ${PARVEEN_ARORA.name}, is a top-selling real estate brokerage in Brampton and Mississauga. ${PARVEEN_ARORA.name} has ${PARVEEN_ARORA.transactions} transactions and ${PARVEEN_ARORA.salesVolume} in career sales.`,
+        `${PARVEEN_ARORA.brokerage}, owned by ${PARVEEN_ARORA.name}, is a top-selling real estate brokerage in Brampton and Mississauga. ${PARVEEN_ARORA.name} has ${PARVEEN_ARORA.transactions} transactions, ${CLIENT_REVIEWS.totalDisplay} client reviews, and ${PARVEEN_ARORA.salesVolume} in career sales.`,
       areaServed: PARVEEN_ARORA.serviceAreas.map((name) => ({ "@type": "City", name })),
       founder: {
         "@type": "Person",

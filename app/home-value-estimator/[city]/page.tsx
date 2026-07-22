@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { MapPin, Zap, CheckCircle2, TrendingUp, Brain, Users, Star } from "lucide-react"
 import { cityMarketData } from "@/lib/seo/city-market-data"
-import { PARVEEN_ARORA, buildParveenPersonJsonLd, getAgentPageUrl } from "@/lib/seo/parveen-arora"
+import { PARVEEN_ARORA, buildParveenPersonJsonLd, getAgentPageUrl, CLIENT_REVIEWS } from "@/lib/seo/parveen-arora"
 
 const cities = cityMarketData
 
@@ -274,7 +274,7 @@ export default async function CityPage({
               Speak with {config.name}'s Top-Selling Real Estate Expert
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-              This free tool is provided by <strong>Parveen Arora</strong>, owner of RE/MAX Optimum Realty and the #1 real estate agent serving {config.name} and the Greater Toronto Area. Whether you're ready to list or just exploring your options, get expert advice from a team that has sold thousands of homes.
+              This free tool is provided by <strong>{PARVEEN_ARORA.name}</strong>, owner of {PARVEEN_ARORA.brokerage} and the #1 real estate agent serving {config.name} and the Greater Toronto Area. With {PARVEEN_ARORA.transactions} transactions, {CLIENT_REVIEWS.totalDisplay} client reviews, and {PARVEEN_ARORA.salesVolume} in sales, get expert advice whether you&apos;re ready to list or just exploring your options.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link

@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Award, ExternalLink, MapPin, Phone, Mail, Star, Trophy } from "lucide-react"
 import { agentCities } from "@/lib/seo/agent-cities"
-import { PARVEEN_ARORA, buildAgentOpenGraph, buildParveenPersonJsonLd, getAgentPageUrl, CLIENT_REVIEWS } from "@/lib/seo/parveen-arora"
+import { PARVEEN_ARORA, buildAgentOpenGraph, buildParveenPersonJsonLd, getAgentPageUrl, CLIENT_REVIEWS, getAgentStats } from "@/lib/seo/parveen-arora"
 import { ReviewsTrustSection } from "@/components/reviews-trust-section"
 
 export const metadata: Metadata = {
@@ -107,12 +107,7 @@ export default function ParveenAroraPage() {
         <section className="py-16 bg-white border-b">
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[
-                { value: PARVEEN_ARORA.yearsExperience + "+", label: "Years Experience" },
-                { value: PARVEEN_ARORA.transactions, label: "Transactions" },
-                { value: PARVEEN_ARORA.salesVolume, label: "Sales Volume" },
-                { value: CLIENT_REVIEWS.totalDisplay, label: "Client Reviews" },
-              ].map((s) => (
+              {getAgentStats("profile").map((s) => (
                 <div key={s.label}>
                   <div className="text-3xl font-black text-primary">{s.value}</div>
                   <div className="text-sm text-muted-foreground mt-1">{s.label}</div>

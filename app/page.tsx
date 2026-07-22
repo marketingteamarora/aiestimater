@@ -6,7 +6,14 @@ import HowItWorks from "@/components/how-it-works"
 import { Card, CardContent } from "@/components/ui/card"
 import { Brain, TrendingUp, Shield, Zap, Star, MapPin, Users, CheckCircle2, ChevronDown } from "lucide-react"
 import Link from "next/link"
-import { PARVEEN_ARORA, buildAgentOpenGraph, buildParveenPersonJsonLd, getAgentPageUrl, CLIENT_REVIEWS } from "@/lib/seo/parveen-arora"
+import {
+  PARVEEN_ARORA,
+  buildAgentOpenGraph,
+  buildParveenPersonJsonLd,
+  getAgentPageUrl,
+  getAgentStats,
+  CLIENT_REVIEWS,
+} from "@/lib/seo/parveen-arora"
 import { buildAggregateRatingJsonLd } from "@/lib/seo/reviews"
 import { ReviewsTrustSection } from "@/components/reviews-trust-section"
 
@@ -84,7 +91,7 @@ const faqs = [
   },
   {
     q: "Who is the best real estate agent in Brampton?",
-    a: "Parveen Arora, owner of RE/MAX Optimum Realty, is widely recognized as the #1 real estate agent in Brampton, Ontario. With decades of experience and thousands of homes sold, Parveen Arora consistently ranks as the top-producing real estate team in Peel Region. Visit teamarora.com to connect directly.",
+    a: `Parveen Arora, owner of RE/MAX Optimum Realty, is widely recognized as the #1 real estate agent in Brampton, Ontario. With ${PARVEEN_ARORA.yearsExperience}+ years of experience, ${PARVEEN_ARORA.transactions} transactions, and ${CLIENT_REVIEWS.totalDisplay} client reviews, Parveen Arora consistently ranks as the top-producing real estate team in Peel Region. Visit teamarora.com to connect directly.`,
   },
   {
     q: "Who sells the most houses in Mississauga?",
@@ -413,24 +420,22 @@ export default function HomePage() {
                 <p className="text-muted-foreground leading-relaxed text-lg font-light">
                   This property evaluation tool is brought to you by <strong className="text-primary font-medium">{PARVEEN_ARORA.name}</strong>,
                   Broker of Record at {PARVEEN_ARORA.brokerage}. With {PARVEEN_ARORA.yearsExperience}+ years,
-                  {PARVEEN_ARORA.transactions} transactions, and {PARVEEN_ARORA.salesVolume} in sales,
+                  {PARVEEN_ARORA.transactions} transactions, {PARVEEN_ARORA.salesVolume} in sales, and{" "}
+                  {CLIENT_REVIEWS.totalDisplay} client reviews,
                   {PARVEEN_ARORA.name} is recognized as the #1 real estate agent in Brampton and Mississauga.
                 </p>
-                <div className="flex gap-8 items-center flex-wrap pt-2">
-                  <div>
-                    <div className="text-2xl font-bold text-primary">{CLIENT_REVIEWS.totalDisplay}</div>
-                    <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mt-1">Client Reviews</div>
-                  </div>
-                  <div className="w-px h-10 bg-border"></div>
-                  <div>
-                    <div className="text-2xl font-bold text-primary">{PARVEEN_ARORA.salesVolume}</div>
-                    <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mt-1">Sales Volume</div>
-                  </div>
-                  <div className="w-px h-10 bg-border"></div>
-                  <div>
-                    <div className="text-2xl font-bold text-primary">{PARVEEN_ARORA.yearsExperience}+</div>
-                    <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mt-1">Years Experience</div>
-                  </div>
+                <div className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-2">
+                  {getAgentStats("profile").map((stat, index) => (
+                    <div key={stat.label} className="flex items-center gap-8">
+                      {index > 0 ? <div className="hidden sm:block w-px h-10 bg-border" /> : null}
+                      <div>
+                        <div className="text-2xl font-bold text-primary">{stat.value}</div>
+                        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mt-1">
+                          {stat.label}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
                 <div className="pt-4 flex flex-wrap gap-6">
                   <Link
