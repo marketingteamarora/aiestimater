@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ExternalLink, ShieldCheck, Star } from "lucide-react"
-import { CLIENT_REVIEWS } from "@/lib/seo/reviews"
+import { ChevronDown } from "lucide-react"
+import { CLIENT_REVIEWS, getReviewSourceLinks } from "@/lib/seo/reviews"
 import { PARVEEN_ARORA } from "@/lib/seo/parveen-arora"
 
 function StarRow({ rating }: { rating: number }) {
@@ -81,6 +82,47 @@ export function ReviewsTrustSection({ cityName, variant = "light" }: ReviewsTrus
             </Link>
           ))}
         </div>
+
+        <details
+          className={`mt-8 rounded-xl border group ${
+            isDark ? "border-white/10 bg-white/5" : "border-border bg-card"
+          }`}
+        >
+          <summary
+            className={`flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 font-semibold ${
+              isDark ? "text-white" : "text-primary"
+            }`}
+          >
+            <span>How we calculated {CLIENT_REVIEWS.totalDisplay} reviews</span>
+            <ChevronDown className="w-5 h-5 shrink-0 transition-transform group-open:rotate-180" />
+          </summary>
+          <div className="space-y-2 px-5 pb-5">
+            {getReviewSourceLinks().map((source) => (
+              <div
+                key={source.id}
+                className={`flex items-center justify-between gap-3 rounded-lg border px-4 py-3 ${
+                  isDark ? "border-white/10 bg-white/5" : "border-border bg-secondary/50"
+                }`}
+              >
+                <div className={`text-sm font-medium ${isDark ? "text-white" : "text-primary"}`}>
+                  {source.name}
+                </div>
+                <div className="flex items-center gap-4 shrink-0">
+                  <span className={`font-bold ${isDark ? "text-accent" : "text-primary"}`}>{source.count}</span>
+                  <Link
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
+                  >
+                    View
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </details>
 
         <p
           className={`text-center text-sm mt-8 ${isDark ? "text-white/60" : "text-muted-foreground"}`}

@@ -81,6 +81,29 @@ export const CLIENT_REVIEWS = {
   ],
 } as const
 
+export function getReviewSourceLinks() {
+  return [
+    ...GOOGLE_REVIEW_LISTINGS.map((listing) => ({
+      id: listing.id,
+      name: listing.name,
+      count: listing.count,
+      url: listing.url,
+    })),
+    {
+      id: "rankmyagent",
+      name: "Rank My Agent",
+      count: RANK_MY_AGENT_COUNT,
+      url: "https://rankmyagent.com/parveenarora",
+    },
+    {
+      id: "ratemyagent",
+      name: "Rate My Agent",
+      count: RATE_MY_AGENT_COUNT,
+      url: "https://www.rate-my-agent.com/parveen-arora-ratings-mississauga-7286",
+    },
+  ]
+}
+
 export function buildAggregateRatingJsonLd() {
   return {
     "@type": "AggregateRating",
