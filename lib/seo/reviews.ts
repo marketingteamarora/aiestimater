@@ -35,7 +35,7 @@ export const CLIENT_REVIEWS = {
   totalCount: VERIFIED_REVIEW_TOTAL,
   aggregateRating: 4.9,
   summary:
-    "Parveen Arora and Team Arora have earned 660+ client reviews across 3 verified Google Business profiles, Rank My Agent, Rate My Agent, RE/MAX, and other platforms — one of the most reviewed real estate teams in Brampton and Mississauga.",
+    "Trusted by homeowners across Brampton, Mississauga, and the GTA — with verified reviews on Google, Rank My Agent, and Rate My Agent.",
   googleListings: GOOGLE_REVIEW_LISTINGS,
   googleTotal: GOOGLE_REVIEWS_TOTAL,
   googleTotalDisplay: String(GOOGLE_REVIEWS_TOTAL),
@@ -47,7 +47,7 @@ export const CLIENT_REVIEWS = {
       count: GOOGLE_REVIEWS_TOTAL,
       rating: 4.8,
       url: GOOGLE_REVIEW_LISTINGS[0].url,
-      description: `Combined from ${GOOGLE_REVIEW_LISTINGS.length} verified Google Business profiles (${GOOGLE_REVIEW_LISTINGS.map((l) => l.count).join(" + ")}).`,
+      description: "Verified Google reviews across Team Arora locations.",
     },
     {
       id: "rankmyagent",
@@ -56,7 +56,7 @@ export const CLIENT_REVIEWS = {
       count: RANK_MY_AGENT_COUNT,
       rating: 4.98,
       url: "https://rankmyagent.com/parveenarora",
-      description: "123+ verified ratings and reviews on Rank My Agent.",
+      description: "Verified ratings on Rank My Agent.",
       verified: true,
     },
     {
@@ -66,7 +66,7 @@ export const CLIENT_REVIEWS = {
       count: RATE_MY_AGENT_COUNT,
       rating: 4.94,
       url: "https://www.rate-my-agent.com/parveen-arora-ratings-mississauga-7286",
-      description: "71+ reviews across 13 cities — 100% recommend ratio.",
+      description: "Verified reviews on Rate My Agent.",
       verified: true,
     },
     {
@@ -80,47 +80,6 @@ export const CLIENT_REVIEWS = {
     },
   ],
 } as const
-
-export type ReviewProofItem = {
-  id: string
-  name: string
-  detail?: string
-  count: number
-  url: string
-  source: "Google" | "Rank My Agent" | "Rate My Agent"
-}
-
-export function getReviewProofItems(): ReviewProofItem[] {
-  return [
-    ...GOOGLE_REVIEW_LISTINGS.map((listing) => ({
-      id: listing.id,
-      name: listing.name,
-      detail: listing.location,
-      count: listing.count,
-      url: listing.url,
-      source: "Google" as const,
-    })),
-    {
-      id: "rankmyagent",
-      name: "Rank My Agent — Parveen Arora",
-      count: RANK_MY_AGENT_COUNT,
-      url: "https://rankmyagent.com/parveenarora",
-      source: "Rank My Agent" as const,
-    },
-    {
-      id: "ratemyagent",
-      name: "Rate My Agent — Parveen Arora",
-      count: RATE_MY_AGENT_COUNT,
-      url: "https://www.rate-my-agent.com/parveen-arora-ratings-mississauga-7286",
-      source: "Rate My Agent" as const,
-    },
-  ]
-}
-
-export function buildReviewCalculationText(): string {
-  const googleParts = GOOGLE_REVIEW_LISTINGS.map((listing) => listing.count).join(" + ")
-  return `${googleParts} (Google) + ${RANK_MY_AGENT_COUNT} (Rank My Agent) + ${RATE_MY_AGENT_COUNT} (Rate My Agent) = ${VERIFIED_REVIEW_TOTAL} verified reviews`
-}
 
 export function buildAggregateRatingJsonLd() {
   return {
