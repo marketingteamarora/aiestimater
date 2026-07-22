@@ -1,4 +1,5 @@
 import { buildAggregateRatingJsonLd, CLIENT_REVIEWS, buildReviewsSummaryText } from "@/lib/seo/reviews"
+import { AWARDS, OTHER_RECOGNITION } from "@/lib/seo/awards"
 
 export const SITE_URL = "https://gethomeevaluation.ca"
 
@@ -172,6 +173,12 @@ export function buildParveenPersonJsonLd(options?: { cityName?: string; descript
       ? [{ "@type": "City", name: cityName }, { "@type": "State", name: "Ontario" }]
       : PARVEEN_ARORA.serviceAreas.map((name) => ({ "@type": "City", name })),
     aggregateRating: buildAggregateRatingJsonLd(),
+    award: [
+      ...AWARDS.map((a) => (a.year ? `${a.name} (${a.year}) — RE/MAX` : `${a.name} — RE/MAX`)),
+      ...OTHER_RECOGNITION.map((r) =>
+        r.year ? `${r.name} (${r.year})${r.organization ? ` — ${r.organization}` : ""}` : r.name,
+      ),
+    ],
   }
 }
 

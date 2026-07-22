@@ -1,10 +1,11 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { Award, ExternalLink, MapPin, Phone, Mail, Star, Trophy } from "lucide-react"
+import { ExternalLink, MapPin, Phone, Mail, Star } from "lucide-react"
 import { agentCities } from "@/lib/seo/agent-cities"
 import { PARVEEN_ARORA, buildAgentOpenGraph, buildParveenPersonJsonLd, getAgentPageUrl, CLIENT_REVIEWS, getAgentStats } from "@/lib/seo/parveen-arora"
 import { AgentStatsDisclaimer } from "@/components/agent-stats-disclaimer"
+import { AwardsShowcase } from "@/components/awards-showcase"
 import { ReviewsTrustSection } from "@/components/reviews-trust-section"
 
 export const metadata: Metadata = {
@@ -119,22 +120,16 @@ export default function ParveenAroraPage() {
           </div>
         </section>
 
+        <AwardsShowcase />
+
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4 max-w-5xl grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-bold text-primary mb-6 flex items-center gap-2">
-                <Trophy className="w-8 h-8 text-accent" />
-                Awards &amp; Recognition
-              </h2>
-              <ul className="space-y-3">
-                {PARVEEN_ARORA.awards.map((award) => (
-                  <li key={award} className="flex gap-3">
-                    <Award className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span>{award}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8 space-y-2 text-sm">
+              <h2 className="text-3xl font-bold text-primary mb-6">Verified Reviews</h2>
+              <p className="text-muted-foreground mb-6">
+                Read {CLIENT_REVIEWS.totalDisplay} verified client reviews across trusted platforms.
+              </p>
+              <div className="space-y-2 text-sm">
                 {CLIENT_REVIEWS.platforms
                   .filter((platform) => platform.count > 0)
                   .map((platform) => (
