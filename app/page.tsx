@@ -16,6 +16,7 @@ import {
 } from "@/lib/seo/parveen-arora"
 import { buildAggregateRatingJsonLd } from "@/lib/seo/reviews"
 import { ReviewsTrustSection } from "@/components/reviews-trust-section"
+import { AgentStatsDisclaimer } from "@/components/agent-stats-disclaimer"
 
 export const metadata: Metadata = {
   title: "Free AI Home Value Estimator Canada — How Much Is My Home Worth?",
@@ -437,6 +438,7 @@ export default function HomePage() {
                     </div>
                   ))}
                 </div>
+                <AgentStatsDisclaimer className="text-xs text-muted-foreground leading-relaxed pt-2" />
                 <div className="pt-4 flex flex-wrap gap-6">
                   <Link
                     href="/parveen-arora"

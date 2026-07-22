@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { MapPin, ExternalLink } from "lucide-react"
-import { getAgentPageUrl, getAgentPageUrlByKeyword, PARVEEN_ARORA, CLIENT_REVIEWS } from "@/lib/seo/parveen-arora"
+import { getAgentPageUrl, getAgentPageUrlByKeyword, PARVEEN_ARORA, CLIENT_REVIEWS, AGENT_STATS_DISCLAIMER } from "@/lib/seo/parveen-arora"
 
 const cityGroups = [
   {
@@ -165,7 +165,7 @@ export default function Footer() {
             Home value estimates are for informational purposes only and do not constitute a
             formal appraisal. Consult a licensed real estate agent for a complete Comparative
             Market Analysis (CMA). All data is sourced from publicly available records and recent
-            MLS sales in your area.
+            MLS sales in your area. {AGENT_STATS_DISCLAIMER}
           </p>
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/50">
             <span>© {new Date().getFullYear()} GetHomeEvaluation.ca — All rights reserved.</span>

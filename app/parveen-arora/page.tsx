@@ -4,6 +4,8 @@ import Link from "next/link"
 import { Award, ExternalLink, MapPin, Phone, Mail, Star, Trophy } from "lucide-react"
 import { agentCities } from "@/lib/seo/agent-cities"
 import { PARVEEN_ARORA, buildAgentOpenGraph, buildParveenPersonJsonLd, getAgentPageUrl, CLIENT_REVIEWS, getAgentStats } from "@/lib/seo/parveen-arora"
+import { getReviewProofItems } from "@/lib/seo/reviews"
+import { AgentStatsDisclaimer } from "@/components/agent-stats-disclaimer"
 import { ReviewsTrustSection } from "@/components/reviews-trust-section"
 
 export const metadata: Metadata = {
@@ -114,6 +116,7 @@ export default function ParveenAroraPage() {
                 </div>
               ))}
             </div>
+            <AgentStatsDisclaimer />
           </div>
         </section>
 
@@ -133,13 +136,17 @@ export default function ParveenAroraPage() {
                 ))}
               </ul>
               <div className="mt-8 space-y-2 text-sm">
-                {CLIENT_REVIEWS.platforms.map((platform) => (
-                  <p key={platform.id}>
-                    <a href={platform.url} className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">
-                      {platform.countDisplay} reviews on {platform.name} →
+                <p className="font-semibold text-primary mb-3">Verified review sources</p>
+                {getReviewProofItems().map((item) => (
+                  <p key={item.id}>
+                    <a href={item.url} className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">
+                      {item.count} reviews — {item.name} →
                     </a>
                   </p>
                 ))}
+                <p className="text-muted-foreground pt-2">
+                  Total: {CLIENT_REVIEWS.totalCount} verified reviews ({CLIENT_REVIEWS.totalDisplay} including RE/MAX testimonials)
+                </p>
               </div>
             </div>
             <div>

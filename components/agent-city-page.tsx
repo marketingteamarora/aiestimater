@@ -13,6 +13,7 @@ import {
   TrendingUp,
   Home,
 } from "lucide-react"
+import { AgentStatsDisclaimer } from "@/components/agent-stats-disclaimer"
 import { ReviewsTrustSection } from "@/components/reviews-trust-section"
 import { agentCities } from "@/lib/seo/agent-cities"
 import { getCityMarket } from "@/lib/seo/city-market-data"
@@ -88,7 +89,7 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
     },
     {
       q: `Who is the top RE/MAX agent in ${cityName}?`,
-      a: `${PARVEEN_ARORA.name} holds prestigious RE/MAX honours including Luminary of Distinction (2024), Circle of Legends, Hall of Fame, and Lifetime Achievement Award. With ${CLIENT_REVIEWS.totalDisplay} reviews across Google (${CLIENT_REVIEWS.platforms[0].countDisplay}), Rank My Agent (${CLIENT_REVIEWS.platforms[1].countDisplay}), Rate My Agent (${CLIENT_REVIEWS.platforms[2].countDisplay}), and more, ${PARVEEN_ARORA.name} is one of the most trusted agents in ${cityName}.`,
+      a: `${PARVEEN_ARORA.name} holds prestigious RE/MAX honours including Luminary of Distinction (2024), Circle of Legends, Hall of Fame, and Lifetime Achievement Award. With ${CLIENT_REVIEWS.totalDisplay} reviews across Google (${CLIENT_REVIEWS.googleTotalDisplay} across 3 verified profiles), Rank My Agent (${CLIENT_REVIEWS.platforms[1].countDisplay}), Rate My Agent (${CLIENT_REVIEWS.platforms[2].countDisplay}), and more, ${PARVEEN_ARORA.name} is one of the most trusted agents in ${cityName}.`,
     },
     {
       q: `How many reviews does Parveen Arora have?`,
@@ -255,6 +256,7 @@ export function AgentCityPage({ citySlug, keywordPrefix, routeBase }: AgentCityP
                 </div>
               ))}
             </div>
+            <AgentStatsDisclaimer />
           </div>
         </section>
 

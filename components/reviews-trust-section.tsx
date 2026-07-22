@@ -1,7 +1,12 @@
 import Link from "next/link"
 import { ExternalLink, ShieldCheck, Star } from "lucide-react"
-import { CLIENT_REVIEWS } from "@/lib/seo/reviews"
+import {
+  CLIENT_REVIEWS,
+  buildReviewCalculationText,
+  getReviewProofItems,
+} from "@/lib/seo/reviews"
 import { PARVEEN_ARORA } from "@/lib/seo/parveen-arora"
+import { AgentStatsDisclaimer } from "@/components/agent-stats-disclaimer"
 
 function StarRow({ rating }: { rating: number }) {
   return (
@@ -23,6 +28,7 @@ interface ReviewsTrustSectionProps {
 
 export function ReviewsTrustSection({ cityName, variant = "light" }: ReviewsTrustSectionProps) {
   const isDark = variant === "dark"
+  const proofItems = getReviewProofItems()
 
   return (
     <section className={isDark ? "py-16 bg-primary text-white" : "py-16 bg-secondary border-y border-border"}>
@@ -86,6 +92,67 @@ export function ReviewsTrustSection({ cityName, variant = "light" }: ReviewsTrus
         </div>
 
         <div
+          className={`rounded-xl border p-6 md:p-8 mb-8 ${
+            isDark ? "bg-white/5 border-white/10" : "bg-card border-border"
+          }`}
+        >
+          <h3 className={`text-lg font-bold mb-2 ${isDark ? "text-white" : "text-primary"}`}>
+            How we calculated {CLIENT_REVIEWS.totalDisplay} reviews
+          </h3>
+          <p className={`text-sm mb-6 ${isDark ? "text-white/70" : "text-muted-foreground"}`}>
+            Every number below links to the verified source. Google reviews are counted across all three Team Arora
+            Google Business profiles.
+          </p>
+          <div className="space-y-3">
+            {proofItems.map((item) => (
+              <div
+                key={item.id}
+                className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-lg border px-4 py-3 ${
+                  isDark ? "border-white/10 bg-white/5" : "border-border bg-secondary/50"
+                }`}
+              >
+                <div>
+                  <div className={`font-semibold text-sm ${isDark ? "text-white" : "text-primary"}`}>{item.name}</div>
+                  {item.detail ? (
+                    <div className={`text-xs mt-0.5 ${isDark ? "text-white/60" : "text-muted-foreground"}`}>
+                      {item.detail}
+                    </div>
+                  ) : null}
+                  <div className={`text-xs mt-1 font-medium ${isDark ? "text-white/50" : "text-muted-foreground"}`}>
+                    {item.source}
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 shrink-0">
+                  <span className={`text-xl font-black ${isDark ? "text-accent" : "text-primary"}`}>
+                    {item.count}
+                  </span>
+                  <Link
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
+                  >
+                    View proof
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div
+            className={`mt-6 pt-4 border-t text-sm font-medium ${
+              isDark ? "border-white/10 text-white/80" : "border-border text-foreground"
+            }`}
+          >
+            <span className={isDark ? "text-accent" : "text-primary"}>{buildReviewCalculationText()}</span>
+            <span className={isDark ? "text-white/60" : "text-muted-foreground"}>
+              {" "}
+              — displayed as {CLIENT_REVIEWS.totalDisplay} to include additional RE/MAX testimonials.
+            </span>
+          </div>
+        </div>
+
+        <div
           className={`flex flex-wrap justify-center gap-8 text-center rounded-xl p-6 ${
             isDark ? "bg-white/5 border border-white/10" : "bg-card border border-border"
           }`}
@@ -113,6 +180,11 @@ export function ReviewsTrustSection({ cityName, variant = "light" }: ReviewsTrus
             <div className={`text-sm ${isDark ? "text-white/70" : "text-muted-foreground"}`}>Recommend Rate</div>
           </div>
         </div>
+        <AgentStatsDisclaimer
+          className={`text-xs leading-relaxed text-center mt-4 max-w-3xl mx-auto ${
+            isDark ? "text-white/50" : "text-muted-foreground"
+          }`}
+        />
       </div>
     </section>
   )
