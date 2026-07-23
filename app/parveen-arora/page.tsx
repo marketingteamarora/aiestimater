@@ -7,6 +7,7 @@ import { PARVEEN_ARORA, buildAgentOpenGraph, buildParveenPersonJsonLd, getAgentP
 import { AgentStatsDisclaimer } from "@/components/agent-stats-disclaimer"
 import { AwardsShowcase } from "@/components/awards-showcase"
 import { ReviewsTrustSection } from "@/components/reviews-trust-section"
+import { SocialLinks } from "@/components/social-links"
 
 export const metadata: Metadata = {
   title: "Parveen Arora — #1 RE/MAX Real Estate Agent in Brampton & GTA",
@@ -173,6 +174,10 @@ export default function ParveenAroraPage() {
                       {PARVEEN_ARORA.address.addressLocality}, {PARVEEN_ARORA.address.addressRegion} {PARVEEN_ARORA.address.postalCode}
                     </div>
                   </div>
+                </div>
+                <div>
+                  <div className="font-semibold mb-3">Social</div>
+                  <SocialLinks variant="dark" />
                 </div>
               </div>
               <p className="mt-6 text-muted-foreground text-sm">

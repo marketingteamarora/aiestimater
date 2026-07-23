@@ -1,5 +1,6 @@
 import { buildAggregateRatingJsonLd, CLIENT_REVIEWS, buildReviewsSummaryText } from "@/lib/seo/reviews"
 import { AWARDS, OTHER_RECOGNITION } from "@/lib/seo/awards"
+import { SOCIAL_LINK_URLS } from "@/lib/seo/social-links"
 
 export const SITE_URL = "https://gethomeevaluation.ca"
 
@@ -100,6 +101,7 @@ export const PARVEEN_ARORA = {
   ],
   sameAs: [
     "https://www.teamarora.com",
+    ...SOCIAL_LINK_URLS,
     "https://www.remax.ca/on/parveen-arora-39110-ag",
     "https://rankmyagent.com/parveenarora",
     "https://www.rate-my-agent.com/parveen-arora-ratings-mississauga-7286",

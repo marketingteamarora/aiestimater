@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { MapPin, ExternalLink } from "lucide-react"
 import { getAgentPageUrl, getAgentPageUrlByKeyword, PARVEEN_ARORA, CLIENT_REVIEWS, AGENT_STATS_DISCLAIMER } from "@/lib/seo/parveen-arora"
+import { SocialLinks } from "@/components/social-links"
 
 const cityGroups = [
   {
@@ -86,6 +87,12 @@ export default function Footer() {
                 <MapPin className="w-4 h-4 text-accent flex-shrink-0" />
                 <span>Brampton, Ontario, Canada</span>
               </div>
+            </div>
+            <div>
+              <h3 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider">
+                Follow Team Arora
+              </h3>
+              <SocialLinks />
             </div>
             <div className="pt-2">
               <h3 className="font-semibold text-white mb-2 text-sm uppercase tracking-wider">

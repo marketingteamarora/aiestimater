@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import ContactForm from "@/components/contact-form"
+import { SocialLinks } from "@/components/social-links"
 
 export const metadata: Metadata = {
   title: "Contact Us — Free Home Evaluation Consultation",
@@ -23,6 +24,10 @@ export default function ContactPage() {
               Want a more detailed home evaluation? Our RE/MAX Optimum Realty agents specialize in
               Ontario real estate and will respond within 24 hours.
             </p>
+            <div className="flex flex-col items-center gap-3">
+              <p className="text-sm font-medium text-foreground">Connect with Team Arora</p>
+              <SocialLinks variant="dark" />
+            </div>
           </div>
 
           <div className="bg-card rounded-2xl shadow-2xl p-6 md:p-10 border border-border">
