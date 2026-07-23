@@ -31,7 +31,7 @@ const RATE_MY_AGENT_COUNT = 71
 const VERIFIED_REVIEW_TOTAL = GOOGLE_REVIEWS_TOTAL + RANK_MY_AGENT_COUNT + RATE_MY_AGENT_COUNT
 
 export const CLIENT_REVIEWS = {
-  totalDisplay: "660+",
+  totalDisplay: "650+",
   totalCount: VERIFIED_REVIEW_TOTAL,
   aggregateRating: 4.9,
   summary:
